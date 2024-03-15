@@ -1,6 +1,8 @@
 "use client";
 
+import { useTransition } from "react";
 import Image from "next/image"
+import { toast } from "sonner";
 
 import {
     Card,
@@ -12,7 +14,8 @@ import {
 import { Button } from "@/components/ui/button"
 
 import { compressImage } from "@/actions/compress"
-import { uploadImageToShopify,replaceExistingImage } from "@/actions/upload";
+import { uploadImageToShopify, replaceExistingImage } from "@/actions/upload";
+
 
 interface StoreProps {
     products: any
@@ -21,13 +24,36 @@ interface StoreProps {
 const Store: React.FC<StoreProps> = ({
     products
 }) => {
+    const [isPending, startTransition] = useTransition();
+
+    const process = async (imageSrc: string, productId: string, imageId: string) => {
+        const compressedImage = await compressImage(imageSrc);
+
+        const data = await uploadImageToShopify(compressedImage, productId);
+        const res = await replaceExistingImage(data, imageId);
+        if (!res.image) {
+            return { error: "Image compressed and uploaded failed!" }
+        }
+        return { success: "Successfully image compressed and uploaded!" }
+    }
 
     const handleCompressAndUpload = async (imageSrc: string, productId: string, imageId: string) => {
-        const compressedImage = await compressImage(imageSrc);
-        
-        const data = await uploadImageToShopify(compressedImage, productId);
-        const res = await replaceExistingImage(data,imageId);
-        console.log(res)
+        startTransition(() => {
+            const promise = process(imageSrc, productId, imageId)
+
+            toast.promise(promise, {
+                loading: 'Compressing and Uploading...',
+                success: (data) => {
+                    if (data.error) {
+                        return `Compressing and Uploading failed: ${data.error}`
+                    } else {
+
+                        return `Compressing and Uploading successful: ${data.success}`
+                    }
+                },
+                error: 'An unexpected error occurred',
+            })
+        });
     };
 
     return (
@@ -53,6 +79,7 @@ const Store: React.FC<StoreProps> = ({
                             <Button
                                 className="w-full"
                                 variant="outline"
+                                disabled={isPending}
                                 onClick={() => handleCompressAndUpload(data.images[0].src, data.id, data.images[0].id)}
                             >
                                 Compress
