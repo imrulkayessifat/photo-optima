@@ -26,7 +26,7 @@ const Store: React.FC<StoreProps> = ({
 }) => {
     const [isPending, startTransition] = useTransition();
 
-    const process = async (imageSrc: string, productId: string, imageId: string) => {
+    const process = async (imageSrc: string, productId: number, imageId: number) => {
         const compressedImage = await compressImage(imageSrc);
 
         const data = await uploadImageToShopify(compressedImage, productId);
@@ -37,7 +37,7 @@ const Store: React.FC<StoreProps> = ({
         return { success: "Successfully image compressed and uploaded!" }
     }
 
-    const handleCompressAndUpload = async (imageSrc: string, productId: string, imageId: string) => {
+    const handleCompressAndUpload = async (imageSrc: string, productId: number, imageId: number) => {
         startTransition(() => {
             const promise = process(imageSrc, productId, imageId)
 
