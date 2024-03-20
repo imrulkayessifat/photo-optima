@@ -3,7 +3,7 @@
 client_id = "7e9572dc62e05ca27ddfb380d124f194"
 name = "asd-admin"
 handle = "asd-admin"
-application_url = "https://shopify.dev/apps/default-app-home"
+application_url = "https://asd-assignment.vercel.app"
 embedded = true
 
 [build]
@@ -15,7 +15,7 @@ include_config_on_deploy = true
 scopes = ""
 
 [auth]
-redirect_urls = [ "https://shopify.dev/apps/default-app-home/api/auth" ]
+redirect_urls = [ "https://asd-assignment.vercel.app/api/auth/callback" ]
 
 [webhooks]
 api_version = "2024-01"
