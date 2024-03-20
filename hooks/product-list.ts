@@ -10,7 +10,7 @@ const useProductStore = create((set) => ({
             }
         })
         const data = await res.json()
-        console.log(data)
+        
         set({ product: data.products });
     },
 }));

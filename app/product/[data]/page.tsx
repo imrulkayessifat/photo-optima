@@ -16,7 +16,7 @@ const page = async ({
     })
 
     const data = await response.json();
-    console.log(data)
+    
     return (
         <div className="mt-24">
             <div className="flex flex-col mx-auto px-8">

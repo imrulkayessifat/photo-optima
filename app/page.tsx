@@ -15,7 +15,7 @@ export default async function Home() {
     }
   })
   const product = await res.json()
-  console.log(product)
+  
   return (
     <main>
       {/* <Store products={data.products} /> */}

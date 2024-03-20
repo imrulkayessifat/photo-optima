@@ -46,7 +46,6 @@ export default function DataTable<TData, TValue>({
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
-  console.log(data)
   const table = useReactTable({
     data,
     columns,
