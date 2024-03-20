@@ -3,12 +3,11 @@
 client_id = "7e9572dc62e05ca27ddfb380d124f194"
 name = "asd-admin"
 handle = "asd-admin"
-application_url = "https://asd-assignment.vercel.app"
+application_url = "https://asd-assignment.vercel.app/"
 embedded = true
 
 [build]
 dev_store_url = "storename3122.myshopify.com"
-include_config_on_deploy = true
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes

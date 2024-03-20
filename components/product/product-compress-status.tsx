@@ -17,9 +17,11 @@ const ProductCompressStatus: React.FC<ProductCompressStatusProps> = ({
         )
     }
 
-    if(compressStatus[data.id] === 'compressed') (
-        <p>compressed</p>
-    )
+    if (compressStatus[data.id] === 'compressed') {
+        return (
+            <p>compressed</p>
+        )
+    }
 
     if (data.images.length === 1) {
         return (

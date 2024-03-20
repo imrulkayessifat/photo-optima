@@ -8,7 +8,6 @@ export default async function Home() {
   const response = await client.get(`products.json`);
   const data = await response.json()
 
-  console.log(data)
   return (
     <main>
       {/* <Store products={data.products} /> */}
