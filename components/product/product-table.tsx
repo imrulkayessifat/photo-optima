@@ -37,24 +37,9 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import ProductActionCell from "./product-action-cell"
-
-
-type ImageProp = {
-    src: string;
-}
-
-type ImagesProps = {
-    id: number;
-    src: string;
-}
-
-export type ProductDataProps = {
-    id: number;
-    title: string;
-    image: ImageProp;
-    images: ImagesProps[]
-}
+import ProductActionCell from "@/components/product/product-action-cell"
+import ProductCompressStatus from "@/components/product/product-compress-status"
+import { ProductDataProps,ProductTableProps } from "@/types/type"
 
 export const columns: ColumnDef<ProductDataProps>[] = [
     {
@@ -138,13 +123,7 @@ export const columns: ColumnDef<ProductDataProps>[] = [
                 </Button>
             )
         },
-        cell: ({ row }) => {
-
-            const data = row.original;
-            return (
-                <p>{data.images.length === 1 ? "not compressed" : 'compressed'}</p>
-            )
-        },
+        cell: ({ row }) => <ProductCompressStatus data={row.original}/>
     },
     {
         id: "actions",
@@ -152,10 +131,6 @@ export const columns: ColumnDef<ProductDataProps>[] = [
         cell: ({ row }) => <ProductActionCell data={row.original} />
     },
 ]
-
-interface ProductTableProps {
-    data: any
-}
 
 const ProductTable: React.FC<ProductTableProps> = ({
     data
