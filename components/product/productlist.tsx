@@ -19,7 +19,7 @@ const ProductList: React.FC<ProductListDataProps> = ({
     useEffect(() => {
         setProducts(products)
     }, [products])
-    
+    console.log(data)
     return (
         <div className='flex flex-col gap-3 mx-auto px-8 my-10'>
             <div className='flex items-center justify-between'>
