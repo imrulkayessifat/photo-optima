@@ -15,17 +15,21 @@ interface ProductListDataProps {
 const ProductList: React.FC<ProductListDataProps> = ({
     products
 }) => {
+    const { data, setProducts } = useProductStore()
+    useEffect(() => {
+        setProducts(products)
+    }, [products])
     
     return (
         <div className='flex flex-col gap-3 mx-auto px-8 my-10'>
             <div className='flex items-center justify-between'>
                 <Heading
-                    title={`Product List (${products.length})`}
+                    title={`Product List (${data.length})`}
                     description="Manage Product for Asd of Admin Panel"
                 />
             </div>
             <Separator />
-            <ProductTable data={products} />
+            <ProductTable data={data} />
         </div>
     )
 }

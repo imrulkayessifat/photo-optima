@@ -8,6 +8,7 @@ embedded = true
 
 [build]
 dev_store_url = "storename3122.myshopify.com"
+include_config_on_deploy = true
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes

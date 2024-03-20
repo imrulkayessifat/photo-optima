@@ -9,6 +9,6 @@ export const compressImage = async (imageUrl: string) => {
     const buffer = Buffer.from(response.data, 'binary');
    
     const compressedBuffer = await sharp(buffer).resize(300, 300).jpeg({ quality: 80 }).toBuffer();
-    fs.writeFileSync('hello.jpg', compressedBuffer);
+    // fs.writeFileSync('hello.jpg', compressedBuffer);
     return compressedBuffer;
 }
