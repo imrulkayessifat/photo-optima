@@ -1,8 +1,8 @@
 "use server";
 
-export const uploadImageToShopify = async (imageBuffer: Buffer, productId: number) => {
+export const uploadImageToShopify = async (imageBuffer: ArrayBuffer, productId: string) => {
     const base64Image = Buffer.from(imageBuffer).toString('base64');
-
+    console.log(base64Image)
     const image = {
         product_id: productId,
         attachment: base64Image,
@@ -19,8 +19,9 @@ export const uploadImageToShopify = async (imageBuffer: Buffer, productId: numbe
 
     const data = await response.json();
 
-    return data;
+    console.log(data)
 
+    return data;
 }
 
 export const replaceExistingImage = async (values: any, imageId: number) => {

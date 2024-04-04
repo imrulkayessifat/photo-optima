@@ -14,8 +14,17 @@ export interface ProductTableProps {
 export type ProductDataProps = {
     id: number;
     title: string;
-    image: ImageProp;
-    images: ImagesProps[]
+}
+
+export interface ImageTableProps {
+    data: any
+}
+
+export type ImageDataProps = {
+    id:string;
+    url:string;
+    productId:string;
+    status:string;
 }
 
 export interface StoreDataTypes {

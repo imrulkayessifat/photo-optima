@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import {
-    CaretSortIcon,
     ChevronDownIcon,
 } from "@radix-ui/react-icons"
 
@@ -37,10 +36,10 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import ProductActionCell from "@/components/product/product-action-cell"
-import { ProductDataProps,ProductTableProps } from "@/types/type"
+import ImageActionCell from "@/components/image/image-action-cell"
+import { ImageTableProps, ImageDataProps } from "@/types/type"
 
-export const columns: ColumnDef<ProductDataProps>[] = [
+export const columns: ColumnDef<ImageDataProps>[] = [
     {
         id: "select",
         header: ({ table }) => (
@@ -65,34 +64,58 @@ export const columns: ColumnDef<ProductDataProps>[] = [
     },
     {
         accessorKey: "id",
-        header: "Product Id",
+        header: "Image Id",
         cell: ({ row }) => (
             <div className="capitalize">{row.getValue("id")}</div>
         ),
     },
     {
-        accessorKey: "title",
+        accessorKey: "url",
         header: ({ column }) => {
             return (
                 <Button
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
-                    Title
-                    <CaretSortIcon className="ml-2 h-4 w-4" />
+                    Image
                 </Button>
             )
         },
-        cell: ({ row }) => <div className="lowercase">{row.getValue("title")}</div>,
+        cell: ({ row }) => {
+            const data = row.original
+            return (
+                <Image
+                    src={data.url}
+                    alt=""
+                    width={"50"}
+                    height={"50"}
+                    className="w-10 h-10"
+                />
+            )
+        },
+    },
+    {
+        accessorKey: "productId",
+        header: "Product Id",
+        cell: ({ row }) => (
+            <div className="capitalize">{row.getValue("productId")}</div>
+        ),
+    },
+    {
+        accessorKey: "status",
+        header: "Status",
+        cell: ({ row }) => (
+            <div className="capitalize">{row.getValue("status")}</div>
+        ),
     },
     {
         id: "actions",
         enableHiding: false,
-        cell: ({ row }) => <ProductActionCell data={row.original} />
+        cell: ({ row }) => <ImageActionCell data={row.original} />
     },
 ]
 
-const ProductTable: React.FC<ProductTableProps> = ({
+const ImageTable: React.FC<ImageTableProps> = ({
     data
 }) => {
 
@@ -127,10 +150,10 @@ const ProductTable: React.FC<ProductTableProps> = ({
         <div className="w-full">
             <div className="flex items-center py-4">
                 <Input
-                    placeholder="Filter Title..."
-                    value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
+                    placeholder="Filter with Image Id..."
+                    value={(table.getColumn("id")?.getFilterValue() as string) ?? ""}
                     onChange={(event) =>
-                        table.getColumn("title")?.setFilterValue(event.target.value)
+                        table.getColumn("id")?.setFilterValue(event.target.value)
                     }
                     className="max-w-sm"
                 />
@@ -239,4 +262,4 @@ const ProductTable: React.FC<ProductTableProps> = ({
     )
 }
 
-export default ProductTable
+export default ImageTable

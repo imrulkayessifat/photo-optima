@@ -11,11 +11,13 @@ import {
 
 
 interface ProductDetailsProps {
-    data: any
+    data: any,
+    title:string;
 }
 
 const ProductDetails: React.FC<ProductDetailsProps> = ({
-    data
+    data,
+    title
 }) => {
     return (
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 m-8'>
@@ -23,11 +25,11 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
                 data.map((image: any, key: any) => (
                     <Card key={key} className="w-[350px]">
                         <CardHeader>
-                            <CardTitle>{data.title}</CardTitle>
+                            <CardTitle>{title}</CardTitle>
                         </CardHeader>
                         <CardContent>
                             <Image
-                                src={image.src}
+                                src={image.url}
                                 alt="demo"
                                 width="300"
                                 height="300"
@@ -36,11 +38,11 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
                                 className="object-center w-[350px] h-[350px] rounded-md"
                             />
                         </CardContent>
-                        <CardFooter className="flex justify-between">
+                        {/* <CardFooter className="flex justify-between">
                             <p>Position : {image.position}</p>
                             <p>Size : {image.width}/{image.height}</p>
                             
-                        </CardFooter>
+                        </CardFooter> */}
                     </Card>
                 ))
             }

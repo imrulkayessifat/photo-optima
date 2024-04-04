@@ -1,28 +1,29 @@
 import { useTransition } from "react";
 import { useRouter } from "next/navigation";
+import { LiaCompressArrowsAltSolid } from "react-icons/lia";
 import { toast } from "sonner";
-import { FaRegEye } from "react-icons/fa";
 
 import { Button } from "@/components/ui/button";
 
 
-interface ProductActionCellProps {
+interface ImageCellProps {
     data: any
 }
-const ProductActionCell: React.FC<ProductActionCellProps> = ({
+const ImageActionCell: React.FC<ImageCellProps> = ({
     data
 }) => {
 
     const router = useRouter();
     const [isPending, startTransition] = useTransition();
 
+
     return (
         <div className="flex gap-2">
-            <Button onClick={() => router.push(`/products/${data.id}`)} variant={"outline"}>
-                <FaRegEye className="w-5 h-5" />
+            <Button variant={"outline"}>
+                <LiaCompressArrowsAltSolid className="w-7 h-7" />
             </Button>
         </div>
     )
 }
 
-export default ProductActionCell;
+export default ImageActionCell;
