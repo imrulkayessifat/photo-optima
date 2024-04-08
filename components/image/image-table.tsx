@@ -37,6 +37,7 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import ImageActionCell from "@/components/image/image-action-cell"
+import ImageStatus from "@/components/image/image-status"
 import { ImageTableProps, ImageDataProps } from "@/types/type"
 
 export const columns: ColumnDef<ImageDataProps>[] = [
@@ -75,7 +76,7 @@ export const columns: ColumnDef<ImageDataProps>[] = [
             return (
                 <Button
                     variant="ghost"
-                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                    // onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Image
                 </Button>
@@ -103,9 +104,18 @@ export const columns: ColumnDef<ImageDataProps>[] = [
     },
     {
         accessorKey: "status",
-        header: "Status",
+        header: ({ column }) => {
+            return (
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    Status
+                </Button>
+            )
+        },
         cell: ({ row }) => (
-            <div className="capitalize">{row.getValue("status")}</div>
+            <ImageStatus data={row.original} />
         ),
     },
     {
