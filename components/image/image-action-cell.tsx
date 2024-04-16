@@ -21,6 +21,30 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
 
     const [isPending, startTransition] = useTransition();
 
+    const pollImageStatus = (id: string) => {
+        const checkStatus = async () => {
+            try {
+                const response = await fetch(`http://localhost:8080/images/image-status/${id}`);
+                const data = await response.json();
+
+                console.log(data)
+                if (data.error) {
+                    clearInterval(intervalId);
+                }
+                setImageStatus(id, data.status);
+                if (data.status === 'COMPRESSED') {
+                    clearInterval(intervalId);
+                }
+            } catch (error) {
+                setImageStatus(id, 'NOT_COMPRESSED');
+                console.error('Error fetching image status:', error);
+                clearInterval(intervalId);
+            }
+        };
+
+        const intervalId = setInterval(checkStatus, 1000); // Poll every 1 second
+    };
+
 
     const handleCompress = async (id: string, productid: string, url: string) => {
 
@@ -34,16 +58,20 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
         });
         const data = await response.json()
 
-        setTimeout(async () => {
-            if (response.ok) {
-                setImageStatus(id, 'COMPRESSED');
-            } else {
-                setImageStatus(id, 'NOT_COMPRESSED');
-            }
-        }, 2000);
-    }
+        if (response.ok && data) {
+            console.log(id)
+            pollImageStatus(id);
+        }
+        // console.log(data)
+        // setTimeout(async () => {
+        //     if (response.ok) {
+        //         setImageStatus(id, 'COMPRESSED');
+        //     } else {
+        //         setImageStatus(id, 'NOT_COMPRESSED');
+        //     }
+        // }, 2000);
 
-    console.log(data)
+    }
 
     return (
         <div className="flex gap-2">
