@@ -21,13 +21,32 @@ export interface ImageTableProps {
 }
 
 export type ImageDataProps = {
-    id:string;
-    url:string;
-    productId:string;
-    status:string;
+    id: string;
+    url: string;
+    productId: string;
+    status: string;
 }
 
 export interface StoreDataTypes {
-    src:string;
-    title:string;
+    src: string;
+    title: string;
+}
+
+export interface PlansProps {
+    title: string;
+    description?: string;
+    bandwidth: string;
+    pay: string;
+}
+
+export interface QuotaProps {
+    title: string;
+    bandwidth: string;
+    pay: string;
+}
+
+export interface ComparePlansProps {
+    feature:string;
+    free:string;
+    paid:string;
 }
