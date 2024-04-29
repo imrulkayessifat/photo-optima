@@ -1,14 +1,21 @@
+"use client"
+
+import { useSearchParams } from "next/navigation";
 import Navbar from "@/components/navbar";
-import ImagestList from "@/components/image/imageslist";
+import ImageBox from "@/components/image/image-box";
 
 export default async function Home() {
-  const res = await fetch('http://localhost:8080/images', { cache: 'no-store' });
-  const data = await res.json();
+  const searchParams = useSearchParams()
+
+  const accessToken = searchParams.get('access_token')
+  console.log(accessToken)
+
+
   return (
     <main>
       <Navbar />
       <div className="mt-24">
-        <ImagestList images={data.data} />
+        <ImageBox />
       </div>
     </main>
   );

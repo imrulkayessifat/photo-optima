@@ -30,20 +30,20 @@ export const StoreData: StoreDataTypes[] = [
 
 export const plans: PlansProps[] = [
     {
-        title: 'Micro',
+        name: 'MICRO',
         bandwidth: '500MB',
-        pay: "4.99"
+        price: "4.99"
     },
     {
-        title: 'Pro',
+        name: 'PRO',
         description: 'MOST POPULAR',
         bandwidth: '2 GB',
-        pay: "9.99"
+        price: "9.99"
     },
     {
-        title: 'Micro',
+        name: 'ADVANCED',
         bandwidth: '5 GB',
-        pay: "19.99"
+        price: "19.99"
     }
 ]
 

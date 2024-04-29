@@ -41,7 +41,7 @@ const Page = () => {
                         plans.map((plan, key) => (
                             <Card className="w-[350px]" key={key} >
                                 <CardHeader className="flex items-center">
-                                    <CardTitle>{plan.title}</CardTitle>
+                                    <CardTitle>{plan.name}</CardTitle>
                                     <CardDescription className="text-green-500">{plan.description}</CardDescription>
                                 </CardHeader>
                                 <CardContent className="flex flex-col items-center">
@@ -50,7 +50,7 @@ const Page = () => {
                                 </CardContent>
                                 <CardFooter className="flex gap-2 justify-between">
                                     <Button variant="secondary">Start compressing</Button>
-                                    <p><span className="font-bold">${plan.pay}</span> per month</p>
+                                    <p><span className="font-bold">${plan.price}</span> per month</p>
                                 </CardFooter>
                             </Card>
                         ))

@@ -33,10 +33,10 @@ export interface StoreDataTypes {
 }
 
 export interface PlansProps {
-    title: string;
+    name: string;
     description?: string;
     bandwidth: string;
-    pay: string;
+    price: string;
 }
 
 export interface QuotaProps {
