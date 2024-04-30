@@ -1,4 +1,10 @@
+"use client"
+
+import { useEffect } from "react";
+
 import { IoIosGitNetwork } from "react-icons/io";
+import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 import {
     Card,
@@ -27,6 +33,49 @@ import { Button } from "@/components/ui/button"
 import { plans, quotas, compare } from "@/lib/data"
 
 const Page = () => {
+    const router = useRouter()
+    const searchParams = useSearchParams()
+
+    const chargeId = searchParams.get('charge_id')
+
+    console.log(chargeId)
+
+    const handleSubscribe = async (name: string) => {
+        const res = await fetch('http://localhost:3001/subscribe', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                plan: name
+            })
+        })
+
+        const data = await res.json();
+        console.log(data)
+        router.push(data.data.recurring_application_charge.confirmation_url)
+    }
+
+    useEffect(() => {
+        console.log(localStorage.getItem('store-name'))
+        const fetchData = async () => {
+            const res = await fetch('http://localhost:3001/subscribe/charge', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chargeId: chargeId,
+                    storeName:localStorage.getItem('store-name')
+                })
+            })
+        }
+
+        if (chargeId?.length! > 0) {
+            fetchData()
+        }
+    }, [chargeId])
+
     return (
         <div className='mt-24'>
             <div className='flex flex-col gap-7 mx-auto px-8'>
@@ -49,7 +98,7 @@ const Page = () => {
                                     <p>OF IMAGES PER MONTH</p>
                                 </CardContent>
                                 <CardFooter className="flex gap-2 justify-between">
-                                    <Button variant="secondary">Start compressing</Button>
+                                    <Button onClick={() => handleSubscribe(plan.name)} variant="secondary">Start compressing</Button>
                                     <p><span className="font-bold">${plan.price}</span> per month</p>
                                 </CardFooter>
                             </Card>
