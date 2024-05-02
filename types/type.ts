@@ -36,7 +36,7 @@ export interface PlansProps {
     name: string;
     description?: string;
     bandwidth: string;
-    price: string;
+    price: number;
 }
 
 export interface QuotaProps {

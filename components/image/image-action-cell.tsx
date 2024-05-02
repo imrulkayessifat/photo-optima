@@ -49,12 +49,13 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
     const handleCompress = async (id: string, productid: string, url: string) => {
 
         setImageStatus(id, 'ONGOING');
+        const storeName = localStorage.getItem('store-name')
         const response = await fetch(`http://localhost:3001/compress-image`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ id, productid, url })
+            body: JSON.stringify({ id, productid, url,storeName })
         });
         const data = await response.json()
 

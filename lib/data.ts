@@ -32,18 +32,18 @@ export const plans: PlansProps[] = [
     {
         name: 'MICRO',
         bandwidth: '500MB',
-        price: "4.99"
+        price: 4.99
     },
     {
         name: 'PRO',
         description: 'MOST POPULAR',
         bandwidth: '2 GB',
-        price: "9.99"
+        price: 9.99
     },
     {
         name: 'ADVANCED',
         bandwidth: '5 GB',
-        price: "19.99"
+        price: 19.99
     }
 ]
 
