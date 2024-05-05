@@ -1,9 +1,11 @@
 "use client"
 
+import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
+
 import Navbar from "@/components/navbar";
 import ImageBox from "@/components/image/image-box";
-import { useEffect } from "react";
+import ManualUpload from "@/components/manual-upload";
 
 export default function Home() {
   const searchParams = useSearchParams()
@@ -22,6 +24,7 @@ export default function Home() {
     <main>
       <Navbar />
       <div className="mt-24">
+        <ManualUpload />
         <ImageBox />
       </div>
     </main>
