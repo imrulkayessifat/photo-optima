@@ -23,6 +23,7 @@ export interface ImageTableProps {
 export type ImageDataProps = {
     id: string;
     url: string;
+    name: string;
     productId: string;
     status: string;
 }
@@ -46,7 +47,7 @@ export interface QuotaProps {
 }
 
 export interface ComparePlansProps {
-    feature:string;
-    free:string;
-    paid:string;
+    feature: string;
+    free: string;
+    paid: string;
 }

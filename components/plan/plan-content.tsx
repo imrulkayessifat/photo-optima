@@ -39,12 +39,11 @@ interface PlanContextProp {
 const PlanContext: React.FC<PlanContextProp> = ({
     localPlan
 }) => {
+    
     const router = useRouter()
     const searchParams = useSearchParams()
 
     const chargeId = searchParams.get('charge_id')
-
-    console.log(chargeId)
 
 
     const handleSubscribe = async (name: string, price: number) => {
@@ -60,7 +59,6 @@ const PlanContext: React.FC<PlanContextProp> = ({
         })
 
         const data = await res.json();
-        console.log(data)
         router.push(data.data.recurring_application_charge.confirmation_url)
     }
 

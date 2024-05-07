@@ -25,6 +25,9 @@ import {
     DropdownMenu,
     DropdownMenuCheckboxItem,
     DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
@@ -39,6 +42,7 @@ import {
 import ImageActionCell from "@/components/image/image-action-cell"
 import ImageStatus from "@/components/image/image-status"
 import { ImageTableProps, ImageDataProps } from "@/types/type"
+import ImageRename from "@/components/image/image-rename"
 
 export const columns: ColumnDef<ImageDataProps>[] = [
     {
@@ -71,12 +75,19 @@ export const columns: ColumnDef<ImageDataProps>[] = [
         ),
     },
     {
+        accessorKey: "name",
+        header: "Image name",
+        cell: ({ row }) => (
+            <div className="">{row.getValue("name")}</div>
+        ),
+    },
+    {
         accessorKey: "url",
         header: ({ column }) => {
             return (
                 <Button
                     variant="ghost"
-                    // onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                // onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
                     Image
                 </Button>
@@ -121,7 +132,24 @@ export const columns: ColumnDef<ImageDataProps>[] = [
     {
         id: "actions",
         enableHiding: false,
-        cell: ({ row }) => <ImageActionCell data={row.original} />
+        cell: ({ row }) => {
+            
+            return (
+                <DropdownMenu>
+                    <DropdownMenuTrigger>...</DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem>
+                            <ImageActionCell data={row.original} />
+                        </DropdownMenuItem>
+                        <DropdownMenuItem>
+                            <ImageRename data={row.original} />
+                        </DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
+            )
+        }
     },
 ]
 

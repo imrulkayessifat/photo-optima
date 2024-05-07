@@ -55,7 +55,7 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ id, productid, url,storeName })
+            body: JSON.stringify({ id, productid, url, storeName })
         });
         const data = await response.json()
 
@@ -81,8 +81,18 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
                 className={`${data.status === 'COMPRESSED' || status === 'COMPRESSED' ? 'hidden' : ''}`}
                 variant={"outline"}
             >
-                <LiaCompressArrowsAltSolid className="w-7 h-7" />
+                {/* <LiaCompressArrowsAltSolid className="w-7 h-7" /> */}
+                compress
             </Button>
+            {
+                (data.status === 'COMPRESSED' || status === 'COMPRESSED') && (
+                    <Button
+                        variant={"outline"}
+                    >
+                        Restore
+                    </Button>
+                )
+            }
         </div>
     )
 }

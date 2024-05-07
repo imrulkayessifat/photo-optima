@@ -2,11 +2,15 @@
 
 import { useState, useEffect } from "react"
 
+import { usePlanStore } from "@/hooks/usePlan";
 import PlanContext from "@/components/plan/plan-content"
 
 const Page = () => {
-    const [plan, setPlan] = useState('')
+    // const [plan, setPlan] = useState('')
+    const { plan, setPlan } = usePlanStore()
     const storeName = localStorage.getItem('store-name')
+
+    console.log(plan)
 
     useEffect(() => {
         const fetchPlan = async () => {
@@ -20,13 +24,15 @@ const Page = () => {
                 })
             })
             const data = await res.json()
+
+            console.log(data)
             setPlan(data.data.plan)
 
         }
         fetchPlan()
     }, [storeName])
     return (
-        <PlanContext localPlan={plan}/>
+        <PlanContext localPlan={plan} />
     )
 }
 
