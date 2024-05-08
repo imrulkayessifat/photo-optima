@@ -82,6 +82,13 @@ export const columns: ColumnDef<ImageDataProps>[] = [
         ),
     },
     {
+        accessorKey: "alt",
+        header: "Image Alt Tag",
+        cell: ({ row }) => (
+            <div className="">{row.getValue("alt")}</div>
+        ),
+    },
+    {
         accessorKey: "url",
         header: ({ column }) => {
             return (

@@ -47,17 +47,37 @@ const ImageRename: React.FC<ImageRenameProps> = ({
         })
 
         const res = await req.json()
+    }
 
-        console.log(res)
+    const altRename = async (id: string, name: string) => {
+        const req = await fetch('http:localhost:3001/rename/alt-rename', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                id: `${id}`,
+                name: name
+            })
+        })
+
+        const res = await req.json()
+
+        console.log("alt tag : ", res)
     }
 
     return (
         <div>
             {
                 plan !== 'FREE' && (
-                    <Button onClick={() => fileRename(data.id, data.name)} variant={'outline'}>
-                        File Rename
-                    </Button>
+                    <div className="flex flex-col gap-2">
+                        <Button onClick={() => fileRename(data.id, data.name)} variant={'outline'}>
+                            File Rename
+                        </Button>
+                        <Button onClick={() => altRename(data.id, data.name)} variant={'outline'}>
+                            Alt Rename
+                        </Button>
+                    </div>
                 )
             }
         </div>

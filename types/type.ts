@@ -24,6 +24,7 @@ export type ImageDataProps = {
     id: string;
     url: string;
     name: string;
+    alt: string;
     productId: string;
     status: string;
 }
