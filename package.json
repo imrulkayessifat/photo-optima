@@ -29,6 +29,7 @@
     "@shopify/app-bridge-utils": "^3.5.1",
     "@shopify/cli": "^3.57.1",
     "@tanstack/react-table": "^8.13.2",
+    "@uploadcare/blocks": "0.39.0",
     "axios": "^1.6.7",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",

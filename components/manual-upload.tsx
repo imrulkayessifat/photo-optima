@@ -1,9 +1,9 @@
 "use client"
 
-import { useEffect, useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
+import { uploadFile } from '@uploadcare/upload-client'
 
 import {
     Form,
@@ -23,6 +23,36 @@ const ManualUpload = () => {
             image: ''
         }
     });
+
+    const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files && e.target.files[0];
+        if (file) {
+            // const reader = new FileReader();
+            // reader.onload = () => {
+            //     const imageDataUrl = reader.result as string;
+            //     console.log("image url : ",imageDataUrl)
+            //     // Save image data to localStorage
+            //     localStorage.setItem('uploadedImage', imageDataUrl);
+            //     // Trigger form field change
+            //     form.setValue('image', imageDataUrl);
+            // };
+            // reader.readAsDataURL(file);
+            const result = await uploadFile(
+                file,
+                {
+                    publicKey: 'c0bc9dbd97f5de75c062',
+                    store: 'auto',
+                    metadata: {
+                        subsystem: 'js-client',
+                        pet: 'cat'
+                    }
+                }
+            )
+            console.log(result)
+        }
+    };
+
+
     return (
         <div
             className='mx-auto px-8'
@@ -41,18 +71,7 @@ const ManualUpload = () => {
                                     <Input
                                         id="picture"
                                         type="file"
-                                        onChange={(e) => {
-                                            field.onChange(e.target.files);
-                                            const file = e.target.files && e.target.files[0];
-                                            if (file) {
-                                                const reader = new FileReader();
-                                                reader.onload = () => {
-
-                                                };
-                                                reader.readAsDataURL(file);
-                                            }
-
-                                        }}
+                                        onChange={handleImageChange}
                                     />
                                 </FormControl>
                                 <FormMessage />

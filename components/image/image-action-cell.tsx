@@ -24,7 +24,7 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
     const pollImageStatus = (id: string) => {
         const checkStatus = async () => {
             try {
-                const response = await fetch(`http://localhost:8080/images/image-status/${id}`);
+                const response = await fetch(`http://localhost:3001/image/image-status/${id}`);
                 const data = await response.json();
 
                 console.log(data)
@@ -50,7 +50,7 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
 
         setImageStatus(id, 'ONGOING');
         const storeName = localStorage.getItem('store-name')
-        const response = await fetch(`http://localhost:3001/compress-image`, {
+        const response = await fetch(`http://localhost:3001/image/compress-image`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

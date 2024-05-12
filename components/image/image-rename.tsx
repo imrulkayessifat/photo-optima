@@ -35,7 +35,7 @@ const ImageRename: React.FC<ImageRenameProps> = ({
 
 
     const fileRename = async (id: string, name: string) => {
-        const req = await fetch('http:localhost:3001/rename/file-rename', {
+        const req = await fetch('http://localhost:3001/rename/file-rename', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ const ImageRename: React.FC<ImageRenameProps> = ({
     }
 
     const altRename = async (id: string, name: string) => {
-        const req = await fetch('http:localhost:3001/rename/alt-rename', {
+        const req = await fetch('http://localhost:3001/rename/alt-rename', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
