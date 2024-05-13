@@ -1,8 +1,10 @@
 "use client"
 
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
 import * as z from "zod"
+import { toast } from "sonner";
+import { useTransition } from "react";
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
 import { uploadFile } from '@uploadcare/upload-client'
 
 import {
@@ -13,10 +15,13 @@ import {
     FormItem,
     FormMessage,
 } from "@/components/ui/form"
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input"
 import { UploadImageFormSchema } from "@/lib/schemas"
 
 const ManualUpload = () => {
+    const [isPending, startTransition] = useTransition();
+
     const form = useForm<z.infer<typeof UploadImageFormSchema>>({
         resolver: zodResolver(UploadImageFormSchema),
         defaultValues: {
@@ -24,20 +29,11 @@ const ManualUpload = () => {
         }
     });
 
-    const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const uploading = async (e: any) => {
         const file = e.target.files && e.target.files[0];
+        console.log(file)
         if (file) {
-            // const reader = new FileReader();
-            // reader.onload = () => {
-            //     const imageDataUrl = reader.result as string;
-            //     console.log("image url : ",imageDataUrl)
-            //     // Save image data to localStorage
-            //     localStorage.setItem('uploadedImage', imageDataUrl);
-            //     // Trigger form field change
-            //     form.setValue('image', imageDataUrl);
-            // };
-            // reader.readAsDataURL(file);
-            const result = await uploadFile(
+            const data = await uploadFile(
                 file,
                 {
                     publicKey: 'c0bc9dbd97f5de75c062',
@@ -48,8 +44,33 @@ const ManualUpload = () => {
                     }
                 }
             )
-            console.log(result)
+            if (!data.uuid) {
+                return { error: `something went wrong` }
+            }
+
+            return { success: "Successfully image uploaded!" };
         }
+        return { error: `something went wrong` }
+    };
+
+    const onUpload = (values: z.infer<typeof UploadImageFormSchema>) => {
+        console.log(values)
+        // startTransition(() => {
+        //     const promise = uploading(values)
+
+        //     toast.promise(promise, {
+        //         loading: 'Uploading Image...',
+        //         success: (data) => {
+        //             if (data!.error) {
+        //                 return `Uploading Image failed: ${data!.error}`
+        //             } else {
+        //                 return `Uploading Image successful: ${data!.success}`
+        //             }
+        //         },
+        //         error: 'An unexpected error occurred',
+        //     })
+        // });
+        // form.reset()
     };
 
 
@@ -70,14 +91,35 @@ const ManualUpload = () => {
                                 <FormControl>
                                     <Input
                                         id="picture"
+                                        disabled={isPending}
                                         type="file"
-                                        onChange={handleImageChange}
+                                        onChange={(e) => {
+                                            field.onChange(e.target.files);
+                                            startTransition(() => {
+                                                const promise = uploading(e)
+
+                                                toast.promise(promise, {
+                                                    loading: 'Uploading Image...',
+                                                    success: (data) => {
+                                                        if (data!.error) {
+                                                            return `Uploading Image failed: ${data!.error}`
+                                                        } else {
+                                                            return `Uploading Image successful: ${data!.success}`
+                                                        }
+                                                    },
+                                                    error: 'An unexpected error occurred',
+                                                })
+                                            });
+                                        }}
                                     />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
                         )}
                     />
+                    <Button disabled={isPending} type="submit">
+                        Submit
+                    </Button>
                 </form>
             </Form>
         </div>
