@@ -31,7 +31,7 @@ const ManualUpload = () => {
 
     const uploading = async (e: any) => {
         const file = e.target.files && e.target.files[0];
-        console.log(file)
+
         if (file) {
             const data = await uploadFile(
                 file,
@@ -40,10 +40,11 @@ const ManualUpload = () => {
                     store: 'auto',
                     metadata: {
                         subsystem: 'js-client',
-                        pet: 'cat'
+                        pet: 'NOTCOMPRESSED'
                     }
                 }
             )
+
             if (!data.uuid) {
                 return { error: `something went wrong` }
             }
@@ -52,27 +53,6 @@ const ManualUpload = () => {
         }
         return { error: `something went wrong` }
     };
-
-    const onUpload = (values: z.infer<typeof UploadImageFormSchema>) => {
-        console.log(values)
-        // startTransition(() => {
-        //     const promise = uploading(values)
-
-        //     toast.promise(promise, {
-        //         loading: 'Uploading Image...',
-        //         success: (data) => {
-        //             if (data!.error) {
-        //                 return `Uploading Image failed: ${data!.error}`
-        //             } else {
-        //                 return `Uploading Image successful: ${data!.success}`
-        //             }
-        //         },
-        //         error: 'An unexpected error occurred',
-        //     })
-        // });
-        // form.reset()
-    };
-
 
     return (
         <div
@@ -109,6 +89,7 @@ const ManualUpload = () => {
                                                     },
                                                     error: 'An unexpected error occurred',
                                                 })
+                                                form.reset()
                                             });
                                         }}
                                     />
@@ -117,9 +98,7 @@ const ManualUpload = () => {
                             </FormItem>
                         )}
                     />
-                    <Button disabled={isPending} type="submit">
-                        Submit
-                    </Button>
+
                 </form>
             </Form>
         </div>
