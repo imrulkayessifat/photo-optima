@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation";
 import Navbar from "@/components/navbar";
 import ImageBox from "@/components/image/image-box";
 import ManualUpload from "@/components/manual-upload";
+import AutoCompression from "@/components/auto-compression";
 
 
 export default function Home() {
@@ -20,10 +21,12 @@ export default function Home() {
 
   }, [store])
 
+
   return (
     <main>
       <Navbar />
       <div className="mt-24">
+        <AutoCompression />
         <ManualUpload />
         <ImageBox />
       </div>
