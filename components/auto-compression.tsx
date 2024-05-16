@@ -19,14 +19,11 @@ import { AutoCompressionSchema } from "@/lib/schemas"
 
 const AutoCompression = () => {
 
-
-    // const [plan, setPlan] = useState('FREE')
-
-
     const form = useForm<z.infer<typeof AutoCompressionSchema>>({
         resolver: zodResolver(AutoCompressionSchema),
         defaultValues: {
             auto_compression: false,
+            store_name: ''
         },
     })
 
@@ -45,6 +42,7 @@ const AutoCompression = () => {
             const data = await res.json()
 
             form.setValue('auto_compression', data.data.autoCompression)
+            form.setValue('store_name', data.data.name)
 
         }
         fetchPlan()
@@ -72,8 +70,18 @@ const AutoCompression = () => {
                                         <FormControl>
                                             <Switch
                                                 checked={field.value}
-                                                onCheckedChange={(newValue) => {
+                                                onCheckedChange={async (newValue) => {
                                                     field.onChange(newValue);
+
+                                                    const data = form.getValues();
+
+                                                    const updateAutoCompression = await fetch('http://localhost:3001/store', {
+                                                        method: 'PUT',
+                                                        headers: {
+                                                            'Content-Type': 'application/json',
+                                                        },
+                                                        body: JSON.stringify(data)
+                                                    })
                                                 }
                                                 }
                                             />

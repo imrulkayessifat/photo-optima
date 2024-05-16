@@ -32,4 +32,5 @@ export const UploadImageFormSchema = z.object({
 
 export const AutoCompressionSchema = z.object({
     auto_compression: z.boolean().optional(),
+    store_name: z.string()
 })
