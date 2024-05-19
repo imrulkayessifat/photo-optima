@@ -63,15 +63,16 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
             console.log(id)
             pollImageStatus(id);
         }
-        // console.log(data)
-        // setTimeout(async () => {
-        //     if (response.ok) {
-        //         setImageStatus(id, 'COMPRESSED');
-        //     } else {
-        //         setImageStatus(id, 'NOT_COMPRESSED');
-        //     }
-        // }, 2000);
+    }
 
+    const handleRestore = async (id: string, productid: string) => {
+        const response = await fetch(`http://localhost:3001/image/restore-image`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id, productid })
+        });
     }
 
     return (
@@ -87,6 +88,7 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
             {
                 (data.status === 'COMPRESSED' || status === 'COMPRESSED') && (
                     <Button
+                        onClick={() => handleRestore(data.id, data.productId)}
                         variant={"outline"}
                     >
                         Restore
