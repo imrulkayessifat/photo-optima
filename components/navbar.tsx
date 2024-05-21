@@ -1,5 +1,3 @@
-"use client"
-
 import Link from "next/link";
 import {
     Menu,
@@ -19,7 +17,6 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
-
 
 const Navbar = () => {
 
@@ -88,7 +85,6 @@ const Navbar = () => {
                         <DropdownMenuSeparator />
                     </DropdownMenuContent>
                 </DropdownMenu>
-
             </div>
         </header >
     )

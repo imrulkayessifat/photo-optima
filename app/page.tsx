@@ -1,7 +1,11 @@
 "use client"
 
 import { useEffect } from "react";
+
+
 import { useSearchParams } from "next/navigation";
+import Cookies from 'js-cookie';
+
 
 import Navbar from "@/components/navbar";
 import ImageBox from "@/components/image/image-box";
@@ -12,24 +16,29 @@ import AutoCompression from "@/components/auto-compression";
 export default function Home() {
   const searchParams = useSearchParams()
 
-  const store = searchParams.get('shop')
+  const storeToken = searchParams.get('storeToken')
 
-  useEffect(() => {
-    if (store !== null) {
-      localStorage.setItem('store-name', store)
-    }
+  // Use js-cookie to set the cookie
+  Cookies.set('storeToken', storeToken!);
 
-  }, [store])
 
+  // const store = searchParams.get('shop')
+
+  // useEffect(() => {
+  //   if (store !== null) {
+  //     localStorage.setItem('store-name', store)
+  //   }
+
+  // }, [store])
 
   return (
     <main>
       <Navbar />
-      <div className="mt-24">
+      {/* <div className="mt-24">
         <AutoCompression />
         <ManualUpload />
         <ImageBox />
-      </div>
+      </div> */}
     </main>
   );
 }
