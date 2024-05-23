@@ -12,7 +12,6 @@ export const create = async (product: z.infer<typeof ProductCreatechema>) => {
         }
     }
     
-    console.log(singleProduct)
     const res = await fetch(`https://${process.env.SHOPIFY_STORE_DOMAIN}/admin/api/2024-04/products.json`, {
         method: 'POST',
         headers: {
@@ -23,7 +22,7 @@ export const create = async (product: z.infer<typeof ProductCreatechema>) => {
     })
     const data = await res.json()
 
-    console.log(data)
+    
 
     if (data.errors) {
         return { error: `Some Error Happens!` }

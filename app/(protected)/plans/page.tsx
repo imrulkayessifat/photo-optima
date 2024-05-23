@@ -1,38 +1,27 @@
-"use client";
-
-import { useState, useEffect } from "react"
-
-import { usePlanStore } from "@/hooks/usePlan";
+import { cookies } from "next/headers";
 import PlanContext from "@/components/plan/plan-content"
 
-const Page = () => {
-    // const [plan, setPlan] = useState('')
-    const { plan, setPlan } = usePlanStore()
-    const storeName = localStorage.getItem('store-name')
+const Page = async () => {
+    const cookieStore = cookies();
 
-    console.log(plan)
+    const shop = cookieStore.get("shop")!.value
 
-    useEffect(() => {
-        const fetchPlan = async () => {
-            const res = await fetch('http://localhost:3001/store', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    storeName: `${storeName}`
-                })
-            })
-            const data = await res.json()
+    const res = await fetch('http://localhost:3001/store', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            storeName: `${shop}`
+        })
+    })
 
-            console.log(data)
-            setPlan(data.data.plan)
+    const store = await res.json();
 
-        }
-        fetchPlan()
-    }, [storeName])
+    console.log(store)
+
     return (
-        <PlanContext localPlan={plan} />
+        <PlanContext localPlan={store.data.plan} shop={store.data.name} />
     )
 }
 

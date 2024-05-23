@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect } from "react";
+import { setCookie,getCookie } from 'cookies-next';
 
 import { IoIosGitNetwork } from "react-icons/io";
 import { useSearchParams } from "next/navigation";
@@ -34,14 +35,17 @@ import { plans, quotas, compare } from "@/lib/data"
 
 interface PlanContextProp {
     localPlan: string;
+    shop:string;
 }
 
 const PlanContext: React.FC<PlanContextProp> = ({
-    localPlan
+    localPlan,
+    shop
 }) => {
     
     const router = useRouter()
     const searchParams = useSearchParams()
+    console.log(shop)
 
     const chargeId = searchParams.get('charge_id')
 
@@ -64,7 +68,7 @@ const PlanContext: React.FC<PlanContextProp> = ({
 
     useEffect(() => {
         if (chargeId !== null) {
-            localStorage.setItem('charge-id', chargeId)
+            setCookie('charge-id', chargeId);
         }
         const fetchData = async () => {
             const res = await fetch('http://localhost:3001/subscribe/charge', {
@@ -74,7 +78,7 @@ const PlanContext: React.FC<PlanContextProp> = ({
                 },
                 body: JSON.stringify({
                     chargeId: chargeId,
-                    storeName: localStorage.getItem('store-name'),
+                    storeName: shop,
                 })
             })
         }

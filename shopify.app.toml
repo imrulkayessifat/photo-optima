@@ -3,7 +3,7 @@
 client_id = "0b77a1fb0b2de6c8915e1d2155b34163"
 name = "photo-optima"
 handle = "photo-optima"
-application_url = "https://60ac-59-153-103-54.ngrok-free.app/shopify"
+application_url = "https://fiber-university-ship-creation.trycloudflare.com/token"
 embedded = true
 
 [build]
@@ -15,7 +15,9 @@ include_config_on_deploy = true
 scopes = "read_products,write_products"
 
 [auth]
-redirect_urls = [ "https://60ac-59-153-103-54.ngrok-free.app/shopify/callback" ]
+redirect_urls = [
+  "https://ee64-182-163-119-50.ngrok-free.app/shopify/callback"
+]
 
 [webhooks]
 api_version = "2024-04"

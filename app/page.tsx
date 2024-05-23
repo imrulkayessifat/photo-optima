@@ -1,44 +1,41 @@
-"use client"
-
-import { useEffect } from "react";
-
-
-import { useSearchParams } from "next/navigation";
-import Cookies from 'js-cookie';
-
-
 import Navbar from "@/components/navbar";
 import ImageBox from "@/components/image/image-box";
 import ManualUpload from "@/components/manual-upload";
 import AutoCompression from "@/components/auto-compression";
+import { cookies } from "next/headers";
 
 
-export default function Home() {
-  const searchParams = useSearchParams()
-
-  const storeToken = searchParams.get('storeToken')
-
-  // Use js-cookie to set the cookie
-  Cookies.set('storeToken', storeToken!);
+export default async function Home() {
 
 
-  // const store = searchParams.get('shop')
+  const cookieStore = cookies();
 
-  // useEffect(() => {
-  //   if (store !== null) {
-  //     localStorage.setItem('store-name', store)
-  //   }
 
-  // }, [store])
+  const shop = cookieStore.get("shop")!.value
+
+  const res = await fetch('http://localhost:3001/store', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      storeName: `${shop}`
+    })
+  })
+
+  const store = await res.json();
+
+  console.log(store)
+
 
   return (
     <main>
       <Navbar />
-      {/* <div className="mt-24">
-        <AutoCompression />
+      <div className="mt-24">
+        {/* <AutoCompression auto_compression={store.data.autoCompression} store_name={store.data.name} /> */}
         <ManualUpload />
         <ImageBox />
-      </div> */}
+      </div>
     </main>
   );
 }

@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 
 
+
 import {
     Form,
     FormControl,
@@ -17,36 +18,25 @@ import {
 import { Switch } from "@/components/ui/switch"
 import { AutoCompressionSchema } from "@/lib/schemas"
 
-const AutoCompression = () => {
+interface AutoCompressionProps {
+    auto_compression: boolean;
+    store_name: string;
+}
+
+const AutoCompression: React.FC<AutoCompressionProps> = ({
+    auto_compression,
+    store_name
+}) => {
 
     const form = useForm<z.infer<typeof AutoCompressionSchema>>({
         resolver: zodResolver(AutoCompressionSchema),
         defaultValues: {
-            auto_compression: false,
-            store_name: ''
+            auto_compression: auto_compression,
+            store_name: store_name
         },
     })
 
-    useEffect(() => {
-        const store_name = localStorage.getItem('store-name')
-        const fetchPlan = async () => {
-            const res = await fetch('http://localhost:3001/store', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    storeName: `${store_name}`
-                })
-            })
-            const data = await res.json()
 
-            form.setValue('auto_compression', data.data.autoCompression)
-            form.setValue('store_name', data.data.name)
-
-        }
-        fetchPlan()
-    }, [])
 
     return (
         <div className='mx-auto px-8 my-10'>
@@ -82,6 +72,7 @@ const AutoCompression = () => {
                                                         },
                                                         body: JSON.stringify(data)
                                                     })
+
                                                 }
                                                 }
                                             />

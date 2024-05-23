@@ -1,8 +1,11 @@
 "use client"
 
+import { useSearchParams } from 'next/navigation';
+
+
 import * as z from "zod"
 import { toast } from "sonner";
-import { useTransition } from "react";
+import { useEffect, useTransition } from "react";
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { uploadFile } from '@uploadcare/upload-client'
@@ -20,6 +23,9 @@ import { Input } from "@/components/ui/input"
 import { UploadImageFormSchema } from "@/lib/schemas"
 
 const ManualUpload = () => {
+    const searchParams = useSearchParams();
+    const shop = searchParams.get('shop');
+    console.log(searchParams)
     const [isPending, startTransition] = useTransition();
 
     const form = useForm<z.infer<typeof UploadImageFormSchema>>({
