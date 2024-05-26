@@ -25,16 +25,13 @@ export default async function Home() {
 
   const store = await res.json();
 
-  console.log(store)
-
-
   return (
     <main>
       <Navbar />
       <div className="mt-24">
-        {/* <AutoCompression auto_compression={store.data.autoCompression} store_name={store.data.name} /> */}
+        <AutoCompression auto_compression={store.data.autoCompression} store_name={store.data.name} />
         <ManualUpload />
-        <ImageBox />
+        <ImageBox plan={store.data.plan}/>
       </div>
     </main>
   );

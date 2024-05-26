@@ -55,8 +55,6 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
     
         const data = await response.json();
     
-        console.log(data)
-    
         return data;
     }
 

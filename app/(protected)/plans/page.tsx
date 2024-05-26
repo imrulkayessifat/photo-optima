@@ -18,8 +18,6 @@ const Page = async () => {
 
     const store = await res.json();
 
-    console.log(store)
-
     return (
         <PlanContext localPlan={store.data.plan} shop={store.data.name} />
     )

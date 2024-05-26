@@ -1,10 +1,6 @@
 "use client"
 
-import { useEffect } from "react";
-import { setCookie,getCookie } from 'cookies-next';
-
 import { IoIosGitNetwork } from "react-icons/io";
-import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 
 import {
@@ -35,20 +31,14 @@ import { plans, quotas, compare } from "@/lib/data"
 
 interface PlanContextProp {
     localPlan: string;
-    shop:string;
+    shop: string;
 }
 
 const PlanContext: React.FC<PlanContextProp> = ({
     localPlan,
     shop
 }) => {
-    
     const router = useRouter()
-    const searchParams = useSearchParams()
-    console.log(shop)
-
-    const chargeId = searchParams.get('charge_id')
-
 
     const handleSubscribe = async (name: string, price: number) => {
         const res = await fetch('http://localhost:3001/subscribe', {
@@ -58,35 +48,16 @@ const PlanContext: React.FC<PlanContextProp> = ({
             },
             body: JSON.stringify({
                 plan: name,
-                price: price
+                price: price,
+                shop: shop
             })
         })
 
         const data = await res.json();
-        router.push(data.data.recurring_application_charge.confirmation_url)
+        const confirmationUrl = data.data.recurring_application_charge.confirmation_url
+        router.push(confirmationUrl)
     }
 
-    useEffect(() => {
-        if (chargeId !== null) {
-            setCookie('charge-id', chargeId);
-        }
-        const fetchData = async () => {
-            const res = await fetch('http://localhost:3001/subscribe/charge', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    chargeId: chargeId,
-                    storeName: shop,
-                })
-            })
-        }
-
-        if (chargeId?.length! > 0) {
-            fetchData()
-        }
-    }, [chargeId])
     return (
         <div className='mt-24'>
             <div className='flex flex-col gap-7 mx-auto px-8'>

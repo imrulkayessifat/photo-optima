@@ -8,17 +8,13 @@ const page = () => {
     const searchParams = useSearchParams()
 
     const shop = searchParams.get('shop')
-    console.log(shop)
 
     if (shop) {
         setCookie('shop', shop!);
-
-        
     }
 
     useEffect(()=>{
-
-        redirect('https://fiber-university-ship-creation.trycloudflare.com')
+        redirect(`${process.env.NEXT_PUBLIC_FRONTEND_DOMAIN}`)
     },[])
     return (
         <div></div>

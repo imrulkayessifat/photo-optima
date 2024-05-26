@@ -1,8 +1,8 @@
+"use client"
+
 import { useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { LiaCompressArrowsAltSolid } from "react-icons/lia";
-
-import { toast } from "sonner";
+import { getCookie } from 'cookies-next';
 
 import { Button } from "@/components/ui/button";
 import { useStore } from "@/hooks/compress-status";
@@ -19,6 +19,8 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
     const setImageStatus = useStore(state => state.setImageStatus);
     const status = useStore(state => state.imageStatus[data.id]);
 
+    const storeName = getCookie('shop')
+
     const [isPending, startTransition] = useTransition();
 
     const pollImageStatus = (id: string) => {
@@ -27,7 +29,6 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
                 const response = await fetch(`http://localhost:3001/image/image-status/${id}`);
                 const data = await response.json();
 
-                console.log(data)
                 if (data.error) {
                     clearInterval(intervalId);
                 }
@@ -49,7 +50,7 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
     const handleCompress = async (id: string, productid: string, url: string) => {
 
         setImageStatus(id, 'ONGOING');
-        const storeName = localStorage.getItem('store-name')
+        
         const response = await fetch(`http://localhost:3001/image/compress-image`, {
             method: 'POST',
             headers: {
@@ -60,7 +61,6 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
         const data = await response.json()
 
         if (response.ok && data) {
-            console.log(id)
             pollImageStatus(id);
         }
     }

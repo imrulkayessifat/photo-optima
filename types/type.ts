@@ -17,6 +17,7 @@ export type ProductDataProps = {
 }
 
 export interface ImageTableProps {
+    plan:string;
     data: any
 }
 

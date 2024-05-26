@@ -42,127 +42,135 @@ import {
 import ImageActionCell from "@/components/image/image-action-cell"
 import ImageStatus from "@/components/image/image-status"
 import { ImageTableProps, ImageDataProps } from "@/types/type"
-import ImageRename from "@/components/image/image-rename"
+import AltRename from "@/components/image/alt-rename"
+import FileRename from "@/components/image/file-rename"
 
-export const columns: ColumnDef<ImageDataProps>[] = [
-    {
-        id: "select",
-        header: ({ table }) => (
-            <Checkbox
-                checked={
-                    table.getIsAllPageRowsSelected() ||
-                    (table.getIsSomePageRowsSelected() && "indeterminate")
-                }
-                onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-                aria-label="Select all"
-            />
-        ),
-        cell: ({ row }) => (
-            <Checkbox
-                checked={row.getIsSelected()}
-                onCheckedChange={(value) => row.toggleSelected(!!value)}
-                aria-label="Select row"
-            />
-        ),
-        enableSorting: false,
-        enableHiding: false,
-    },
-    {
-        accessorKey: "id",
-        header: "Image Id",
-        cell: ({ row }) => (
-            <div className="capitalize">{row.getValue("id")}</div>
-        ),
-    },
-    {
-        accessorKey: "name",
-        header: "Image name",
-        cell: ({ row }) => (
-            <div className="">{row.getValue("name")}</div>
-        ),
-    },
-    {
-        accessorKey: "alt",
-        header: "Image Alt Tag",
-        cell: ({ row }) => (
-            <div className="">{row.getValue("alt")}</div>
-        ),
-    },
-    {
-        accessorKey: "url",
-        header: ({ column }) => {
-            return (
-                <Button
-                    variant="ghost"
-                // onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-                >
-                    Image
-                </Button>
-            )
-        },
-        cell: ({ row }) => {
-            const data = row.original
-            return (
-                <Image
-                    src={data.url}
-                    alt=""
-                    width={"50"}
-                    height={"50"}
-                    className="w-10 h-10"
-                />
-            )
-        },
-    },
-    {
-        accessorKey: "productId",
-        header: "Product Id",
-        cell: ({ row }) => (
-            <div className="capitalize">{row.getValue("productId")}</div>
-        ),
-    },
-    {
-        accessorKey: "status",
-        header: ({ column }) => {
-            return (
-                <Button
-                    variant="ghost"
-                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-                >
-                    Status
-                </Button>
-            )
-        },
-        cell: ({ row }) => (
-            <ImageStatus data={row.original} />
-        ),
-    },
-    {
-        id: "actions",
-        enableHiding: false,
-        cell: ({ row }) => {
-            
-            return (
-                <DropdownMenu>
-                    <DropdownMenuTrigger>...</DropdownMenuTrigger>
-                    <DropdownMenuContent>
-                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem>
-                            <ImageActionCell data={row.original} />
-                        </DropdownMenuItem>
-                        <DropdownMenuItem>
-                            <ImageRename data={row.original} />
-                        </DropdownMenuItem>
-                    </DropdownMenuContent>
-                </DropdownMenu>
-            )
-        }
-    },
-]
 
 const ImageTable: React.FC<ImageTableProps> = ({
-    data
+    data,
+    plan
 }) => {
+
+    const columns: ColumnDef<ImageDataProps>[] = [
+        {
+            id: "select",
+            header: ({ table }) => (
+                <Checkbox
+                    checked={
+                        table.getIsAllPageRowsSelected() ||
+                        (table.getIsSomePageRowsSelected() && "indeterminate")
+                    }
+                    onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+                    aria-label="Select all"
+                />
+            ),
+            cell: ({ row }) => (
+                <Checkbox
+                    checked={row.getIsSelected()}
+                    onCheckedChange={(value) => row.toggleSelected(!!value)}
+                    aria-label="Select row"
+                />
+            ),
+            enableSorting: false,
+            enableHiding: false,
+        },
+        {
+            accessorKey: "id",
+            header: "Image Id",
+            cell: ({ row }) => (
+                <div className="capitalize">{row.getValue("id")}</div>
+            ),
+        },
+        {
+            accessorKey: "name",
+            header: "Image name",
+            cell: ({ row }) => (
+                <div className="">{row.getValue("name")}</div>
+            ),
+        },
+        {
+            accessorKey: "alt",
+            header: "Image Alt Tag",
+            cell: ({ row }) => (
+                <div className="">{row.getValue("alt")}</div>
+            ),
+        },
+        {
+            accessorKey: "url",
+            header: ({ column }) => {
+                return (
+                    <Button
+                        variant="ghost"
+                    // onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                    >
+                        Image
+                    </Button>
+                )
+            },
+            cell: ({ row }) => {
+                const data = row.original
+                return (
+                    <Image
+                        src={data.url}
+                        alt=""
+                        width={"50"}
+                        height={"50"}
+                        className="w-10 h-10"
+                    />
+                )
+            },
+        },
+        {
+            accessorKey: "productId",
+            header: "Product Id",
+            cell: ({ row }) => (
+                <div className="capitalize">{row.getValue("productId")}</div>
+            ),
+        },
+        {
+            accessorKey: "status",
+            header: ({ column }) => {
+                return (
+                    <Button
+                        variant="ghost"
+                        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                    >
+                        Status
+                    </Button>
+                )
+            },
+            cell: ({ row }) => (
+                <ImageStatus data={row.original} />
+            ),
+        },
+        {
+            id: "actions",
+            enableHiding: false,
+            cell: ({ row }) => {
+
+                return (
+                    <DropdownMenu>
+                        <DropdownMenuTrigger>...</DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem>
+                                <ImageActionCell data={row.original} />
+                            </DropdownMenuItem>
+                            <DropdownMenuItem>
+                                <FileRename plan={plan} data={row.original} />
+                            </DropdownMenuItem>
+                            <DropdownMenuItem>
+                                <AltRename plan={plan} data={row.original} />
+                            </DropdownMenuItem>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+                )
+            }
+        },
+    ]
+
+
 
     const [sorting, setSorting] = React.useState<SortingState>([])
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(

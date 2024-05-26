@@ -25,7 +25,7 @@ import { UploadImageFormSchema } from "@/lib/schemas"
 const ManualUpload = () => {
     const searchParams = useSearchParams();
     const shop = searchParams.get('shop');
-    console.log(searchParams)
+    
     const [isPending, startTransition] = useTransition();
 
     const form = useForm<z.infer<typeof UploadImageFormSchema>>({
