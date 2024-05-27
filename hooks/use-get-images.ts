@@ -1,8 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 
-export const useGetImages = () => {
+interface UseGetImagesProps {
+    autoCompression: boolean;
+}
+
+
+export const useGetImages = ({ autoCompression }: UseGetImagesProps) => {
+    console.log(autoCompression)
     const query = useQuery({
-        queryKey: ["images"],
+        queryKey: ["images",autoCompression],
         queryFn: async () => {
             const res = await fetch('http://localhost:3001/image');
             if (!res.ok) {
@@ -10,7 +16,8 @@ export const useGetImages = () => {
             }
             const { data } = await res.json();
             return data;
-        }
+        },
+        refetchInterval: autoCompression ? 1000 : undefined
     })
     return query;
 }

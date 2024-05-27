@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/form"
 import { Switch } from "@/components/ui/switch"
 import { AutoCompressionSchema } from "@/lib/schemas"
+import { useAutoCompression } from "@/hooks/use-auto-compression"
 
 interface AutoCompressionProps {
     auto_compression: boolean;
@@ -27,6 +28,8 @@ const AutoCompression: React.FC<AutoCompressionProps> = ({
     auto_compression,
     store_name
 }) => {
+
+    const mutation = useAutoCompression()
 
     const form = useForm<z.infer<typeof AutoCompressionSchema>>({
         resolver: zodResolver(AutoCompressionSchema),
@@ -65,13 +68,15 @@ const AutoCompression: React.FC<AutoCompressionProps> = ({
 
                                                     const data = form.getValues();
 
-                                                    const updateAutoCompression = await fetch('http://localhost:3001/store', {
-                                                        method: 'PUT',
-                                                        headers: {
-                                                            'Content-Type': 'application/json',
-                                                        },
-                                                        body: JSON.stringify(data)
-                                                    })
+                                                    const res = await mutation.mutateAsync(data)
+
+                                                    // const updateAutoCompression = await fetch('http://localhost:3001/store', {
+                                                    //     method: 'PUT',
+                                                    //     headers: {
+                                                    //         'Content-Type': 'application/json',
+                                                    //     },
+                                                    //     body: JSON.stringify(data)
+                                                    // })
 
                                                 }
                                                 }

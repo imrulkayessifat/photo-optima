@@ -6,6 +6,8 @@ import { getCookie } from 'cookies-next';
 
 import { Button } from "@/components/ui/button";
 import { useStore } from "@/hooks/compress-status";
+import { useComressImage } from "@/hooks/use-compress-image";
+import { useRestoringImage } from "@/hooks/use-restoring-image";
 
 
 interface ImageCellProps {
@@ -16,6 +18,8 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
 }) => {
 
     const router = useRouter();
+    const mutation = useComressImage()
+    const restoreMutation = useRestoringImage()
     const setImageStatus = useStore(state => state.setImageStatus);
     const status = useStore(state => state.imageStatus[data.id]);
 
@@ -34,6 +38,7 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
                 }
                 setImageStatus(id, data.status);
                 if (data.status === 'COMPRESSED') {
+                    setImageStatus(id, 'COMPRESSED');
                     clearInterval(intervalId);
                 }
             } catch (error) {
@@ -49,6 +54,8 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
 
     const handleCompress = async (id: string, productid: string, url: string) => {
 
+        // mutation.mutate({id,productid,url,storeName})
+
         setImageStatus(id, 'ONGOING');
         
         const response = await fetch(`http://localhost:3001/image/compress-image`, {
@@ -61,11 +68,14 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
         const data = await response.json()
 
         if (response.ok && data) {
-            pollImageStatus(id);
+            // pollImageStatus(id);
+            const data = await mutation.mutateAsync(id)
+            
         }
     }
 
     const handleRestore = async (id: string, productid: string) => {
+        setImageStatus(id, 'RESTORING');
         const response = await fetch(`http://localhost:3001/image/restore-image`, {
             method: 'POST',
             headers: {
@@ -73,6 +83,11 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
             },
             body: JSON.stringify({ id, productid })
         });
+
+        const data = await response.json();
+        if(response.ok && data) {
+            const data = await restoreMutation.mutateAsync(id)
+        }
     }
 
     return (

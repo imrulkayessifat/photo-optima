@@ -21,12 +21,14 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input"
 import { UploadImageFormSchema } from "@/lib/schemas"
+import { useUploadImage } from '@/hooks/use-upload-image';
 
 const ManualUpload = () => {
     const searchParams = useSearchParams();
     const shop = searchParams.get('shop');
-    
+
     const [isPending, startTransition] = useTransition();
+    const mutation = useUploadImage()
 
     const form = useForm<z.infer<typeof UploadImageFormSchema>>({
         resolver: zodResolver(UploadImageFormSchema),
@@ -39,17 +41,8 @@ const ManualUpload = () => {
         const file = e.target.files && e.target.files[0];
 
         if (file) {
-            const data = await uploadFile(
-                file,
-                {
-                    publicKey: 'c0bc9dbd97f5de75c062',
-                    store: 'auto',
-                    metadata: {
-                        subsystem: 'js-client',
-                        pet: 'NOTCOMPRESSED'
-                    }
-                }
-            )
+
+            const data = await mutation.mutateAsync(file)
 
             if (!data.uuid) {
                 return { error: `something went wrong` }
