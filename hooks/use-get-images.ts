@@ -6,7 +6,6 @@ interface UseGetImagesProps {
 
 
 export const useGetImages = ({ autoCompression }: UseGetImagesProps) => {
-    console.log(autoCompression)
     const query = useQuery({
         queryKey: ["images",autoCompression],
         queryFn: async () => {

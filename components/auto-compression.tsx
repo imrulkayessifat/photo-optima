@@ -22,11 +22,13 @@ import { useAutoCompression } from "@/hooks/use-auto-compression"
 interface AutoCompressionProps {
     auto_compression: boolean;
     store_name: string;
+    plan: string;
 }
 
 const AutoCompression: React.FC<AutoCompressionProps> = ({
     auto_compression,
-    store_name
+    store_name,
+    plan
 }) => {
 
     const mutation = useAutoCompression()
@@ -62,6 +64,7 @@ const AutoCompression: React.FC<AutoCompressionProps> = ({
                                         </div>
                                         <FormControl>
                                             <Switch
+                                                disabled={plan === 'FREE'}
                                                 checked={field.value}
                                                 onCheckedChange={async (newValue) => {
                                                     field.onChange(newValue);

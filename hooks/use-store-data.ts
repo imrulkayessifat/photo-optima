@@ -6,7 +6,6 @@ interface UseStoreDataProps {
 
 
 export const useStoreData = ({ shop }: UseStoreDataProps) => {
-    console.log(shop)
     const query = useQuery({
         queryKey: ["store"],
         queryFn: async () => {

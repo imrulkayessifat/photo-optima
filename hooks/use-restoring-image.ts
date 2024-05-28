@@ -18,7 +18,6 @@ export const useRestoringImage = () => {
                     }
                     setImageStatus(id, data.status);
 
-                    console.log(data)
                     if (data.status === 'NOT_COMPRESSED') {
                         setImageStatus(id, 'NOT_COMPRESSED');
                         queryClient.invalidateQueries({ queryKey: ["images"] })

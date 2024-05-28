@@ -36,13 +36,11 @@ export default function Home() {
     )
   }
 
-  console.log(store)
-
   return (
     <main>
       <Navbar />
       <div className="mt-24">
-        <AutoCompression auto_compression={store.autoCompression} store_name={store.name} />
+        <AutoCompression plan={store.plan} auto_compression={store.autoCompression} store_name={store.name} />
         <ManualUpload />
         <ImageBox autoCompression={store.autoCompression} plan={store.plan} />
       </div>

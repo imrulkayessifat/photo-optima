@@ -21,20 +21,37 @@ const Page = () => {
                     <p>
                         Select Default compression settings. All new images will be compressed with selected compression.
                     </p>
-                    <RadioGroup defaultValue="balanced">
-                        <div className="flex items-center space-x-2">
-                            <RadioGroupItem value="balanced" id="r1" />
-                            <Label htmlFor="r1">Balanced</Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                            <RadioGroupItem value="conservative" id="r2" />
-                            <Label htmlFor="r2">Conservative</Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                            <RadioGroupItem value="custom" id="r3" />
-                            <Label htmlFor="r3">Custom</Label>
-                        </div>
-                    </RadioGroup>
+                    <Card>
+                        <CardContent className="py-10">
+                            <RadioGroup className="flex flex-wrap" defaultValue="balanced">
+                                <Card className="w-1/4">
+                                    <CardContent className="py-5">
+                                        <div className="flex items-center space-x-2">
+                                            <RadioGroupItem value="balanced" id="r1" />
+                                            <Label htmlFor="r1">Balanced</Label>
+                                        </div>
+                                    </CardContent>
+                                </Card>
+                                <Card className="w-1/4">
+                                    <CardContent className="py-5">
+                                        <div className="flex items-center space-x-2">
+                                            <RadioGroupItem value="conservative" id="r2" />
+                                            <Label htmlFor="r2">Conservative</Label>
+                                        </div>
+                                    </CardContent>
+                                </Card>
+                                <Card className="w-1/4">
+                                    <CardContent className="py-5">
+                                        <div className="flex items-center space-x-2">
+                                            <RadioGroupItem value="custom" id="r3" />
+                                            <Label htmlFor="r3">Custom</Label>
+                                        </div>
+                                    </CardContent>
+                                </Card>
+                            </RadioGroup>
+                        </CardContent>
+                    </Card>
+
                 </div>
                 <div className='flex flex-col gap-2'>
                     <h1 className='font-bold text-lg'>Automatic compression settings</h1>

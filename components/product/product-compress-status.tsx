@@ -10,7 +10,6 @@ const ProductCompressStatus: React.FC<ProductCompressStatusProps> = ({
     data
 }) => {
     // const compressStatus = useCompressStatusStore((state) => state.compressStatus);
-    // console.log(data.images.length)
     // if (compressStatus[data.id] === 'ongoing') {
     //     return (
     //         <p>ongoing</p>

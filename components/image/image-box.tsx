@@ -14,7 +14,6 @@ const ImageBox: React.FC<ImageBoxProps> = ({
     autoCompression
 }) => {
     const { data: images,isLoading } = useGetImages({autoCompression});
-    // console.log(images)
     // const res = await fetch('http://localhost:3001/image', { cache: 'no-store' });
     // const data = await res.json();
 

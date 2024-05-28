@@ -38,7 +38,6 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
 
     const uploadImageToShopify = async (imageBuffer: ArrayBuffer, productId: string) => {
         const base64Image = Buffer.from(imageBuffer).toString('base64');
-        console.log(base64Image)
         const image = {
             product_id: productId,
             attachment: base64Image,

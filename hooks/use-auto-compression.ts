@@ -7,7 +7,6 @@ export const useAutoCompression = () => {
 
     const mutation = useMutation({
         mutationFn: async (data) => {
-            console.log(data)
             const updateAutoCompression = await fetch('http://localhost:3001/store', {
                 method: 'PUT',
                 headers: {
