@@ -20,11 +20,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <script
-          src={`https://cdn.shopify.com/shopifycloud/app-bridge.js?apiKey=0b77a1fb0b2de6c8915e1d2155b34163`}
-        ></script>
-      </head>
       <body className={inter.className}>
         <QueryProvider>
           {children}

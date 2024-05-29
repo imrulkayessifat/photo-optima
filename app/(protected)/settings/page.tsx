@@ -1,57 +1,45 @@
 import Link from "next/link"
+import { cookies } from "next/headers";
 
 import { Button } from "@/components/ui/button"
-import { Label } from "@/components/ui/label"
+
 import {
     Card,
     CardContent,
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import CompressionSetting from "@/components/compression-setting"
 import { Separator } from "@/components/ui/separator"
 
-const Page = () => {
+const Page = async () => {
+    const cookieStore = cookies()
+    const shop = cookieStore.get('shop')!.value
+
+    const res = await fetch('http://localhost:3001/store', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            storeName: `${shop}`
+        })
+    })
+
+    const store = await res.json();
+
     return (
         <div className='mt-24'>
             <div className='flex flex-col gap-7 mx-auto px-8'>
                 <h1 className='font-bold text-2xl'>Account</h1>
                 <div className='flex flex-col gap-2'>
-                    <h1 className='font-bold text-lg'>Compression</h1>
-                    <p>
-                        Select Default compression settings. All new images will be compressed with selected compression.
-                    </p>
-                    <Card>
-                        <CardContent className="py-10">
-                            <RadioGroup className="flex flex-wrap" defaultValue="balanced">
-                                <Card className="w-1/4">
-                                    <CardContent className="py-5">
-                                        <div className="flex items-center space-x-2">
-                                            <RadioGroupItem value="balanced" id="r1" />
-                                            <Label htmlFor="r1">Balanced</Label>
-                                        </div>
-                                    </CardContent>
-                                </Card>
-                                <Card className="w-1/4">
-                                    <CardContent className="py-5">
-                                        <div className="flex items-center space-x-2">
-                                            <RadioGroupItem value="conservative" id="r2" />
-                                            <Label htmlFor="r2">Conservative</Label>
-                                        </div>
-                                    </CardContent>
-                                </Card>
-                                <Card className="w-1/4">
-                                    <CardContent className="py-5">
-                                        <div className="flex items-center space-x-2">
-                                            <RadioGroupItem value="custom" id="r3" />
-                                            <Label htmlFor="r3">Custom</Label>
-                                        </div>
-                                    </CardContent>
-                                </Card>
-                            </RadioGroup>
-                        </CardContent>
-                    </Card>
-
+                    <CompressionSetting
+                        jpeg={store.data.jpeg}
+                        png={store.data.png}
+                        others={store.data.others}
+                        store_name={shop}
+                        compressionType={store.data.compressionType}
+                    />
                 </div>
                 <div className='flex flex-col gap-2'>
                     <h1 className='font-bold text-lg'>Automatic compression settings</h1>
