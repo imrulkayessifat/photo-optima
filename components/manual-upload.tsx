@@ -63,7 +63,6 @@ const ManualUpload: React.FC<ManualUploadProps> = ({
             const imageRes = await fetch(`http://localhost:3001/image/${data.uuid}`);
             const imageData = await imageRes.json();
 
-            console.log(imageData)
             if (imageData.data.id && plan !== 'FREE') {
                 setImageStatus(imageData.data.id, 'ONGOING');
                 const response = await fetch(`http://localhost:3001/image/compress-image`, {

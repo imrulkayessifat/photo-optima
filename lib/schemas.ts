@@ -34,3 +34,13 @@ export const AutoCompressionSchema = z.object({
     auto_compression: z.boolean().optional(),
     store_name: z.string()
 })
+
+export const AutoFileRenameSchema = z.object({
+    auto_file_rename: z.boolean().optional(),
+    store_name: z.string()
+})
+
+export const AutoAltRenameSchema = z.object({
+    auto_alt_rename: z.boolean().optional(),
+    store_name: z.string()
+})

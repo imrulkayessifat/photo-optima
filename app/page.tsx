@@ -4,7 +4,8 @@ import Navbar from "@/components/navbar";
 import ImageBox from "@/components/image/image-box";
 import ManualUpload from "@/components/manual-upload";
 import AutoCompression from "@/components/auto-compression";
-// import { cookies } from "next/headers";
+import AutoFileRename from "@/components/auto-file-rename";
+import AutoAltRename from "@/components/auto-alt-rename";
 import { getCookie } from 'cookies-next';
 import { useStoreData } from "@/hooks/use-store-data";
 
@@ -24,18 +25,6 @@ export default function Home() {
 
   const { data: store, isLoading } = useStoreData({ shop })
 
-  // const res = await fetch('http://localhost:3001/store', {
-  //   method: 'POST',
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //   },
-  //   body: JSON.stringify({
-  //     storeName: `${shop}`
-  //   })
-  // })
-
-  // const store = await res.json();
-
   if (isLoading) {
     return (
       <div className="mx-auto px-8 my-10">
@@ -49,6 +38,8 @@ export default function Home() {
       <Navbar />
       <div className="mt-24">
         <AutoCompression plan={store.plan} auto_compression={store.autoCompression} store_name={store.name} />
+        <AutoFileRename plan={store.plan} auto_file_rename={store.autoFileRename} store_name={store.name} />
+        <AutoAltRename plan={store.plan} auto_alt_rename={store.autoAltRename} store_name={store.name} />
         <ManualUpload plan={store.plan} storeName={store.name} />
         <ImageBox autoCompression={store.autoCompression} plan={store.plan} />
       </div>

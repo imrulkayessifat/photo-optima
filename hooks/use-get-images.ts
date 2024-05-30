@@ -16,7 +16,7 @@ export const useGetImages = ({ autoCompression }: UseGetImagesProps) => {
             const { data } = await res.json();
             return data;
         },
-        refetchInterval: autoCompression ? 1000 : undefined
+        refetchInterval: autoCompression === true ? 2000 : undefined
     })
     return query;
 }
