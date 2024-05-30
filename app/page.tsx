@@ -14,6 +14,14 @@ export default function Home() {
 
   const shop = getCookie('shop')
 
+  if (!shop) {
+    return (
+      <div className="mx-auto px-8 my-10">
+        No shop available....
+      </div>
+    )
+  }
+
   const { data: store, isLoading } = useStoreData({ shop })
 
   // const res = await fetch('http://localhost:3001/store', {
@@ -41,7 +49,7 @@ export default function Home() {
       <Navbar />
       <div className="mt-24">
         <AutoCompression plan={store.plan} auto_compression={store.autoCompression} store_name={store.name} />
-        <ManualUpload />
+        <ManualUpload plan={store.plan} storeName={store.name} />
         <ImageBox autoCompression={store.autoCompression} plan={store.plan} />
       </div>
     </main>

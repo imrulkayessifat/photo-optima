@@ -6,7 +6,7 @@ export const useComressImage = () => {
     const queryClient = useQueryClient();
 
     const mutation = useMutation({
-        mutationFn: async (id) => {
+        mutationFn: async (id:string) => {
             const checkStatus = async () => {
                 try {
                     const response = await fetch(`http://localhost:3001/image/image-status/${id}`);
@@ -17,7 +17,7 @@ export const useComressImage = () => {
                         clearInterval(intervalId);
                     }
                     setImageStatus(id, data.status);
-
+                    console.log(data.status)
                     if (data.status === 'COMPRESSED') {
                         setImageStatus(id, 'COMPRESSED');
                         queryClient.invalidateQueries({ queryKey: ["images"] })

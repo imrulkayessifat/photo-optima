@@ -6,7 +6,7 @@ export const useRestoringImage = () => {
     const queryClient = useQueryClient();
 
     const mutation = useMutation({
-        mutationFn: async (id) => {
+        mutationFn: async (id:string) => {
             const checkStatus = async () => {
                 try {
                     const response = await fetch(`http://localhost:3001/image/image-status/${id}`);

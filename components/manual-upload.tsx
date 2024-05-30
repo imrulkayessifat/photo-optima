@@ -22,13 +22,25 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input"
 import { UploadImageFormSchema } from "@/lib/schemas"
 import { useUploadImage } from '@/hooks/use-upload-image';
+import { useStore } from "@/hooks/compress-status";
+import { useComressImage } from "@/hooks/use-compress-image";
 
-const ManualUpload = () => {
+interface ManualUploadProps {
+    storeName: string;
+    plan: string;
+}
+
+const ManualUpload: React.FC<ManualUploadProps> = ({
+    storeName,
+    plan
+}) => {
     const searchParams = useSearchParams();
     const shop = searchParams.get('shop');
 
     const [isPending, startTransition] = useTransition();
+    const setImageStatus = useStore(state => state.setImageStatus);
     const mutation = useUploadImage()
+    const mutationCompress = useComressImage()
 
     const form = useForm<z.infer<typeof UploadImageFormSchema>>({
         resolver: zodResolver(UploadImageFormSchema),
@@ -48,6 +60,29 @@ const ManualUpload = () => {
                 return { error: `something went wrong` }
             }
 
+            const imageRes = await fetch(`http://localhost:3001/image/${data.uuid}`);
+            const imageData = await imageRes.json();
+
+            console.log(imageData)
+            if (imageData.data.id && plan !== 'FREE') {
+                setImageStatus(imageData.data.id, 'ONGOING');
+                const response = await fetch(`http://localhost:3001/image/compress-image`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        id: imageData.data.id,
+                        productid: imageData.data.productId,
+                        url: imageData.data.url,
+                        storeName: storeName
+                    })
+                });
+                const data = await response.json()
+                if (response.ok && data) {
+                    const data = await mutationCompress.mutateAsync(imageData.data.id)
+                }
+            }
             return { success: "Successfully image uploaded!" };
         }
         return { error: `something went wrong` }

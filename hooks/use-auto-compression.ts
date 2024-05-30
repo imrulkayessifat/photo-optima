@@ -1,12 +1,16 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
+interface UseAutoCompressionProps {
+    store_name: string;
+    auto_compression?: boolean;
+}
 
 export const useAutoCompression = () => {
     const queryClient = useQueryClient();
 
     const mutation = useMutation({
-        mutationFn: async (data) => {
+        mutationFn: async (data:UseAutoCompressionProps) => {
             const updateAutoCompression = await fetch('http://localhost:3001/store', {
                 method: 'PUT',
                 headers: {

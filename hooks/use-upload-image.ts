@@ -5,7 +5,7 @@ export const useUploadImage = () => {
     const queryClient = useQueryClient();
 
     const mutation = useMutation({
-        mutationFn: async (file) => {
+        mutationFn: async (file:File) => {
             const data =  await uploadFile(
                 file,
                 {

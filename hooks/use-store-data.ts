@@ -22,6 +22,7 @@ export const useStoreData = ({ shop }: UseStoreDataProps) => {
                 throw new Error("Failed to fetch images");
             }
             const { data } = await res.json();
+            
             return data;
         },
     })
