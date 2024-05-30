@@ -49,42 +49,66 @@ const ManualUpload: React.FC<ManualUploadProps> = ({
         }
     });
 
-    const uploading = async (e: any) => {
-        const file = e.target.files && e.target.files[0];
+    const pollingInterval = 2000; // Poll every 2 seconds
+    const maxRetries = 10; // Maximum number of retries
 
-        if (file) {
-
-            const data = await mutation.mutateAsync(file)
-
-            if (!data.uuid) {
-                return { error: `something went wrong` }
-            }
-
-            const imageRes = await fetch(`http://localhost:3001/image/${data.uuid}`);
+    const waitForImageData = async (uuid: string): Promise<any> => {
+        let retries = 0;
+        while (retries < maxRetries) {
+            const imageRes = await fetch(`http://localhost:3001/image/${uuid}`);
             const imageData = await imageRes.json();
 
-            if (imageData.data.id && plan !== 'FREE') {
-                setImageStatus(imageData.data.id, 'ONGOING');
-                const response = await fetch(`http://localhost:3001/image/compress-image`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        id: imageData.data.id,
-                        productid: imageData.data.productId,
-                        url: imageData.data.url,
-                        storeName: storeName
-                    })
-                });
-                const data = await response.json()
-                if (response.ok && data) {
-                    const data = await mutationCompress.mutateAsync(imageData.data.id)
-                }
+            if (imageData.data) {
+                return imageData.data;
             }
-            return { success: "Successfully image uploaded!" };
+
+            await new Promise(resolve => setTimeout(resolve, pollingInterval));
+            retries++;
         }
-        return { error: `something went wrong` }
+        throw new Error("Image data not available after maximum retries");
+    };
+
+    const uploading = async (e: any) => {
+        const file = e.target.files && e.target.files[0];
+    
+        if (file) {
+            try {
+                const data = await mutation.mutateAsync(file);
+    
+                if (!data.uuid) {
+                    return { error: `Something went wrong` };
+                }
+    
+                const imageData = await waitForImageData(data.uuid);
+    
+                if (imageData.id && plan !== 'FREE') {
+                    setImageStatus(imageData.id, 'ONGOING');
+                    const response = await fetch(`http://localhost:3001/image/compress-image`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            id: imageData.id,
+                            productid: imageData.productId,
+                            url: imageData.url,
+                            storeName: storeName,
+                        }),
+                    });
+    
+                    const responseData = await response.json();
+                    if (response.ok && responseData) {
+                        await mutationCompress.mutateAsync(imageData.id);
+                    }
+                }
+    
+                return { success: "Successfully image uploaded!" };
+            } catch (error) {
+                return { error: `Something went wrong` };
+            }
+        }
+    
+        return { error: `Something went wrong` };
     };
 
     return (
