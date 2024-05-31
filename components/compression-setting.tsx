@@ -1,6 +1,5 @@
 "use client"
 
-import { useTransition } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
@@ -44,7 +43,6 @@ const CompressionSetting: React.FC<CompressionSettingProp> = ({
     store_name,
     compressionType
 }) => {
-    const [isPending, startTransition] = useTransition();
 
     const mutation = changeCompressionType()
 

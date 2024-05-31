@@ -10,6 +10,8 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 import CompressionSetting from "@/components/compression-setting"
+import FileRenameSetting from "@/components/file-rename-setting";
+import AltRenameSetting from "@/components/alt-rename-setting";
 import { Separator } from "@/components/ui/separator"
 
 const Page = async () => {
@@ -28,6 +30,16 @@ const Page = async () => {
 
     const store = await res.json();
 
+    const getFileRenameSetting = await fetch(`http://localhost:3001/filerename/${shop}`);
+
+    const fileRenameSetting = await getFileRenameSetting.json();
+
+    const getAltRenameSetting = await fetch(`http://localhost:3001/altrename/${shop}`);
+
+    const altRenameSetting = await getAltRenameSetting.json();
+
+    console.log(altRenameSetting)
+
     return (
         <div className='mt-24'>
             <div className='flex flex-col gap-7 mx-auto px-8'>
@@ -39,6 +51,26 @@ const Page = async () => {
                         others={store.data.others}
                         store_name={shop}
                         compressionType={store.data.compressionType}
+                    />
+                    <FileRenameSetting
+                        storename={shop}
+                        product_vendor={fileRenameSetting.filerename.product_vendor}
+                        variant_title={fileRenameSetting.filerename.variant_title}
+                        product_page_title={fileRenameSetting.filerename.product_page_title}
+                        product_type={fileRenameSetting.filerename.product_type}
+                        product_barcode={fileRenameSetting.filerename.product_barcode}
+                        product_title={fileRenameSetting.filerename.product_title}
+                        product_sku={fileRenameSetting.filerename.product_sku}
+                    />
+                    <AltRenameSetting
+                        storename={shop}
+                        product_vendor={altRenameSetting.altrename.product_vendor}
+                        variant_title={altRenameSetting.altrename.variant_title}
+                        product_page_title={altRenameSetting.altrename.product_page_title}
+                        product_type={altRenameSetting.altrename.product_type}
+                        product_barcode={altRenameSetting.altrename.product_barcode}
+                        product_title={altRenameSetting.altrename.product_title}
+                        product_sku={altRenameSetting.altrename.product_sku}
                     />
                 </div>
                 <div className='flex flex-col gap-2'>
