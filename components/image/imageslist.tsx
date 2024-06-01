@@ -5,11 +5,13 @@ import { Separator } from "@/components/ui/separator";
 import ImageTable from '@/components/image/image-table';
 
 interface ProductListDataProps {
+    storeName:string
     plan:string;
     images: any;
 }
 
 const ImagestList: React.FC<ProductListDataProps> = ({
+    storeName,
     plan,
     images
 }) => {
@@ -23,7 +25,7 @@ const ImagestList: React.FC<ProductListDataProps> = ({
                 />
             </div>
             <Separator />
-            <ImageTable plan={plan} data={images} />
+            <ImageTable storeName={storeName} plan={plan} data={images} />
         </div>
     )
 }

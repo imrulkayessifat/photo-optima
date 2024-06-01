@@ -47,6 +47,7 @@ import FileRename from "@/components/image/file-rename"
 
 
 const ImageTable: React.FC<ImageTableProps> = ({
+    storeName,
     data,
     plan
 }) => {
@@ -158,10 +159,10 @@ const ImageTable: React.FC<ImageTableProps> = ({
                                 <ImageActionCell data={row.original} />
                             </DropdownMenuItem>
                             <DropdownMenuItem>
-                                <FileRename plan={plan} data={row.original} />
+                                <FileRename storeName={storeName} plan={plan} data={row.original} />
                             </DropdownMenuItem>
                             <DropdownMenuItem>
-                                <AltRename plan={plan} data={row.original} />
+                                <AltRename storeName={storeName} plan={plan} data={row.original} />
                             </DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>

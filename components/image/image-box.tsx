@@ -5,11 +5,13 @@ import { useGetImages } from "@/hooks/use-get-images";
 import ImagestList from "@/components/image/imageslist";
 
 interface ImageBoxProps {
+    storeName:string;
     plan: string;
     autoCompression:boolean
 }
 
 const ImageBox: React.FC<ImageBoxProps> = ({
+    storeName,
     plan,
     autoCompression
 }) => {
@@ -23,7 +25,7 @@ const ImageBox: React.FC<ImageBoxProps> = ({
         )
     }
     return (
-        <ImagestList plan={plan} images={images} />
+        <ImagestList storeName={storeName} plan={plan} images={images} />
     )
 }
 
