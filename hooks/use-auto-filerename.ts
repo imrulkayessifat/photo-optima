@@ -22,12 +22,12 @@ export const useAutoFileRename = () => {
         },
         onSuccess: () => {
             toast.success('Change Auto File Rename!')
-            queryClient.invalidateQueries({ queryKey: ["store"] })
+            queryClient.invalidateQueries({ queryKey: ["store", "images"] })
 
         },
         onError: () => {
             toast.error('something went wrong')
-            queryClient.invalidateQueries({ queryKey: ["store"] })
+            queryClient.invalidateQueries({ queryKey: ["store", "images"] })
         }
     })
     return mutation;

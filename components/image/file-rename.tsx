@@ -16,13 +16,13 @@ const FileRename: React.FC<FileRenameProps> = ({
 }) => {
     const mutation = useFileRename()
 
-    const fileRename = async (id: string, name: string) => {
-        const data = await mutation.mutateAsync({id,name,storeName})
+    const fileRename = async (id: string) => {
+        const data = await mutation.mutateAsync({id,storeName})
     }
 
     return (
         <div className="flex flex-col gap-2">
-            <Button disabled={plan === 'FREE'} onClick={() => fileRename(data.id, data.name)} variant={'outline'}>
+            <Button disabled={plan === 'FREE'} onClick={() => fileRename(data.id)} variant={'outline'}>
                 File Rename
             </Button>
         </div>

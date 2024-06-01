@@ -22,12 +22,12 @@ export const useAutoAltRename = () => {
         },
         onSuccess: () => {
             toast.success('Change Auto Alt Rename!')
-            queryClient.invalidateQueries({ queryKey: ["store"] })
+            queryClient.invalidateQueries({ queryKey: ["store","images"] })
 
         },
         onError: () => {
             toast.error('something went wrong')
-            queryClient.invalidateQueries({ queryKey: ["store"] })
+            queryClient.invalidateQueries({ queryKey: ["store","images"] })
         }
     })
     return mutation;

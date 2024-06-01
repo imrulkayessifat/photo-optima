@@ -7,15 +7,19 @@ import ImagestList from "@/components/image/imageslist";
 interface ImageBoxProps {
     storeName:string;
     plan: string;
-    autoCompression:boolean
+    autoCompression:boolean;
+    autoFileRename:boolean;
+    autoAltRename:boolean;
 }
 
 const ImageBox: React.FC<ImageBoxProps> = ({
     storeName,
     plan,
-    autoCompression
+    autoCompression,
+    autoFileRename,
+    autoAltRename
 }) => {
-    const { data: images,isLoading } = useGetImages({autoCompression});
+    const { data: images,isLoading } = useGetImages({autoCompression,autoFileRename,autoAltRename});
 
     if(isLoading) {
         return (

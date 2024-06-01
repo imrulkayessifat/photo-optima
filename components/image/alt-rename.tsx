@@ -15,12 +15,12 @@ const AltRename: React.FC<AltRenameProps> = ({
     data
 }) => {
     const mutation = useAltRename()
-    const altRename = async (id: string, name: string) => {
-        const data = await mutation.mutateAsync({ id, name ,storeName})
+    const altRename = async (id: string) => {
+        const data = await mutation.mutateAsync({ id ,storeName})
     }
     return (
         <div className="flex flex-col gap-2">
-            <Button disabled={plan === 'FREE'} onClick={() => altRename(data.id, data.name)} variant={'outline'}>
+            <Button disabled={plan === 'FREE'} onClick={() => altRename(data.id)} variant={'outline'}>
                 Alt Rename
             </Button>
         </div>

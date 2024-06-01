@@ -41,7 +41,13 @@ export default function Home() {
         <AutoFileRename plan={store.plan} auto_file_rename={store.autoFileRename} store_name={store.name} />
         <AutoAltRename plan={store.plan} auto_alt_rename={store.autoAltRename} store_name={store.name} />
         <ManualUpload plan={store.plan} storeName={store.name} />
-        <ImageBox storeName={store.name} autoCompression={store.autoCompression} plan={store.plan} />
+        <ImageBox
+          storeName={store.name}
+          autoCompression={store.autoCompression}
+          autoFileRename={store.autoFileRename}
+          autoAltRename={store.autoAltRename}
+          plan={store.plan}
+        />
       </div>
     </main>
   );

@@ -4,7 +4,6 @@ import { toast } from "sonner";
 interface UseFileRenameProps {
     storeName: string;
     id: string;
-    name: string;
 }
 
 export const useFileRename = () => {
@@ -12,7 +11,7 @@ export const useFileRename = () => {
 
     const mutation = useMutation({
         mutationFn: async (data: UseFileRenameProps) => {
-            const { id, name, storeName } = data;
+            const { id, storeName } = data;
             const req = await fetch('http://localhost:3001/rename/file-rename', {
                 method: 'PUT',
                 headers: {
@@ -21,7 +20,6 @@ export const useFileRename = () => {
                 body: JSON.stringify({
                     storeName: storeName,
                     id: `${id}`,
-                    name: name
                 })
             })
 
