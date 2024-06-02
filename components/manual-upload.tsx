@@ -24,13 +24,21 @@ import { UploadImageFormSchema } from "@/lib/schemas"
 import { useUploadImage } from '@/hooks/use-upload-image';
 import { useStore } from "@/hooks/compress-status";
 import { useComressImage } from "@/hooks/use-compress-image";
+import { useFileRename } from '@/hooks/use-file-rename';
+import { useAltRename } from '@/hooks/use-alt-rename';
 
 interface ManualUploadProps {
+    auto_compression: boolean;
+    autoFileRename: boolean;
+    autoAltRename: boolean;
     storeName: string;
     plan: string;
 }
 
 const ManualUpload: React.FC<ManualUploadProps> = ({
+    auto_compression,
+    autoFileRename,
+    autoAltRename,
     storeName,
     plan
 }) => {
@@ -41,6 +49,8 @@ const ManualUpload: React.FC<ManualUploadProps> = ({
     const setImageStatus = useStore(state => state.setImageStatus);
     const mutation = useUploadImage()
     const mutationCompress = useComressImage()
+    const mutationFileRename = useFileRename()
+    const mutationAltRename = useAltRename();
 
     const form = useForm<z.infer<typeof UploadImageFormSchema>>({
         resolver: zodResolver(UploadImageFormSchema),
@@ -70,18 +80,18 @@ const ManualUpload: React.FC<ManualUploadProps> = ({
 
     const uploading = async (e: any) => {
         const file = e.target.files && e.target.files[0];
-    
+
         if (file) {
             try {
                 const data = await mutation.mutateAsync(file);
-    
+
                 if (!data.uuid) {
                     return { error: `Something went wrong` };
                 }
-    
+
                 const imageData = await waitForImageData(data.uuid);
-    
-                if (imageData.id && plan !== 'FREE') {
+
+                if (imageData.id && plan !== 'FREE' && auto_compression === true) {
                     setImageStatus(imageData.id, 'ONGOING');
                     const response = await fetch(`http://localhost:3001/image/compress-image`, {
                         method: 'POST',
@@ -95,19 +105,33 @@ const ManualUpload: React.FC<ManualUploadProps> = ({
                             storeName: storeName,
                         }),
                     });
-    
+
                     const responseData = await response.json();
                     if (response.ok && responseData) {
                         await mutationCompress.mutateAsync(imageData.id);
                     }
                 }
-    
+
+                if (imageData.id && plan !== 'FREE' && autoFileRename === true) {
+                    const data = await mutationFileRename.mutateAsync({
+                        id: imageData.id,
+                        storeName: storeName
+                    })
+                }
+
+                if (imageData.id && plan !== 'FREE' && autoAltRename === true) {
+                    const data = await mutationAltRename.mutateAsync({
+                        id: imageData.id,
+                        storeName: storeName
+                    })
+                }
+
                 return { success: "Successfully image uploaded!" };
             } catch (error) {
                 return { error: `Something went wrong` };
             }
         }
-    
+
         return { error: `Something went wrong` };
     };
 

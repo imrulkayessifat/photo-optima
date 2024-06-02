@@ -33,6 +33,8 @@ export default function Home() {
     )
   }
 
+  console.log(store)
+
   return (
     <main>
       <Navbar />
@@ -40,7 +42,13 @@ export default function Home() {
         <AutoCompression plan={store.plan} auto_compression={store.autoCompression} store_name={store.name} />
         <AutoFileRename plan={store.plan} auto_file_rename={store.autoFileRename} store_name={store.name} />
         <AutoAltRename plan={store.plan} auto_alt_rename={store.autoAltRename} store_name={store.name} />
-        <ManualUpload plan={store.plan} storeName={store.name} />
+        <ManualUpload
+          plan={store.plan}
+          auto_compression={store.autoCompression}
+          autoFileRename={store.autoFileRename}
+          autoAltRename={store.autoAltRename}
+          storeName={store.name}
+        />
         <ImageBox
           storeName={store.name}
           autoCompression={store.autoCompression}
