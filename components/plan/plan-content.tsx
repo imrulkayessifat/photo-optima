@@ -108,15 +108,22 @@ const PlanContext: React.FC<PlanContextProp> = ({
                                     quotas.map((quota, key) => (
                                         <Card className="w-[350px]" key={key} >
                                             <CardHeader className="flex items-center">
-                                                <CardTitle>{quota.title}</CardTitle>
+                                                <CardTitle>{quota.name}</CardTitle>
                                             </CardHeader>
                                             <CardContent className="flex flex-col items-center">
                                                 <h1 className="text-2xl font-bold">{quota.bandwidth}</h1>
                                                 <p>OF IMAGES PER MONTH</p>
                                             </CardContent>
                                             <CardFooter className="flex gap-2 justify-between">
-                                                <Button variant="secondary">Start compressing</Button>
-                                                <p><span className="font-bold">${quota.pay}</span> per month</p>
+                                                {
+                                                    localPlan === quota.name ? (
+                                                        <Button disabled className="cursor-not-allowed" variant="secondary">Selected</Button>
+                                                    ) : (
+                                                        <Button onClick={() => handleSubscribe(quota.name, quota.price)} variant="secondary">Start compressing</Button>
+
+                                                    )
+                                                }
+                                                <p><span className="font-bold">${quota.price}</span> per month</p>
                                             </CardFooter>
                                         </Card>
                                     ))

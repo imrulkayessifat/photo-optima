@@ -49,19 +49,19 @@ export const plans: PlansProps[] = [
 
 export const quotas: QuotaProps[] = [
     {
-        title: 'Premium',
+        name: 'PREMIUM',
         bandwidth: '15 GB',
-        pay: "39.99"
+        price: 39.99
     },
     {
-        title: 'Plus',
+        name: 'PLUS',
         bandwidth: '50 GB',
-        pay: "79.99"
+        price: 79.99
     },
     {
-        title: 'Enterprise',
+        name: 'ENTERPRISE',
         bandwidth: '100 GB',
-        pay: "149.99"
+        price: 149.99
     }
 ]
 

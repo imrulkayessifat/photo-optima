@@ -1,5 +1,7 @@
 "use client";
 
+import { redirect } from "next/navigation";
+
 import Navbar from "@/components/navbar";
 import ImageBox from "@/components/image/image-box";
 import ManualUpload from "@/components/manual-upload";
@@ -14,6 +16,10 @@ export default function Home() {
 
 
   const shop = getCookie('shop')
+
+  if (!!shop === false) {
+    redirect("/token")
+  }
 
   if (!shop) {
     return (
@@ -32,8 +38,6 @@ export default function Home() {
       </div>
     )
   }
-
-  console.log(store)
 
   return (
     <main>

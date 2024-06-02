@@ -44,9 +44,9 @@ export interface PlansProps {
 }
 
 export interface QuotaProps {
-    title: string;
+    name: string;
     bandwidth: string;
-    pay: string;
+    price: number;
 }
 
 export interface ComparePlansProps {
