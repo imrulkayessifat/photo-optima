@@ -24,13 +24,13 @@ export const restoreFileName = () => {
             return await req.json()
         },
         onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["images"] })
             toast.success('Successfully File Name Restored')
-            queryClient.invalidateQueries({ queryKey: ["store","images"] })
 
         },
         onError: () => {
-            toast.error('something went wrong')
             queryClient.invalidateQueries({ queryKey: ["images"] })
+            toast.error('something went wrong')
         }
     })
     return mutation;

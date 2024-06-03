@@ -11,14 +11,14 @@ const ImageStatus: React.FC<ImageStatusProps> = ({
 }) => {
     const status = useStore(state => state.imageStatus[data.id]);
 
-    if(!status) {
+    if (!status) {
         return (
-            <div className='capitalize'>{data.status}</div>
+            <div className='text-xs capitalize'>{data.status}</div>
         )
     }
 
     return (
-        <div className='capitalize'>{status}</div>
+        <div className='text-xs capitalize'>{status}</div>
     )
 }
 

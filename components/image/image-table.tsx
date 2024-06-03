@@ -79,21 +79,21 @@ const ImageTable: React.FC<ImageTableProps> = ({
             accessorKey: "id",
             header: "Image Id",
             cell: ({ row }) => (
-                <div className="capitalize">{row.getValue("id")}</div>
+                <div className="text-xs capitalize">{row.getValue("id")}</div>
             ),
         },
         {
             accessorKey: "name",
             header: "Image name",
             cell: ({ row }) => (
-                <div className="">{row.getValue("name")}</div>
+                <div className="text-xs">{row.getValue("name")}</div>
             ),
         },
         {
             accessorKey: "alt",
             header: "Image Alt Tag",
             cell: ({ row }) => (
-                <div className="">{row.getValue("alt")}</div>
+                <div className="text-xs">{row.getValue("alt")}</div>
             ),
         },
         {
@@ -116,7 +116,7 @@ const ImageTable: React.FC<ImageTableProps> = ({
                         alt=""
                         width={"50"}
                         height={"50"}
-                        className="w-10 h-10"
+                        className="w-10 h-10 rounded-sm"
                     />
                 )
             },
@@ -125,7 +125,7 @@ const ImageTable: React.FC<ImageTableProps> = ({
             accessorKey: "productId",
             header: "Product Id",
             cell: ({ row }) => (
-                <div className="capitalize">{row.getValue("productId")}</div>
+                <div className="text-xs capitalize">{row.getValue("productId")}</div>
             ),
         },
         {
@@ -134,7 +134,7 @@ const ImageTable: React.FC<ImageTableProps> = ({
                 return (
                     <Button
                         variant="ghost"
-                        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                        // onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                     >
                         Status
                     </Button>
@@ -152,8 +152,8 @@ const ImageTable: React.FC<ImageTableProps> = ({
                 return (
                     <DropdownMenu>
                         <DropdownMenuTrigger>...</DropdownMenuTrigger>
-                        <DropdownMenuContent>
-                            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                        <DropdownMenuContent align="end">
+                            <DropdownMenuLabel className="text-sm">Actions</DropdownMenuLabel>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem>
                                 <ImageActionCell data={row.original} />

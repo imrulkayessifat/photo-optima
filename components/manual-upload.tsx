@@ -59,38 +59,13 @@ const ManualUpload: React.FC<ManualUploadProps> = ({
         }
     });
 
-    const pollingInterval = 2000; // Poll every 2 seconds
-    const maxRetries = 10; // Maximum number of retries
-
-    const waitForImageData = async (uuid: string): Promise<any> => {
-        let retries = 0;
-        while (retries < maxRetries) {
-            const imageRes = await fetch(`http://localhost:3001/image/${uuid}`);
-            const imageData = await imageRes.json();
-
-            if (imageData.data) {
-                return imageData.data;
-            }
-
-            await new Promise(resolve => setTimeout(resolve, pollingInterval));
-            retries++;
-        }
-        throw new Error("Image data not available after maximum retries");
-    };
-
     const uploading = async (e: any) => {
         const file = e.target.files && e.target.files[0];
 
         if (file) {
             try {
-                const data = await mutation.mutateAsync(file);
-
-                if (!data.uuid) {
-                    return { error: `Something went wrong` };
-                }
-
-                const imageData = await waitForImageData(data.uuid);
-
+                const imageData = await mutation.mutateAsync(file);
+                console.log(imageData)
                 if (imageData.id && plan !== 'FREE' && auto_compression === true) {
                     setImageStatus(imageData.id, 'ONGOING');
                     const response = await fetch(`http://localhost:3001/image/compress-image`, {
@@ -140,19 +115,20 @@ const ManualUpload: React.FC<ManualUploadProps> = ({
             className='mx-auto px-8'
         >
             <Form {...form}>
-                <form className="w-full space-y-6">
+                <form className="w-full md:w-1/3 space-y-6">
                     <FormField
                         control={form.control}
                         name="image"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>
+                                <FormLabel className='text-sm'>
                                     Manual Upload
                                 </FormLabel>
                                 <FormControl>
                                     <Input
                                         id="picture"
                                         disabled={isPending}
+                                        className='text-xs'
                                         type="file"
                                         onChange={(e) => {
                                             field.onChange(e.target.files);

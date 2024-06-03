@@ -38,8 +38,6 @@ const Page = async () => {
 
     const altRenameSetting = await getAltRenameSetting.json();
 
-    console.log(altRenameSetting)
-
     return (
         <div className='mt-24'>
             <div className='flex flex-col gap-7 mx-auto px-8'>

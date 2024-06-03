@@ -44,56 +44,54 @@ const AutoCompression: React.FC<AutoCompressionProps> = ({
 
 
     return (
-        <div className='mx-auto px-8 my-10'>
-            <Form {...form}>
-                <form className="w-full space-y-8">
-                    <div>
-                        <div className="space-y-4">
-                            <FormField
-                                control={form.control}
-                                name="auto_compression"
-                                render={({ field }) => (
-                                    <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-                                        <div className="space-y-0.5">
-                                            <FormLabel className="text-base">
-                                                Image Compression
-                                            </FormLabel>
-                                            <FormDescription>
-                                                Automatically compress your store image
-                                            </FormDescription>
-                                        </div>
-                                        <FormControl>
-                                            <Switch
-                                                disabled={plan === 'FREE'}
-                                                checked={field.value}
-                                                onCheckedChange={async (newValue) => {
-                                                    field.onChange(newValue);
+        <Form {...form}>
+            <form className="w-full space-y-8">
+                <div>
+                    <div className="space-y-4">
+                        <FormField
+                            control={form.control}
+                            name="auto_compression"
+                            render={({ field }) => (
+                                <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+                                    <div className="space-y-0.5">
+                                        <FormLabel className="text-sm">
+                                            Image Compression
+                                        </FormLabel>
+                                        <FormDescription className="text-xs">
+                                            Automatically compress your store image
+                                        </FormDescription>
+                                    </div>
+                                    <FormControl>
+                                        <Switch
+                                            disabled={plan === 'FREE'}
+                                            checked={field.value}
+                                            onCheckedChange={async (newValue) => {
+                                                field.onChange(newValue);
 
-                                                    const data = form.getValues();
+                                                const data = form.getValues();
 
-                                                    const res = await mutation.mutateAsync(data)
+                                                const res = await mutation.mutateAsync(data)
 
-                                                    // const updateAutoCompression = await fetch('http://localhost:3001/store', {
-                                                    //     method: 'PUT',
-                                                    //     headers: {
-                                                    //         'Content-Type': 'application/json',
-                                                    //     },
-                                                    //     body: JSON.stringify(data)
-                                                    // })
+                                                // const updateAutoCompression = await fetch('http://localhost:3001/store', {
+                                                //     method: 'PUT',
+                                                //     headers: {
+                                                //         'Content-Type': 'application/json',
+                                                //     },
+                                                //     body: JSON.stringify(data)
+                                                // })
 
-                                                }
-                                                }
-                                            />
-                                        </FormControl>
-                                    </FormItem>
-                                )}
-                            />
+                                            }
+                                            }
+                                        />
+                                    </FormControl>
+                                </FormItem>
+                            )}
+                        />
 
-                        </div>
                     </div>
-                </form>
-            </Form>
-        </div>
+                </div>
+            </form>
+        </Form>
     )
 }
 

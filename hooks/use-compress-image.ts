@@ -17,7 +17,6 @@ export const useComressImage = () => {
                         clearInterval(intervalId);
                     }
                     setImageStatus(id, data.status);
-                    console.log(data.status)
                     if (data.status === 'COMPRESSED') {
                         setImageStatus(id, 'COMPRESSED');
                         queryClient.invalidateQueries({ queryKey: ["images"] })

@@ -69,8 +69,6 @@ const FileRenameSetting: React.FC<FileRenameSettingProps> = ({
             storename: storename
         }
         const res = await mutation.mutateAsync(value)
-
-        console.log(res)
     }
     return (
         <>

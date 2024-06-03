@@ -1,32 +1,30 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
-interface UseFileRenameProps {
-    storeName: string;
-    id: string;
+interface RestoreAltTagProps {
+    restoreId: string;
 }
 
-export const useFileRename = () => {
+export const restoreAltTag = () => {
     const queryClient = useQueryClient();
 
     const mutation = useMutation({
-        mutationFn: async (data: UseFileRenameProps) => {
-            const { id, storeName } = data;
-            const req = await fetch('http://localhost:3001/rename/file-rename', {
+        mutationFn: async (data: RestoreAltTagProps) => {
+            const { restoreId } = data;
+            const req = await fetch('http://localhost:3001/rename/restore-alt-tag', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    storeName: storeName,
-                    id: `${id}`,
+                    restoreId: `${restoreId}`,
                 })
             })
 
             return await req.json()
         },
-        onSuccess: (data) => {
-            toast.success('Successfully File Renamed')
+        onSuccess: () => {
+            toast.success('Successfully Alt Tag Restored')
             queryClient.invalidateQueries({ queryKey: ["images"] })
 
         },

@@ -94,7 +94,7 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
         <div className="flex gap-2">
             <Button
                 onClick={() => handleCompress(data.id, data.productId, data.url)}
-                className={`${data.status === 'COMPRESSED' || status === 'COMPRESSED' ? 'hidden' : ''}`}
+                className={`${data.status === 'COMPRESSED' || status === 'COMPRESSED' ? 'hidden' : ''} text-xs`}
                 variant={"outline"}
             >
                 {/* <LiaCompressArrowsAltSolid className="w-7 h-7" /> */}
@@ -105,8 +105,9 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
                     <Button
                         onClick={() => handleRestore(data.id, data.productId)}
                         variant={"outline"}
+                        className="text-xs"
                     >
-                        Restore
+                        Restore Image
                     </Button>
                 )
             }

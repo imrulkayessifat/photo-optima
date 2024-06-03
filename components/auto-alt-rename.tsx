@@ -42,49 +42,45 @@ const AutoAltRename: React.FC<AutoAltRenameProps> = ({
 
 
     return (
-        <div className='mx-auto px-8 my-10'>
-            <Form {...form}>
-                <form className="w-full space-y-8">
-                    <div>
-                        <div className="space-y-4">
-                            <FormField
-                                control={form.control}
-                                name="auto_alt_rename"
-                                render={({ field }) => (
-                                    <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-                                        <div className="space-y-0.5">
-                                            <FormLabel className="text-base">
-                                                Alt Rename
-                                            </FormLabel>
-                                            <FormDescription>
-                                                Automatically Alt name optimized
-                                            </FormDescription>
-                                        </div>
-                                        <FormControl>
-                                            <Switch
-                                                disabled={plan === 'FREE'}
-                                                checked={field.value}
-                                                onCheckedChange={async (newValue) => {
-                                                    field.onChange(newValue);
+        <Form {...form}>
+            <form className="w-full space-y-8">
+                <div>
+                    <div className="space-y-4">
+                        <FormField
+                            control={form.control}
+                            name="auto_alt_rename"
+                            render={({ field }) => (
+                                <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+                                    <div className="space-y-0.5">
+                                        <FormLabel className="text-sm">
+                                            Alt Rename
+                                        </FormLabel>
+                                        <FormDescription className="text-xs">
+                                            Automatically Alt name optimized
+                                        </FormDescription>
+                                    </div>
+                                    <FormControl>
+                                        <Switch
+                                            disabled={plan === 'FREE'}
+                                            checked={field.value}
+                                            onCheckedChange={async (newValue) => {
+                                                field.onChange(newValue);
 
-                                                    const data = form.getValues();
+                                                const data = form.getValues();
 
-                                                    const res = await mutation.mutateAsync(data)
+                                                const res = await mutation.mutateAsync(data)
+                                            }
+                                            }
+                                        />
+                                    </FormControl>
+                                </FormItem>
+                            )}
+                        />
 
-                                                    console.log("auto alt rename : ",res)
-                                                }
-                                                }
-                                            />
-                                        </FormControl>
-                                    </FormItem>
-                                )}
-                            />
-
-                        </div>
                     </div>
-                </form>
-            </Form>
-        </div>
+                </div>
+            </form>
+        </Form>
     )
 }
 

@@ -5,8 +5,26 @@ export const useUploadImage = () => {
     const queryClient = useQueryClient();
 
     const mutation = useMutation({
-        mutationFn: async (file:File) => {
-            const data =  await uploadFile(
+        mutationFn: async (file: File) => {
+            const pollingInterval = 2000; // Poll every 2 seconds
+            const maxRetries = 10;
+            const waitForImageData = async (uuid: string): Promise<any> => {
+                let retries = 0;
+                while (retries < maxRetries) {
+                    const imageRes = await fetch(`http://localhost:3001/image/${uuid}`);
+                    const imageData = await imageRes.json();
+
+                    if (imageData.data) {
+                        return imageData.data;
+                    }
+
+                    await new Promise(resolve => setTimeout(resolve, pollingInterval));
+                    retries++;
+                }
+                throw new Error("Image data not available after maximum retries");
+            };
+
+            const data = await uploadFile(
                 file,
                 {
                     publicKey: 'c0bc9dbd97f5de75c062',
@@ -17,8 +35,10 @@ export const useUploadImage = () => {
                     }
                 }
             )
-            queryClient.invalidateQueries({ queryKey: ["images"] })
-            return data;
+            if (!data.uuid) {
+                return { error: `Something went wrong` };
+            }
+            return await waitForImageData(data.uuid);
         },
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["images"] })
@@ -26,7 +46,7 @@ export const useUploadImage = () => {
         },
         onError: () => {
             queryClient.invalidateQueries({ queryKey: ["images"] })
-            return {error : 'something went wrong'};
+            return { error: 'something went wrong' };
         }
     })
     return mutation;

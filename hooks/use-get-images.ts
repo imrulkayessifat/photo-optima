@@ -9,7 +9,7 @@ interface UseGetImagesProps {
 
 export const useGetImages = ({ autoCompression, autoFileRename, autoAltRename }: UseGetImagesProps) => {
     const query = useQuery({
-        queryKey: ["images", autoCompression, autoFileRename, autoAltRename],
+        queryKey: ["images"],
         queryFn: async () => {
             const res = await fetch('http://localhost:3001/image');
             if (!res.ok) {

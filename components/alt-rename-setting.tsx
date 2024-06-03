@@ -69,8 +69,6 @@ const AltRenameSetting: React.FC<AltRenameSettingProps> = ({
             storename: storename
         }
         const res = await mutation.mutateAsync(value)
-
-        console.log(res)
     }
     return (
         <>

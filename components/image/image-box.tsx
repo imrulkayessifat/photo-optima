@@ -23,7 +23,7 @@ const ImageBox: React.FC<ImageBoxProps> = ({
 
     if(isLoading) {
         return (
-            <div className="mx-auto px-8 my-10">
+            <div className="text-sm mx-auto px-8 my-10">
                 Loading....
             </div>
         )
