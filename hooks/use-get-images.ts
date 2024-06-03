@@ -1,13 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 
 interface UseGetImagesProps {
+    allowBatchCompress:boolean;
     autoCompression: boolean;
     autoFileRename: boolean;
     autoAltRename: boolean;
 }
 
 
-export const useGetImages = ({ autoCompression, autoFileRename, autoAltRename }: UseGetImagesProps) => {
+export const useGetImages = ({ autoCompression, autoFileRename, autoAltRename,allowBatchCompress }: UseGetImagesProps) => {
     const query = useQuery({
         queryKey: ["images"],
         queryFn: async () => {
@@ -18,7 +19,7 @@ export const useGetImages = ({ autoCompression, autoFileRename, autoAltRename }:
             const { data } = await res.json();
             return data;
         },
-        refetchInterval: autoCompression === true || autoFileRename === true || autoAltRename === true ? 2000 : undefined
+        refetchInterval: allowBatchCompress === true || autoCompression === true || autoFileRename === true || autoAltRename === true ? 2000 : undefined
     })
     return query;
 }

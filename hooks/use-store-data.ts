@@ -16,7 +16,8 @@ export const useStoreData = ({ shop }: UseStoreDataProps) => {
                 },
                 body: JSON.stringify({
                     storeName: `${shop}`
-                })
+                }),
+                cache:'no-store'
             })
             if (!res.ok) {
                 throw new Error("Failed to fetch images");
@@ -25,6 +26,12 @@ export const useStoreData = ({ shop }: UseStoreDataProps) => {
             
             return data;
         },
+        // staleTime: 0, // Data will be considered stale immediately
+         // Disable caching
+        refetchOnWindowFocus: true, 
+        refetchOnReconnect: true, 
+        refetchOnMount: true,
+
     })
     return query;
 }

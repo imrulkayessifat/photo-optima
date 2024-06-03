@@ -8,6 +8,7 @@ interface ImageBoxProps {
     storeName:string;
     plan: string;
     autoCompression:boolean;
+    allowBatchCompress:boolean;
     autoFileRename:boolean;
     autoAltRename:boolean;
 }
@@ -16,10 +17,11 @@ const ImageBox: React.FC<ImageBoxProps> = ({
     storeName,
     plan,
     autoCompression,
+    allowBatchCompress,
     autoFileRename,
     autoAltRename
 }) => {
-    const { data: images,isLoading } = useGetImages({autoCompression,autoFileRename,autoAltRename});
+    const { data: images,isLoading } = useGetImages({autoCompression,autoFileRename,autoAltRename,allowBatchCompress});
 
     if(isLoading) {
         return (

@@ -11,7 +11,6 @@ import AutoAltRename from "@/components/auto-alt-rename";
 import { getCookie } from 'cookies-next';
 import { useStoreData } from "@/hooks/use-store-data";
 
-
 export default function Home() {
 
 
@@ -31,6 +30,7 @@ export default function Home() {
 
   const { data: store, isLoading } = useStoreData({ shop })
 
+
   if (isLoading) {
     return (
       <div className="text-sm mx-auto px-8 my-10">
@@ -38,6 +38,8 @@ export default function Home() {
       </div>
     )
   }
+
+  console.log(store.batchCompress)
 
   return (
     <main>
@@ -57,6 +59,7 @@ export default function Home() {
         />
         <ImageBox
           storeName={store.name}
+          allowBatchCompress = {store.batchCompress}
           autoCompression={store.autoCompression}
           autoFileRename={store.autoFileRename}
           autoAltRename={store.autoAltRename}
