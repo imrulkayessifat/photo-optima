@@ -69,6 +69,20 @@ const Page = () => {
         return data;
     }
 
+    const batchRestoreFN = async () => {
+        const res = await fetch(`http://localhost:3001/batch/batch-restore`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ store_name: store.name })
+        })
+
+        const data = await res.json();
+        console.log(data)
+        return data;
+    }
+
     console.log(store)
 
     return (
@@ -149,7 +163,28 @@ const Page = () => {
                                                 <p className="text-sm">
                                                     You have {batch_restore_images_length} images ready to be restored.
                                                 </p>
-                                                <Button>
+                                                <Button
+                                                    disabled={isPending}
+                                                    onClick={() => {
+                                                        startTransition(() => {
+
+                                                            const promise = batchRestoreFN();
+
+                                                            toast.promise(promise, {
+                                                                loading: 'Batch Restoring...',
+                                                                success: (data) => {
+                                                                    if (data!.error) {
+                                                                        return `Batch Restore failed: ${data!.error}`
+                                                                    } else {
+                                                                        setShouldRedirect(true)
+                                                                        return `Batch Restore Started : ${data!.success}`
+                                                                    }
+                                                                },
+                                                                error: 'An unexpected error occurred',
+                                                            })
+                                                        });
+                                                    }}
+                                                >
                                                     Restored {batch_restore_images_length} images
                                                 </Button>
                                             </div>

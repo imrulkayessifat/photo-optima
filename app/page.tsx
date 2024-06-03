@@ -39,7 +39,7 @@ export default function Home() {
     )
   }
 
-  console.log(store.batchCompress)
+  console.log(store.batchRestore)
 
   return (
     <main>
@@ -60,6 +60,7 @@ export default function Home() {
         <ImageBox
           storeName={store.name}
           allowBatchCompress = {store.batchCompress}
+          allowBatchRestore = {store.batchRestore}
           autoCompression={store.autoCompression}
           autoFileRename={store.autoFileRename}
           autoAltRename={store.autoAltRename}
