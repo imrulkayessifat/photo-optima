@@ -2,6 +2,7 @@
 
 import { IoIosGitNetwork } from "react-icons/io";
 import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 
 import {
     Card,
@@ -56,7 +57,8 @@ const PlanContext: React.FC<PlanContextProp> = ({
 
         const data = await res.json();
         const confirmationUrl = data.data.recurring_application_charge.confirmation_url
-        router.push(confirmationUrl)
+        console.log(confirmationUrl)
+        router.push(`${confirmationUrl}`)
     }
 
     return (
