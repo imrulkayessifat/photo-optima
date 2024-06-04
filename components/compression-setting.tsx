@@ -66,8 +66,8 @@ const CompressionSetting: React.FC<CompressionSettingProp> = ({
     const state = form.watch('compressionType')
     return (
         <>
-            <h1 className='font-bold text-lg'>Compression</h1>
-            <p>
+            <h1 className='font-bold text-base'>COMPRESSION</h1>
+            <p className="text-sm">
                 Select Default compression settings. All new images will be compressed with selected compression.
             </p>
             <Form {...form}>

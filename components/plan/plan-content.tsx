@@ -28,6 +28,7 @@ import {
 } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
 import { plans, quotas, compare } from "@/lib/data"
+import { Separator } from "@/components/ui/separator";
 
 interface PlanContextProp {
     localPlan: string;
@@ -61,10 +62,11 @@ const PlanContext: React.FC<PlanContextProp> = ({
     return (
         <div className='mt-24'>
             <div className='flex flex-col gap-7 mx-auto px-8'>
-                <h1 className='font-bold text-lg'>Plans</h1>
+                <h1 className='font-bold text-base'>Plans</h1>
+                <Separator />
                 <Card>
                     <CardContent className="p-6">
-                        <p>You have <span className="font-bold">41.5 KB</span> of uncompressed images in your store.</p>
+                        <p className="text-sm">You have <span className="font-bold">41.5 KB</span> of uncompressed images in your store.</p>
                     </CardContent>
                 </Card>
                 <div className="flex justify-center gap-5 flex-wrap">
@@ -72,12 +74,12 @@ const PlanContext: React.FC<PlanContextProp> = ({
                         plans.map((plan, key) => (
                             <Card className="w-[350px]" key={key} >
                                 <CardHeader className="flex items-center">
-                                    <CardTitle>{plan.name}</CardTitle>
-                                    <CardDescription className="text-green-500">{plan.description}</CardDescription>
+                                    <CardTitle className="text-base">{plan.name}</CardTitle>
+                                    <CardDescription className="text-green-500 text-sm">{plan.description}</CardDescription>
                                 </CardHeader>
                                 <CardContent className="flex flex-col items-center">
-                                    <h1 className="text-2xl font-bold">{plan.bandwidth}</h1>
-                                    <p>OF IMAGES PER MONTH</p>
+                                    <h1 className="text-sm font-bold">{plan.bandwidth}</h1>
+                                    <p className="text-sm">OF IMAGES PER MONTH</p>
                                 </CardContent>
                                 <CardFooter className="flex gap-2 justify-between">
                                     {
@@ -88,17 +90,18 @@ const PlanContext: React.FC<PlanContextProp> = ({
 
                                         )
                                     }
-                                    <p><span className="font-bold">${plan.price}</span> per month</p>
+                                    <p><span className="text-sm font-bold">${plan.price}</span> per month</p>
                                 </CardFooter>
                             </Card>
                         ))
                     }
                 </div>
+                <Separator />
                 <Accordion type="single" collapsible className="w-full">
                     <AccordionItem value="item-1">
                         <AccordionTrigger>
-                            <div className="flex gap-3">
-                                <IoIosGitNetwork className="w-6 h-6" />
+                            <div className="flex text-base gap-3">
+                                <IoIosGitNetwork className="w-5 h-5" />
                                 Need More Quota?
                             </div>
                         </AccordionTrigger>
@@ -108,11 +111,11 @@ const PlanContext: React.FC<PlanContextProp> = ({
                                     quotas.map((quota, key) => (
                                         <Card className="w-[350px]" key={key} >
                                             <CardHeader className="flex items-center">
-                                                <CardTitle>{quota.name}</CardTitle>
+                                                <CardTitle className="text-base">{quota.name}</CardTitle>
                                             </CardHeader>
                                             <CardContent className="flex flex-col items-center">
-                                                <h1 className="text-2xl font-bold">{quota.bandwidth}</h1>
-                                                <p>OF IMAGES PER MONTH</p>
+                                                <h1 className="text-sm font-bold">{quota.bandwidth}</h1>
+                                                <p className="text-sm">OF IMAGES PER MONTH</p>
                                             </CardContent>
                                             <CardFooter className="flex gap-2 justify-between">
                                                 {
@@ -123,7 +126,7 @@ const PlanContext: React.FC<PlanContextProp> = ({
 
                                                     )
                                                 }
-                                                <p><span className="font-bold">${quota.price}</span> per month</p>
+                                                <p><span className="text-sm font-bold">${quota.price}</span> per month</p>
                                             </CardFooter>
                                         </Card>
                                     ))
@@ -132,7 +135,7 @@ const PlanContext: React.FC<PlanContextProp> = ({
                         </AccordionContent>
                     </AccordionItem>
                 </Accordion>
-                <h1 className="font-bold text-lg text-center">Compare Plans</h1>
+                <h1 className="font-bold text-base text-center">Compare Plans</h1>
                 <Table>
                     <TableCaption>A list of photo optima features.</TableCaption>
                     <TableHeader>
@@ -167,7 +170,8 @@ const PlanContext: React.FC<PlanContextProp> = ({
                         </TableRow>
                     </TableBody>
                 </Table>
-                <h1 className="font-bold text-lg text-center">
+                <Separator />
+                <h1 className="font-bold text-base text-center">
                     Frequently Asked Questions
                 </h1>
                 <Card className="mb-20">
@@ -176,12 +180,12 @@ const PlanContext: React.FC<PlanContextProp> = ({
                             <Accordion type="single" collapsible className="w-full">
                                 <AccordionItem value="item-1">
                                     <AccordionTrigger>
-                                        <div>
+                                        <div className="text-base">
                                             Is it possible to upgrade or downgrade my subscription?
                                         </div>
                                     </AccordionTrigger>
                                     <AccordionContent className="md:w-[450px]">
-                                        <p>
+                                        <p className="text-sm">
                                             Absolutely! Simply open the Crush.pics app, click “Upgrade Plan” in the top right section of the app dashboard and choose the plan you’d like. Once selected you’ll be prompted by Shopify to complete the process.
                                         </p>
                                     </AccordionContent>
@@ -192,12 +196,12 @@ const PlanContext: React.FC<PlanContextProp> = ({
                             <Accordion type="single" collapsible className="w-full">
                                 <AccordionItem value="item-1">
                                     <AccordionTrigger>
-                                        <div>
+                                        <div className="text-base">
                                             Is it possible to upgrade or downgrade my subscription?
                                         </div>
                                     </AccordionTrigger>
                                     <AccordionContent className="md:w-[450px]">
-                                        <p>
+                                        <p className="text-sm">
                                             Absolutely! Simply open the Crush.pics app, click “Upgrade Plan” in the top right section of the app dashboard and choose the plan you’d like. Once selected you’ll be prompted by Shopify to complete the process.
                                         </p>
                                     </AccordionContent>
