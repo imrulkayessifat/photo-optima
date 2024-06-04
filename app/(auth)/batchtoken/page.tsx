@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { useEffect } from "react";
+import { useEffect, Suspense } from "react";
 import { redirect, useSearchParams } from "next/navigation";
 import { setCookie } from 'cookies-next';
 
-const page = () => {
+const BatchTokenPage = () => {
     const searchParams = useSearchParams()
 
     const shop = searchParams.get('shop')
@@ -21,4 +21,10 @@ const page = () => {
     )
 }
 
-export default page
+const SuspenseBatchTokenPage = () => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <BatchTokenPage />
+  </Suspense>
+)
+
+export default SuspenseBatchTokenPage;

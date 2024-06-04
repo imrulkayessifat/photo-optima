@@ -74,7 +74,7 @@ const FileRenameSetting: React.FC<FileRenameSettingProps> = ({
         <>
             <h1 className='font-bold text-base'>FILE RENAME SETTINGS</h1>
             <p className="text-sm">
-                Choose how you want to manage applying to your images. Set to automatic and we'll stay on top of it, or manually apply your templates to individual images.
+                Choose how you want to manage applying to your images. Set to automatic and we&apos;ll stay on top of it, or manually apply your templates to individual images.
             </p>
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-2 space-y-6">

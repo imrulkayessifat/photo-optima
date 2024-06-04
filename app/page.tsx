@@ -14,7 +14,8 @@ import { useStoreData } from "@/hooks/use-store-data";
 export default function Home() {
 
 
-  const shop = getCookie('shop')
+  const shop = getCookie('shop') || ''
+  const { data: store, isLoading } = useStoreData({ shop })
 
   if (!!shop === false) {
     redirect("/token")
@@ -27,9 +28,6 @@ export default function Home() {
       </div>
     )
   }
-
-  const { data: store, isLoading } = useStoreData({ shop })
-
 
   if (isLoading) {
     return (

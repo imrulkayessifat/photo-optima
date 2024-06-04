@@ -21,19 +21,25 @@ import { getBatchRestoreImageLength } from '@/hooks/get-batch-restore-image-leng
 const Page = () => {
 
     const [isPending, startTransition] = useTransition();
+    
     const [shouldRedirect, setShouldRedirect] = useState(false);
+    const shop = getCookie('shop') || '';
+
+    useEffect(() => {
+        if (!!shop === false) {
+            redirect("/batchtoken");
+        }
+    }, [shop]);
+
+    const { data: store } = useStoreData({ shop });
+    const { data: batch_compress_images_length } = getBatchCompressImageLength({ shop });
+    const { data: batch_restore_images_length, isLoading } = getBatchRestoreImageLength({ shop });
 
     useEffect(() => {
         if (shouldRedirect) {
             redirect(`${process.env.NEXT_PUBLIC_FRONTEND_DOMAIN}`);
         }
     }, [shouldRedirect]);
-
-    const shop = getCookie('shop')
-
-    if (!!shop === false) {
-        redirect("/batchtoken")
-    }
 
     if (!shop) {
         return (
@@ -42,10 +48,6 @@ const Page = () => {
             </div>
         )
     }
-
-    const { data: store } = useStoreData({ shop })
-    const { data: batch_compress_images_length } = getBatchCompressImageLength({ shop })
-    const { data: batch_restore_images_length, isLoading } = getBatchRestoreImageLength({ shop })
 
     if (isLoading) {
         return (
@@ -115,7 +117,7 @@ const Page = () => {
                                     {
                                         batch_compress_images_length === 0 ? (
                                             <p className="text-sm">
-                                                You don't have any images ready to be compressed.
+                                                You don&apos;t have any images ready to be compressed.
                                             </p>
                                         ) : (
                                             <Button
@@ -156,7 +158,7 @@ const Page = () => {
                                         batch_restore_images_length === 0 ? (
                                             <p className="text-sm">
 
-                                                You don't have any images ready to be restored.
+                                                You don&apos;t have any images ready to be restored.
                                             </p>
                                         ) : (
                                             <div className="flex flex-col gap-2">
