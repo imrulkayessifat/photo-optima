@@ -11,9 +11,11 @@ import { useRestoringImage } from "@/hooks/use-restoring-image";
 
 
 interface ImageCellProps {
+    storeName:string;
     data: any
 }
 const ImageActionCell: React.FC<ImageCellProps> = ({
+
     data
 }) => {
 
@@ -57,7 +59,7 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
         // mutation.mutate({id,productid,url,storeName})
 
         setImageStatus(id, 'ONGOING');
-        
+
         const response = await fetch(`http://localhost:3001/image/compress-image`, {
             method: 'POST',
             headers: {
@@ -66,11 +68,11 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
             body: JSON.stringify({ id, productid, url, storeName })
         });
         const data = await response.json()
-
+        console.log(data)
         if (response.ok && data) {
             // pollImageStatus(id);
             const data = await mutation.mutateAsync(id)
-            
+
         }
     }
 
@@ -81,11 +83,12 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ id, productid })
+            body: JSON.stringify({ id, productid ,store_name:storeName})
         });
 
         const data = await response.json();
-        if(response.ok && data) {
+        console.log(data)
+        if (response.ok && data) {
             const data = await restoreMutation.mutateAsync(id)
         }
     }

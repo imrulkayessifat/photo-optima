@@ -156,7 +156,7 @@ const ImageTable: React.FC<ImageTableProps> = ({
                             <DropdownMenuLabel className="text-sm">Actions</DropdownMenuLabel>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem>
-                                <ImageActionCell data={row.original} />
+                                <ImageActionCell storeName={storeName} data={row.original} />
                             </DropdownMenuItem>
                             <DropdownMenuItem>
                                 <FileRename storeName={storeName} plan={plan} data={row.original} />
