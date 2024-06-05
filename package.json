@@ -9,6 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "shopify-build": "shopify app build",
+    "postinstall": "prisma generate",
     "shopify-dev": "shopify app dev",
     "deploy": "shopify app deploy"
   },
