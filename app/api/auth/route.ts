@@ -14,6 +14,7 @@ export async function GET(req: Request) {
     const offlineSessionId = shopify.session.getOfflineId(sanitizedShop);
     try {
         const offlineSession = await loadSession(offlineSessionId);
+        console.log("offlineSession : ",offlineSession)
         if (!shopify.config.scopes!.equals(offlineSession.scope)) {
             return beginAuth(sanitizedShop, req, false);
         }
