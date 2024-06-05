@@ -1,7 +1,7 @@
 import { Session } from "@prisma/client";
 import { Session as ShopifySession } from "@shopify/shopify-api";
-import { db } from "@/lib/db/db";
-const apiKey = process.env.NEXT_PUBLIC_SHOPIFY_API_KEY || "";
+import { db } from "@/lib/db";
+const apiKey = process.env.SHOPIFY_API_KEY || "";
 
 export async function storeSession(session: ShopifySession) {
   await db.session.upsert({

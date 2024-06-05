@@ -1,7 +1,7 @@
 import { performChecks } from "@/lib/shopify/shopify-oauth";
 import Home from "@/components/home";
-import { cookies } from "next/headers";
 import { ExitClient } from "@/components/exit-client";
+
 
 export default async function Page({
   params,
@@ -10,8 +10,10 @@ export default async function Page({
   params: any;
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
+  // we can perform some checks to see if the app has been installed and that it is still valid
   const { shop, host, hmac, embedded } = searchParams;
 
+  console.log(shop)
   
   if (!shop || !host) {
     return <h1>Missing Shop and Host Parameters</h1>;
@@ -28,9 +30,6 @@ export default async function Page({
     console.log("Redirecting to: ", redirectUri);
     return <ExitClient redirectUri={redirectUri} />;
   }
-
-  const sessionCookie = cookies().get("shopifySession");
-  console.log(sessionCookie);
 
   return <Home shop={shop as string} />;
 }

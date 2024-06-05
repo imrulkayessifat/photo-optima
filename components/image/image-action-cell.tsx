@@ -15,17 +15,16 @@ interface ImageCellProps {
     data: any
 }
 const ImageActionCell: React.FC<ImageCellProps> = ({
-
+    storeName,
     data
 }) => {
-
     const router = useRouter();
     const mutation = useComressImage()
     const restoreMutation = useRestoringImage()
     const setImageStatus = useStore(state => state.setImageStatus);
     const status = useStore(state => state.imageStatus[data.id]);
 
-    const storeName = getCookie('shop')
+
 
     const [isPending, startTransition] = useTransition();
 

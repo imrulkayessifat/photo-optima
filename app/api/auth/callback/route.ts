@@ -48,16 +48,7 @@ export async function GET(req: Request) {
       });
     }
 
-    const response = NextResponse.redirect(new URL(redirectUrl));
-    // we could store the session in a cookie here or something
-    // delete this when you want the customer to logout
-    response.cookies.set("shopifySession", session.id, {
-      httpOnly: true,
-      sameSite: "lax",
-      secure: true,
-      expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7), // in 1 week
-    });
-    return response;
+    return NextResponse.redirect(redirectUrl);
   } catch (e: any) {
     console.warn(e);
     switch (true) {

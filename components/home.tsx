@@ -8,14 +8,12 @@ import ManualUpload from "@/components/manual-upload";
 import AutoCompression from "@/components/auto-compression";
 import AutoFileRename from "@/components/auto-file-rename";
 import AutoAltRename from "@/components/auto-alt-rename";
-import { setCookie } from 'cookies-next';
 import { useStoreData } from "@/hooks/use-store-data";
 
-const Home = ({ shop }: { shop: string }) => {
-    console.log("shop with session : ", shop)
-    // setCookie('shop', shop)
+const Home = ({shop}:{shop:string}) => {
     const { data: store, isLoading } = useStoreData({ shop })
-    
+
+
     if (isLoading) {
         return (
             <div className="text-sm mx-auto px-8 my-10">
@@ -23,11 +21,8 @@ const Home = ({ shop }: { shop: string }) => {
             </div>
         )
     }
-
-    console.log(store)
-
     return (
-        <div>
+        <main>
             <Navbar />
             <div className="mt-24">
                 <div className="flex flex-wrap md:flex-nowrap mx-auto px-8 my-10 gap-2 w-full">
@@ -52,7 +47,7 @@ const Home = ({ shop }: { shop: string }) => {
                     plan={store.plan}
                 />
             </div>
-        </div>
+        </main>
     )
 }
 

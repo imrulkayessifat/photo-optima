@@ -1,7 +1,8 @@
 import { redirect } from "next/navigation";
 import { AppInstallations } from "@/lib/db/app-installations";
-import { loadSession } from "@/lib/db/session-storage";
+import { loadSession } from "../db/session-storage";
 import shopify from "@/lib/shopify/initialize-context";
+import { verifyAuth } from "@/lib/shopify/verify";
 
 const TEST_GRAPHQL_QUERY = `
 {
@@ -44,7 +45,6 @@ export async function checkInstallation(shop: string) {
     return false;
   }
   const appInstalled = await AppInstallations.includes(sanitizedShop);
-
   return appInstalled;
 }
 
@@ -90,8 +90,15 @@ export async function performChecks(
   embedded: string,
 ) {
   const isInstalled = await checkInstallation(shop);
-
   if (!isInstalled) {
     return serverSideRedirect(shop, host, embedded);
   }
+
+  // // verify the session
+  // try {
+  //   await verifyAuth(shop);
+  //   return false;
+  // } catch (err) {
+  //   return serverSideRedirect(shop, host, embedded);
+  // }
 }

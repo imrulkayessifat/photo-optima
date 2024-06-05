@@ -57,8 +57,8 @@ const PlanContext: React.FC<PlanContextProp> = ({
 
         const data = await res.json();
         const confirmationUrl = data.data.recurring_application_charge.confirmation_url
+        console.log(confirmationUrl)
         window.open(confirmationUrl, "_top");
-        // router.push(`${confirmationUrl}`)
     }
 
     return (
