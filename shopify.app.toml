@@ -3,7 +3,7 @@
 client_id = "0b77a1fb0b2de6c8915e1d2155b34163"
 name = "photo-optima"
 handle = "photo-optima"
-application_url = "https://gm-takes-relax-sewing.trycloudflare.com/token"
+application_url = "https://predict-marvel-jeep-intermediate.trycloudflare.com/"
 embedded = true
 
 [build]
@@ -16,7 +16,7 @@ scopes = "read_products,write_products"
 
 [auth]
 redirect_urls = [
-  "https://f217-182-163-119-50.ngrok-free.app/shopify/callback"
+  "https://predict-marvel-jeep-intermediate.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]

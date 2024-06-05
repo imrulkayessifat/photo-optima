@@ -25,11 +25,7 @@ const Page = () => {
     const [shouldRedirect, setShouldRedirect] = useState(false);
     const shop = getCookie('shop') || '';
 
-    useEffect(() => {
-        if (!!shop === false) {
-            redirect("/batchtoken");
-        }
-    }, [shop]);
+    console.log(shop)
 
     const { data: store } = useStoreData({ shop });
     const { data: batch_compress_images_length } = getBatchCompressImageLength({ shop });
@@ -67,7 +63,6 @@ const Page = () => {
         })
 
         const data = await res.json();
-        console.log(data)
         return data;
     }
 
@@ -81,11 +76,8 @@ const Page = () => {
         })
 
         const data = await res.json();
-        console.log(data)
         return data;
     }
-
-    console.log(store)
 
     return (
         <div className='mt-24'>

@@ -1,70 +1,32 @@
-"use client";
+import { performChecks } from "@/lib/shopify/shopify-oauth";
+import Home from "@/components/home";
+import { ExitClient } from "@/components/exit-client";
 
-import { redirect } from "next/navigation";
+export default async function Page({
+  params,
+  searchParams,
+}: {
+  params: any;
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
+  const { shop, host, hmac, embedded } = searchParams;
 
-import Navbar from "@/components/navbar";
-import ImageBox from "@/components/image/image-box";
-import ManualUpload from "@/components/manual-upload";
-import AutoCompression from "@/components/auto-compression";
-import AutoFileRename from "@/components/auto-file-rename";
-import AutoAltRename from "@/components/auto-alt-rename";
-import { getCookie } from 'cookies-next';
-import { useStoreData } from "@/hooks/use-store-data";
-
-export default function Home() {
-
-
-  const shop = getCookie('shop') || ''
-  const { data: store, isLoading } = useStoreData({ shop })
-
-  if (!!shop === false) {
-    redirect("/token")
+  
+  if (!shop || !host) {
+    return <h1>Missing Shop and Host Parameters</h1>;
   }
 
-  if (!shop) {
-    return (
-      <div className="text-sm mx-auto px-8 my-10">
-        No shop available....
-      </div>
-    )
-  }
-
-  if (isLoading) {
-    return (
-      <div className="text-sm mx-auto px-8 my-10">
-        Loading....
-      </div>
-    )
-  }
-
-  console.log(store.batchRestore)
-
-  return (
-    <main>
-      <Navbar />
-      <div className="mt-24">
-        <div className="flex flex-wrap md:flex-nowrap mx-auto px-8 my-10 gap-2 w-full">
-          <AutoCompression plan={store.plan} auto_compression={store.autoCompression} store_name={store.name} />
-          <AutoFileRename plan={store.plan} auto_file_rename={store.autoFileRename} store_name={store.name} />
-          <AutoAltRename plan={store.plan} auto_alt_rename={store.autoAltRename} store_name={store.name} />
-        </div>
-        <ManualUpload
-          plan={store.plan}
-          auto_compression={store.autoCompression}
-          autoFileRename={store.autoFileRename}
-          autoAltRename={store.autoAltRename}
-          storeName={store.name}
-        />
-        <ImageBox
-          storeName={store.name}
-          allowBatchCompress = {store.batchCompress}
-          allowBatchRestore = {store.batchRestore}
-          autoCompression={store.autoCompression}
-          autoFileRename={store.autoFileRename}
-          autoAltRename={store.autoAltRename}
-          plan={store.plan}
-        />
-      </div>
-    </main>
+  // verify hmac if we are doing an install
+  const redirectUri = await performChecks(
+    shop as string,
+    host as string,
+    embedded as string,
   );
+
+  if (redirectUri) {
+    console.log("Redirecting to: ", redirectUri);
+    return <ExitClient redirectUri={redirectUri} />;
+  }
+
+  return <Home shop={shop as string} />;
 }

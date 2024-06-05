@@ -68,7 +68,6 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
             body: JSON.stringify({ id, productid, url, storeName })
         });
         const data = await response.json()
-        console.log(data)
         if (response.ok && data) {
             // pollImageStatus(id);
             const data = await mutation.mutateAsync(id)
@@ -87,7 +86,6 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
         });
 
         const data = await response.json();
-        console.log(data)
         if (response.ok && data) {
             const data = await restoreMutation.mutateAsync(id)
         }
