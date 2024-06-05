@@ -15,9 +15,7 @@ include_config_on_deploy = true
 scopes = "read_products,write_products"
 
 [auth]
-redirect_urls = [
-  "https://photo-optima.vercel.app/api/auth/callback"
-]
+redirect_urls = [ "https://photo-optima.vercel.app/api/auth/callback" ]
 
 [webhooks]
 api_version = "2024-04"

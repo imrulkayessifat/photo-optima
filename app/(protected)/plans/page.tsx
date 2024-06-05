@@ -6,6 +6,8 @@ const Page = async () => {
 
     const shop = cookieStore.get("shop")!.value
 
+    console.log("plans",shop)
+
     const res = await fetch('http://localhost:3001/store', {
         method: 'POST',
         headers: {

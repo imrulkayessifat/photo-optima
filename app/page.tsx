@@ -1,5 +1,6 @@
 import { performChecks } from "@/lib/shopify/shopify-oauth";
 import Home from "@/components/home";
+import { cookies } from "next/headers";
 import { ExitClient } from "@/components/exit-client";
 
 export default async function Page({
@@ -27,6 +28,9 @@ export default async function Page({
     console.log("Redirecting to: ", redirectUri);
     return <ExitClient redirectUri={redirectUri} />;
   }
+
+  const sessionCookie = cookies().get("shopifySession");
+  console.log(sessionCookie);
 
   return <Home shop={shop as string} />;
 }

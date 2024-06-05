@@ -13,9 +13,9 @@ import { useStoreData } from "@/hooks/use-store-data";
 
 const Home = ({ shop }: { shop: string }) => {
     console.log("shop with session : ", shop)
-    setCookie('shop', shop)
+    // setCookie('shop', shop)
     const { data: store, isLoading } = useStoreData({ shop })
-
+    
     if (isLoading) {
         return (
             <div className="text-sm mx-auto px-8 my-10">
@@ -23,6 +23,8 @@ const Home = ({ shop }: { shop: string }) => {
             </div>
         )
     }
+
+    console.log(store)
 
     return (
         <div>
