@@ -10,9 +10,6 @@ const Page = async () => {
 
     const { shop } = await store_name.json()
 
-
-
-
     return (
         <PlanContext shop={shop.domain} />
     )

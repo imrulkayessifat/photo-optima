@@ -38,8 +38,23 @@ interface PlanContextProp {
 const PlanContext: React.FC<PlanContextProp> = ({
     shop
 }) => {
-    const { data: store } = useStoreData({ shop });
-    console.log(store)
+    const { data: store,isLoading } = useStoreData({ shop });
+    
+    if (!shop) {
+        return (
+            <div className="text-sm mx-auto px-8 my-10">
+                No shop available....
+            </div>
+        )
+    }
+
+    if (isLoading) {
+        return (
+            <div className="text-sm mx-auto px-8 my-10">
+                Loading....
+            </div>
+        )
+    }
 
     const handleSubscribe = async (name: string, price: number) => {
         const res = await fetch('http://localhost:3001/subscribe', {

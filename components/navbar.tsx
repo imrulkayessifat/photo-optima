@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link";
 import {
     Menu,
@@ -19,7 +21,7 @@ import {
 import { Button } from "@/components/ui/button"
 
 const Navbar = () => {
-
+    
     return (
         <header className={`fixed z-40 top-0 bg-white dark:bg-[#0f0f0f] shadow-sm py-5 w-screen`}>
             <div className='mx-auto px-10 flex justify-between items-center'>
