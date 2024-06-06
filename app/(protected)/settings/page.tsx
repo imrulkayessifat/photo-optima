@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { cookies } from "next/headers";
 
 import { Button } from "@/components/ui/button"
 
@@ -15,8 +14,15 @@ import AltRenameSetting from "@/components/alt-rename-setting";
 import { Separator } from "@/components/ui/separator"
 
 const Page = async () => {
-    const cookieStore = cookies()
-    const shop = cookieStore.get('shop')!.value
+
+    const store_name = await fetch('https://photo-optima.myshopify.com/admin/api/2024-04/shop.json', {
+        method: 'GET',
+        headers: {
+            'X-Shopify-Access-Token': `${process.env.SHOPIFY_ADMIN_ACCESS_TOKEN}`
+        }
+    })
+
+    const { shop } = await store_name.json()
 
     const res = await fetch('http://localhost:3001/store', {
         method: 'POST',
@@ -24,17 +30,17 @@ const Page = async () => {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            storeName: `${shop}`
+            storeName: `${shop.domain}`
         })
     })
 
     const store = await res.json();
 
-    const getFileRenameSetting = await fetch(`http://localhost:3001/filerename/${shop}`);
+    const getFileRenameSetting = await fetch(`http://localhost:3001/filerename/${shop.domain}`);
 
     const fileRenameSetting = await getFileRenameSetting.json();
 
-    const getAltRenameSetting = await fetch(`http://localhost:3001/altrename/${shop}`);
+    const getAltRenameSetting = await fetch(`http://localhost:3001/altrename/${shop.domain}`);
 
     const altRenameSetting = await getAltRenameSetting.json();
 

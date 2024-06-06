@@ -7,7 +7,6 @@ export function ExitClient(props: { redirectUri: string }) {
   useEffect(() => {
     if (redirectUri) {
       const decodedRedirectUri = decodeURIComponent(redirectUri);
-      console.log("decodedRedirectUri: ", decodedRedirectUri);
       window.open(decodedRedirectUri, "_top");
     }
   }, [redirectUri]);

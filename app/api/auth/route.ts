@@ -15,7 +15,6 @@ export async function GET(req: Request) {
   try {
     const offlineSession = await loadSession(offlineSessionId);
     if (!shopify.config.scopes!.equals(offlineSession.scope)) {
-      console.log("scopes do not match");
       return beginAuth(sanitizedShop, req, false);
     }
   } catch (err) {

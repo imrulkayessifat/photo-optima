@@ -6,8 +6,8 @@ import {
 } from "@shopify/shopify-api";
 
 const shopify = shopifyApi({
-  apiKey: process.env.SHOPIFY_CLIENT_ID || "",
-  apiSecretKey: process.env.SHOPIFY_CLIENT_SECRET || "",
+  apiKey: process.env.NEXT_PUBLIC_SHOPIFY_API_KEY || "",
+  apiSecretKey: process.env.NEXT_PUBLIC_SHOPIFY_API_SECRET || "",
   scopes: process.env.SCOPES?.split(",") || ["write_products"],
   hostName: process.env.HOST?.replace(/http?:\/\//, "") || "",
   hostScheme: "http",

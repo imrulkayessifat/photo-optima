@@ -10,17 +10,24 @@ import AutoFileRename from "@/components/auto-file-rename";
 import AutoAltRename from "@/components/auto-alt-rename";
 import { useStoreData } from "@/hooks/use-store-data";
 
-const Home = ({shop}:{shop:string}) => {
-    const { data: store, isLoading } = useStoreData({ shop })
+interface HomePageProps {
+    name: string;
+    plan: string;
+    dataUsed: number;
+    chargeId: string;
+    autoCompression: boolean
+    autoFileRename: boolean
+    batchCompress: boolean
+    batchRestore: boolean
+    autoAltRename: boolean
+    compressionType: string
+    jpeg: number;
+    png: number;
+    others:number;
+}
 
+const Home = ({ store }: { store: any }) => {
 
-    if (isLoading) {
-        return (
-            <div className="text-sm mx-auto px-8 my-10">
-                Loading....
-            </div>
-        )
-    }
     return (
         <main>
             <Navbar />

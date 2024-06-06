@@ -1,3 +1,4 @@
+
 import { redirect } from "next/navigation";
 import { AppInstallations } from "@/lib/db/app-installations";
 import { loadSession } from "../db/session-storage";
@@ -89,6 +90,8 @@ export async function performChecks(
   host: string,
   embedded: string,
 ) {
+  "use server"
+
   const isInstalled = await checkInstallation(shop);
   if (!isInstalled) {
     return serverSideRedirect(shop, host, embedded);

@@ -6,6 +6,7 @@ import {
   InvalidSession,
   Session,
 } from "@shopify/shopify-api";
+import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import { beginAuth } from "../auth";
 
@@ -47,6 +48,9 @@ export async function GET(req: Request) {
         rawResponse: new NextResponse(),
       });
     }
+    cookies().set("shop", session.shop, {
+      maxAge: 60 * 60 * 24 * 7,
+    });
 
     return NextResponse.redirect(redirectUrl);
   } catch (e: any) {

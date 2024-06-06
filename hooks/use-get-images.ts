@@ -18,7 +18,6 @@ export const useGetImages = ({ autoCompression, autoFileRename, autoAltRename, a
                 throw new Error("Failed to fetch images");
             }
             const { data } = await res.json();
-            console.log(new Date())
             return data;
         },
         refetchInterval: allowBatchCompress === true || allowBatchRestore === true || autoCompression === true || autoFileRename === true || autoAltRename === true ? 2000 : undefined

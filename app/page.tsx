@@ -13,8 +13,7 @@ export default async function Page({
   // we can perform some checks to see if the app has been installed and that it is still valid
   const { shop, host, hmac, embedded } = searchParams;
 
-  console.log(shop)
-  
+
   if (!shop || !host) {
     return <h1>Missing Shop and Host Parameters</h1>;
   }
@@ -27,9 +26,20 @@ export default async function Page({
   );
 
   if (redirectUri) {
-    console.log("Redirecting to: ", redirectUri);
     return <ExitClient redirectUri={redirectUri} />;
   }
-
-  return <Home shop={shop as string} />;
+  const res = await fetch('http://localhost:3001/store', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      storeName: `${shop}`
+    }),
+    cache: 'no-store'
+  })
+  
+  const { data } = await res.json();
+  
+  return <Home store={data} />;
 }

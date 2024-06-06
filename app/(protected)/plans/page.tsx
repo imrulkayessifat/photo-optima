@@ -1,27 +1,20 @@
-import { cookies } from "next/headers";
 import PlanContext from "@/components/plan/plan-content"
 
 const Page = async () => {
-    const cookieStore = cookies();
-
-    const shop = cookieStore.get("shop")!.value
-
-    console.log("plans",shop)
-
-    const res = await fetch('http://localhost:3001/store', {
-        method: 'POST',
+    const store_name = await fetch('https://photo-optima.myshopify.com/admin/api/2024-04/shop.json', {
+        method: 'GET',
         headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            storeName: `${shop}`
-        })
+            'X-Shopify-Access-Token': `${process.env.SHOPIFY_ADMIN_ACCESS_TOKEN}`
+        }
     })
 
-    const store = await res.json();
+    const { shop } = await store_name.json()
+
+
+
 
     return (
-        <PlanContext localPlan={store.data.plan} shop={store.data.name} />
+        <PlanContext shop={shop.domain} />
     )
 }
 

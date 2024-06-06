@@ -1,8 +1,6 @@
 "use client"
 
 import { IoIosGitNetwork } from "react-icons/io";
-import { useRouter } from "next/navigation";
-import { redirect } from "next/navigation";
 
 import {
     Card,
@@ -30,17 +28,18 @@ import {
 import { Button } from "@/components/ui/button"
 import { plans, quotas, compare } from "@/lib/data"
 import { Separator } from "@/components/ui/separator";
+import { useStoreData } from '@/hooks/use-store-data';
 
 interface PlanContextProp {
-    localPlan: string;
+
     shop: string;
 }
 
 const PlanContext: React.FC<PlanContextProp> = ({
-    localPlan,
     shop
 }) => {
-    const router = useRouter()
+    const { data: store } = useStoreData({ shop });
+    console.log(store)
 
     const handleSubscribe = async (name: string, price: number) => {
         const res = await fetch('http://localhost:3001/subscribe', {
@@ -57,7 +56,6 @@ const PlanContext: React.FC<PlanContextProp> = ({
 
         const data = await res.json();
         const confirmationUrl = data.data.recurring_application_charge.confirmation_url
-        console.log(confirmationUrl)
         window.open(confirmationUrl, "_top");
     }
 
@@ -85,10 +83,10 @@ const PlanContext: React.FC<PlanContextProp> = ({
                                 </CardContent>
                                 <CardFooter className="flex gap-2 justify-between">
                                     {
-                                        localPlan === plan.name ? (
-                                            <Button disabled className="cursor-not-allowed" variant="secondary">Selected</Button>
+                                        store.plan === plan.name ? (
+                                            <Button disabled className="cursor-not-allowed" >Selected</Button>
                                         ) : (
-                                            <Button onClick={() => handleSubscribe(plan.name, plan.price)} variant="secondary">Start compressing</Button>
+                                            <Button onClick={() => handleSubscribe(plan.name, plan.price)}>Start compressing</Button>
 
                                         )
                                     }
@@ -121,10 +119,10 @@ const PlanContext: React.FC<PlanContextProp> = ({
                                             </CardContent>
                                             <CardFooter className="flex gap-2 justify-between">
                                                 {
-                                                    localPlan === quota.name ? (
-                                                        <Button disabled className="cursor-not-allowed" variant="secondary">Selected</Button>
+                                                    store.plan === quota.name ? (
+                                                        <Button disabled className="cursor-not-allowed" >Selected</Button>
                                                     ) : (
-                                                        <Button onClick={() => handleSubscribe(quota.name, quota.price)} variant="secondary">Start compressing</Button>
+                                                        <Button onClick={() => handleSubscribe(quota.name, quota.price)}>Start compressing</Button>
 
                                                     )
                                                 }
@@ -160,12 +158,12 @@ const PlanContext: React.FC<PlanContextProp> = ({
                         <TableRow>
                             <TableCell className="font-bold"></TableCell>
                             <TableCell>
-                                <Button variant={"outline"}>
+                                <Button >
                                     Free Plan
                                 </Button>
                             </TableCell>
                             <TableCell>
-                                <Button variant={"outline"}>
+                                <Button>
                                     Choose Plan
                                 </Button>
                             </TableCell>
