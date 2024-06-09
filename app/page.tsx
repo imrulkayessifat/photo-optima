@@ -54,8 +54,7 @@ export default async function Page({
 
   if (!shop || !host) {
     return <div>
-      {/* <Home store={data} /> */}
-      shop and host is not available
+      <Home store={data} />
     </div>;
   }
 
