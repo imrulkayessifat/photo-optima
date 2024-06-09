@@ -16,4 +16,4 @@ npm run build
 echo "PM2 Reload"
 pm2 reload photo-optima
 
-echo "Deployment Finished!"
+echo "Deployment Finished!!"
