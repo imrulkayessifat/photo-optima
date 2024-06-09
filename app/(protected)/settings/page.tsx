@@ -15,30 +15,16 @@ import { Separator } from "@/components/ui/separator"
 
 const Page = async () => {
 
-    const accessTokenResponse = await fetch(`https://${process.env.SHOPIFY_STORE_DOMAIN}/admin/oauth/access_token`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            'client_id': `${process.env.NEXT_PUBLIC_SHOPIFY_API_KEY}`,
-            'client_secret': `${process.env.NEXT_PUBLIC_SHOPIFY_API_SECRET}`,
-            'grant_type': 'client_credentials'
-        })
-    })
-
-    const { access_token } = await accessTokenResponse.json()
-
     const store_name = await fetch('https://photo-optima.myshopify.com/admin/api/2024-04/shop.json', {
         method: 'GET',
         headers: {
-            'X-Shopify-Access-Token': `${access_token}`
+            'X-Shopify-Access-Token': `${process.env.SHOPIFY_ADMIN_ACCESS_TOKEN}`
         }
     })
 
     const { shop } = await store_name.json()
 
-    const res = await fetch('http://127.0.0.1:3001/store', {
+    const res = await fetch('http://localhost:3001/store', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -50,11 +36,11 @@ const Page = async () => {
 
     const store = await res.json();
 
-    const getFileRenameSetting = await fetch(`http://127.0.0.1:3001/filerename/${shop.domain}`);
+    const getFileRenameSetting = await fetch(`http://localhost:3001/filerename/${shop.domain}`);
 
     const fileRenameSetting = await getFileRenameSetting.json();
 
-    const getAltRenameSetting = await fetch(`http://127.0.0.1:3001/altrename/${shop.domain}`);
+    const getAltRenameSetting = await fetch(`http://localhost:3001/altrename/${shop.domain}`);
 
     const altRenameSetting = await getAltRenameSetting.json();
 

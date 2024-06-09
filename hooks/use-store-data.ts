@@ -23,7 +23,6 @@ export const useStoreData = ({ shop }: UseStoreDataProps) => {
                 throw new Error("Failed to fetch images");
             }
             const { data } = await res.json();
-            
             return data;
         },
         // staleTime: 0, // Data will be considered stale immediately
