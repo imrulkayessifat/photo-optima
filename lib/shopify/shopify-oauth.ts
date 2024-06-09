@@ -32,6 +32,7 @@ export function serverSideRedirect(
     shop: sanitizedShop,
     host,
   });
+  console.log("oauth",host)
   if (embedded === "1") {
     return `${process.env.HOST}/api/auth?${queryParams.toString()}`;
   } else {
@@ -93,6 +94,7 @@ export async function performChecks(
   "use server"
 
   const isInstalled = await checkInstallation(shop);
+  console.log("shopify",host)
   if (!isInstalled) {
     return serverSideRedirect(shop, host, embedded);
   }
