@@ -11,7 +11,7 @@ export const restoreAltTag = () => {
     const mutation = useMutation({
         mutationFn: async (data: RestoreAltTagProps) => {
             const { restoreId } = data;
-            const req = await fetch('http://localhost:3001/rename/restore-alt-tag', {
+            const req = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/rename/restore-alt-tag`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

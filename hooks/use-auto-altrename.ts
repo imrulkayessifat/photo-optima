@@ -11,7 +11,7 @@ export const useAutoAltRename = () => {
 
     const mutation = useMutation({
         mutationFn: async (data: UseAutoAltRenameProps) => {
-            const updateAutoAltRename = await fetch('http://localhost:3001/store/auto-alt-rename', {
+            const updateAutoAltRename = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/store/auto-alt-rename`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

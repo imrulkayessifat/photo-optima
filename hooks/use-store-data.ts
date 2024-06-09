@@ -9,7 +9,7 @@ export const useStoreData = ({ shop }: UseStoreDataProps) => {
     const query = useQuery({
         queryKey: ["store"],
         queryFn: async () => {
-            const res = await fetch('http://localhost:3001/store', {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/store`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

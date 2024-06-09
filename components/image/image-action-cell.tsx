@@ -31,7 +31,7 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
     const pollImageStatus = (id: string) => {
         const checkStatus = async () => {
             try {
-                const response = await fetch(`http://localhost:3001/image/image-status/${id}`);
+                const response = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/image/image-status/${id}`);
                 const data = await response.json();
 
                 if (data.error) {
@@ -59,7 +59,7 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
 
         setImageStatus(id, 'ONGOING');
 
-        const response = await fetch(`http://localhost:3001/image/compress-image`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/image/compress-image`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -76,7 +76,7 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
 
     const handleRestore = async (id: string, productid: string) => {
         setImageStatus(id, 'RESTORING');
-        const response = await fetch(`http://localhost:3001/image/restore-image`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/image/restore-image`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

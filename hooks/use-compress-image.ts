@@ -9,7 +9,7 @@ export const useComressImage = () => {
         mutationFn: async (id:string) => {
             const checkStatus = async () => {
                 try {
-                    const response = await fetch(`http://localhost:3001/image/image-status/${id}`);
+                    const response = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/image/image-status/${id}`);
                     const data = await response.json();
 
                     if (data.error) {

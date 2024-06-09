@@ -11,7 +11,7 @@ export const useAutoCompression = () => {
 
     const mutation = useMutation({
         mutationFn: async (data:UseAutoCompressionProps) => {
-            const updateAutoCompression = await fetch('http://localhost:3001/store', {
+            const updateAutoCompression = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/store`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

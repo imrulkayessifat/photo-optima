@@ -17,7 +17,7 @@ export const useAltRenameSetting = () => {
 
     const mutation = useMutation({
         mutationFn: async (data: UseAltRenameSettingProps) => {
-            const req = await fetch('http://localhost:3001/altrename', {
+            const req = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/altrename`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

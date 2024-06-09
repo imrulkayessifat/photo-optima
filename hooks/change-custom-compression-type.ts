@@ -14,7 +14,7 @@ export const changeCustomCompressionType = () => {
 
     const mutation = useMutation({
         mutationFn: async (data: CustomCompressionTypeData) => {
-            const req = await fetch('http://localhost:3001/store/custom-compression-type', {
+            const req = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/store/custom-compression-type`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

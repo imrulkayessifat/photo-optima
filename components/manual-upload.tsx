@@ -68,7 +68,7 @@ const ManualUpload: React.FC<ManualUploadProps> = ({
                 
                 if (imageData.id && plan !== 'FREE' && auto_compression === true) {
                     setImageStatus(imageData.id, 'ONGOING');
-                    const response = await fetch(`http://localhost:3001/image/compress-image`, {
+                    const response = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/image/compress-image`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',

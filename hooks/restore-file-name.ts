@@ -11,7 +11,7 @@ export const restoreFileName = () => {
     const mutation = useMutation({
         mutationFn: async (data: RestoreFileNameProps) => {
             const { restoreId } = data;
-            const req = await fetch('http://localhost:3001/rename/restore-file-name', {
+            const req = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/rename/restore-file-name`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

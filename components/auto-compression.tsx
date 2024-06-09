@@ -72,14 +72,6 @@ const AutoCompression: React.FC<AutoCompressionProps> = ({
 
                                                 const res = await mutation.mutateAsync(data)
 
-                                                // const updateAutoCompression = await fetch('http://localhost:3001/store', {
-                                                //     method: 'PUT',
-                                                //     headers: {
-                                                //         'Content-Type': 'application/json',
-                                                //     },
-                                                //     body: JSON.stringify(data)
-                                                // })
-
                                             }
                                             }
                                         />

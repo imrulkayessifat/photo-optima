@@ -12,7 +12,7 @@ export const useAltRename = () => {
     const mutation = useMutation({
         mutationFn: async (data: UseAltRenameProps) => {
             const { id, storeName } = data;
-            const req = await fetch('http://localhost:3001/rename/alt-rename', {
+            const req = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/rename/alt-rename`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

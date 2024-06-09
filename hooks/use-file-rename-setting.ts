@@ -17,7 +17,7 @@ export const useFileRenameSetting = () => {
 
     const mutation = useMutation({
         mutationFn: async (data: UseFileRenameSettingProps) => {
-            const req = await fetch('http://localhost:3001/filerename', {
+            const req = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/filerename`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

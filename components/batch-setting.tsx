@@ -55,7 +55,7 @@ const BatchSetting:React.FC<BatchSettingProps> = ({
     }
 
     const batchCompressFN = async () => {
-        const res = await fetch(`http://localhost:3001/batch/batch-compress`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/batch/batch-compress`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -69,7 +69,7 @@ const BatchSetting:React.FC<BatchSettingProps> = ({
     }
 
     const batchRestoreFN = async () => {
-        const res = await fetch(`http://localhost:3001/batch/batch-restore`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/batch/batch-restore`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

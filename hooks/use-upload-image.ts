@@ -11,7 +11,7 @@ export const useUploadImage = () => {
             const waitForImageData = async (uuid: string): Promise<any> => {
                 let retries = 0;
                 while (retries < maxRetries) {
-                    const imageRes = await fetch(`http://localhost:3001/image/${uuid}`);
+                    const imageRes = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/image/${uuid}`);
                     const imageData = await imageRes.json();
 
                     if (imageData.data) {

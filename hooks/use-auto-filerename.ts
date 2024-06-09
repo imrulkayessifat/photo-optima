@@ -11,7 +11,7 @@ export const useAutoFileRename = () => {
 
     const mutation = useMutation({
         mutationFn: async (data: UseAutoFileRenameProps) => {
-            const updateAutoFileRename = await fetch('http://localhost:3001/store/auto-file-rename', {
+            const updateAutoFileRename = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/store/auto-file-rename`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

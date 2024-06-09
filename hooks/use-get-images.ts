@@ -13,7 +13,7 @@ export const useGetImages = ({ autoCompression, autoFileRename, autoAltRename, a
     const query = useQuery({
         queryKey: ["images"],
         queryFn: async () => {
-            const res = await fetch('http://localhost:3001/image');
+            const res = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/image`);
             if (!res.ok) {
                 throw new Error("Failed to fetch images");
             }

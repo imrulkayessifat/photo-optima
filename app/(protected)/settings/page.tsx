@@ -38,7 +38,7 @@ const Page = async () => {
 
     const { shop } = await store_name.json()
 
-    const res = await fetch('http://localhost:3001/store', {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/store`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -50,11 +50,11 @@ const Page = async () => {
 
     const store = await res.json();
 
-    const getFileRenameSetting = await fetch(`http://localhost:3001/filerename/${shop.domain}`);
+    const getFileRenameSetting = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/filerename/${shop.domain}`);
 
     const fileRenameSetting = await getFileRenameSetting.json();
 
-    const getAltRenameSetting = await fetch(`http://localhost:3001/altrename/${shop.domain}`);
+    const getAltRenameSetting = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/altrename/${shop.domain}`);
 
     const altRenameSetting = await getAltRenameSetting.json();
 

@@ -9,7 +9,7 @@ export const getBatchCompressImageLength = ({ shop }: GetBatchCompressImageLengt
     const query = useQuery({
         queryKey: ["getBatchCompressImageLength"],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:3001/batch/${shop}`)
+            const res = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/batch/${shop}`)
             if (!res.ok) {
                 throw new Error("Failed to fetch images");
             }

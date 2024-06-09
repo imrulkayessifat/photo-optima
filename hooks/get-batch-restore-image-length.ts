@@ -9,7 +9,7 @@ export const getBatchRestoreImageLength = ({ shop }: GetBatchRestoreImageLengthP
     const query = useQuery({
         queryKey: ["getBatchRestoreImageLength"],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:3001/batch/restore/${shop}`)
+            const res = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/batch/restore/${shop}`)
             if (!res.ok) {
                 throw new Error("Failed to fetch images");
             }
