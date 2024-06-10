@@ -42,13 +42,11 @@ export async function GET(req: Request) {
       return new NextResponse("Missing host parameter", { status: 400 });
     }
 
-    const decodedHost = Buffer.from(host, 'base64').toString('utf8');
-    console.log(decodedHost)
-    const sanitizedHost = shopify.utils.sanitizeHost(decodedHost || "");
+    const sanitizedHost = shopify.utils.sanitizeHost(host || "");
     console.log("sanitizedHost",sanitizedHost)
     
 
-    let redirectUrl = `/?shop=${session.shop}&host=${encodeURIComponent(decodedHost!)}`;
+    let redirectUrl = `/?shop=${session.shop}&host=${encodeURIComponent(sanitizedHost!)}`;
     console.log("redirectUrl",redirectUrl)
     if (shopify.config.isEmbeddedApp) {
       redirectUrl = await shopify.auth.getEmbeddedAppUrl({
