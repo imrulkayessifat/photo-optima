@@ -15,6 +15,8 @@ export async function GET(req: Request) {
   const shop = url.searchParams.get("shop");
   const host = url.searchParams.get("host");
 
+  console.log("host",host)
+
   // todo: validate hmac
 
   if (!shop) {
@@ -37,11 +39,13 @@ export async function GET(req: Request) {
     await shopify.webhooks.register({ session });
 
     const sanitizedHost = shopify.utils.sanitizeHost(host || "");
+    console.log("sanitizedHost",sanitizedHost)
     if (!host || host == null) {
       return new NextResponse("Missing host parameter", { status: 400 });
     }
 
     let redirectUrl = `/?shop=${session.shop}&host=${encodeURIComponent(sanitizedHost!)}`;
+    console.log("redirectUrl",redirectUrl)
     if (shopify.config.isEmbeddedApp) {
       redirectUrl = await shopify.auth.getEmbeddedAppUrl({
         rawRequest: req,
