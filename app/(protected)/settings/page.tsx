@@ -53,7 +53,7 @@ const Page = async () => {
     if(store.data===null){
         return (
             <div>
-                ...store not available
+                ....store not available
             </div>
         )
     }
