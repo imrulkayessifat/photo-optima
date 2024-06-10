@@ -38,11 +38,15 @@ export async function GET(req: Request) {
 
     await shopify.webhooks.register({ session });
 
-    const sanitizedHost = shopify.utils.sanitizeHost(host || "");
-    console.log("sanitizedHost",sanitizedHost)
     if (!host || host == null) {
       return new NextResponse("Missing host parameter", { status: 400 });
     }
+
+    const decodedHost = Buffer.from(host, 'base64').toString('utf8');
+    console.log(decodedHost)
+    const sanitizedHost = shopify.utils.sanitizeHost(decodedHost || "");
+    console.log("sanitizedHost",sanitizedHost)
+    
 
     let redirectUrl = `/?shop=${session.shop}&host=${encodeURIComponent(sanitizedHost!)}`;
     console.log("redirectUrl",redirectUrl)
