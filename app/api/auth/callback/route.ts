@@ -48,7 +48,7 @@ export async function GET(req: Request) {
     console.log("sanitizedHost",sanitizedHost)
     
 
-    let redirectUrl = `/?shop=${session.shop}&host=${encodeURIComponent(sanitizedHost!)}`;
+    let redirectUrl = `/?shop=${session.shop}&host=${encodeURIComponent(decodedHost!)}`;
     console.log("redirectUrl",redirectUrl)
     if (shopify.config.isEmbeddedApp) {
       redirectUrl = await shopify.auth.getEmbeddedAppUrl({
