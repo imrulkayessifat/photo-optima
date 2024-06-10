@@ -50,6 +50,14 @@ const Page = async () => {
 
     const store = await res.json();
 
+    if(store.data===null){
+        return (
+            <div>
+                ...store not available
+            </div>
+        )
+    }
+
     const getFileRenameSetting = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/filerename/${shop.domain}`);
 
     const fileRenameSetting = await getFileRenameSetting.json();
