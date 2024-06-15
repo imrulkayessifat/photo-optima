@@ -6,6 +6,7 @@ import {
 } from "@/routes";
 
 export const authConfig = {
+    trustHost: true,
     pages: {
         signIn: '/login'
     },
@@ -15,10 +16,10 @@ export const authConfig = {
 
             const isProtectedRoute = protectedRoutes.includes(nextUrl.pathname);
             if (isProtectedRoute) {
-                if(isLoggedIn) return true;
+                if (isLoggedIn) return true;
                 return false
-            } else if(isLoggedIn) {
-                return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT,nextUrl))
+            } else if (isLoggedIn) {
+                return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl))
             }
             // const isOnDashboard = nextUrl.pathname.startsWith('/dashboard')
             // if (isOnDashboard) {
