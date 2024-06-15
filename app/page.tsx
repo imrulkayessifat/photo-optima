@@ -48,8 +48,6 @@ export default async function Page({
 
   const { data } = await res.json();
 
-  console.log(data)
-
   if (!shop || !host) {
     return <div>
       <Home store={data} />
