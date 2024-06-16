@@ -44,3 +44,8 @@ export const AutoAltRenameSchema = z.object({
     auto_alt_rename: z.boolean().optional(),
     store_name: z.string()
 })
+
+export const LoginSchema = z.object({
+    email: z.string().email(),
+    password: z.string()
+})

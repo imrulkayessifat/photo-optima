@@ -3,7 +3,6 @@ import SubscriptionList from "@/components/subscription/subscription-list";
 
 const Page = async () => {
   const user = await currentUser();
-
   if (!user) {
     return (
       <div className="mx-auto px-8 mt-24">

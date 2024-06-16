@@ -1,25 +1,44 @@
-import NextAuth from "next-auth";
-import { authConfig } from "./auth.config";
-import Credentials from 'next-auth/providers/credentials'
+import NextAuth, { Session, User } from "next-auth"
+import authConfig from "@/auth.config";
+import { NextResponse } from 'next/server'
 
-export const { auth, signIn, signOut } = NextAuth({
-    ...authConfig,
-    providers: [Credentials({
-        async authorize(credentials) {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/auth/signin`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    'email': `${credentials.email}`,
-                    'password': `${credentials.password}`,
-                })
-            })
+interface CustomUser extends User {
+  accessToken?: string;
+  user?: any;
+  data?:any;
+}
 
-            const resData = await response.json()
-            if (resData.error) return null
-            return resData.user
+export const {
+  handlers: { GET, POST },
+  auth,
+  signIn,
+  signOut,
+} = NextAuth(
+  {
+    pages: {
+      signIn: "/login",
+      error: "/error",
+    },
+    events: {
+
+    },
+    callbacks: {
+      async signIn({ user, account }) {
+        if (!user) return false;
+        
+        return true;
+      },
+      async session({ token, session }: { token: any; session: Session }) {
+        session.user = token.user
+        return session;
+      },
+      async jwt({ token, user }) {
+        if(user) {
+          token.user = user
         }
-    })]
-})
+        return token;
+      }
+    },
+    session: { strategy: "jwt" },
+    ...authConfig,
+  });

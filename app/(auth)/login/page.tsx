@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { useTransition } from "react"
+import { useSearchParams } from "next/navigation"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -20,16 +21,14 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { toast } from "sonner"
-import { signIn } from "@/auth"
-import { authenticate } from "@/actions/authenticate"
+import { login } from "@/actions/login"
 
-const LoginSchema = z.object({
-    email: z.string().email(),
-    password: z.string()
-})
+import { LoginSchema } from "@/lib/schemas"
 
 const Page = () => {
     const [isPending, startTransition] = useTransition();
+    const searchParams = useSearchParams();
+    const callbackUrl = searchParams.get("callbackUrl");
     const form = useForm<z.infer<typeof LoginSchema>>({
         resolver: zodResolver(LoginSchema),
         defaultValues: {
@@ -38,27 +37,25 @@ const Page = () => {
         },
     })
 
-    const login = async (data: z.infer<typeof LoginSchema>) => {
-        const res = await authenticate(data)
-    }
 
     const onSubmit = (data: z.infer<typeof LoginSchema>) => {
         startTransition(() => {
-            const promise = login(data)
-            // toast.promise(promise, {
-            //     loading: 'Login...',
-            //     success: (data) => {
-            //         if (data.error) {
-            //             return `Log in failed: ${data.error}`
-            //         } else {
-            //             form.reset()
-            //             return `Log in successful: ${data.success}`
-            //         }
-            //     },
-            //     error: 'An unexpected error occurred',
-            // })
+            const promise = login (data,callbackUrl)
+
+            toast.promise(promise,{
+                loading:'Login into Account...',
+                success:(data)=> {
+                    form.reset()
+                    if(data?.error) {
+                        return `Login failed: ${data?.error}`
+                    } else {
+                        return `Login successful: ${data?.success}`
+                    }
+                }
+            })
         })
     }
+
     return (
         <div className="flex justify-center items-center w-full h-full">
             <Card className="w-2/5 md:w-1/4 h-2/5">

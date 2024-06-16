@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { QueryProvider } from "@/providers/query-provider";
+import SheetProvider from "@/providers/sheet-provider";
 import "./globals.css";
 
 import { SessionProvider } from "next-auth/react";
@@ -26,6 +27,7 @@ export default async function RootLayout({
       <html lang="en">
         <body className={inter.className}>
           <QueryProvider>
+            <SheetProvider />
             {children}
           </QueryProvider>
           <Toaster />

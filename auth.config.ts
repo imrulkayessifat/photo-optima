@@ -1,35 +1,31 @@
-import type { NextAuthConfig } from 'next-auth'
-import {
-    MAIN_REDIRECT,
-    protectedRoutes,
-    DEFAULT_LOGIN_REDIRECT
-} from "@/routes";
+import type { NextAuthConfig } from "next-auth";
+import Credentials from "next-auth/providers/credentials";
 
-export const authConfig = {
-    trustHost: true,
-    pages: {
-        signIn: '/login'
-    },
-    callbacks: {
-        authorized({ auth, request: { nextUrl } }) {
-            const isLoggedIn = !!auth?.user;
+import { LoginSchema } from "@/lib/schemas";
 
-            const isProtectedRoute = protectedRoutes.includes(nextUrl.pathname);
-            if (isProtectedRoute) {
-                if (isLoggedIn) return true;
-                return false
-            } else if (isLoggedIn) {
-                return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl))
-            }
-            // const isOnDashboard = nextUrl.pathname.startsWith('/dashboard')
-            // if (isOnDashboard) {
-            //     if (isLoggedIn) return true
-            //     return false
-            // } else if (isLoggedIn) {
-            //     return Response.redirect(new URL('/dashboard', nextUrl))
-            // }
-            return true;
+export default {
+  providers: [
+    Credentials({
+      async authorize(credentials) {
+        const validatedFields = LoginSchema.safeParse(credentials);
+
+        if (validatedFields.success) {
+          const res = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/auth/signin`, {
+            method: 'POST',
+            body: JSON.stringify(validatedFields.data),
+            headers: { 'Content-Type': 'application/json' }
+          })
+          const data = await res.json()
+          if (data.user && data.accessToken) {
+            return { email:data.user.email, accessToken: data.accessToken }
+          } else {
+            return null
+          }
         }
-    },
-    providers: []
-} satisfies NextAuthConfig;
+
+        return null;
+      }
+    })
+  ],
+  secret: process.env.AUTH_SECRET
+} satisfies NextAuthConfig

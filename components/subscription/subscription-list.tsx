@@ -17,6 +17,7 @@ import {
 } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Loader2 } from 'lucide-react';
+import { addSubsciptionPlan } from '@/hooks/add-subscription-plan';
 
 type Subscription = {
     id: number;
@@ -32,6 +33,7 @@ interface SubscriptionListProps {
 const SubscriptionList = () => {
     const { data, isLoading } = useGetSubscriptionPlans();
     const deleteSubscription = useDeleteSubscriptions();
+    const { onOpen } = addSubsciptionPlan()
 
     if (isLoading) {
         return (
@@ -58,16 +60,16 @@ const SubscriptionList = () => {
                     title={`Subscription Plan List (${data.length})`}
                     description="Manage Subscription Plan for Photo Optima"
                 />
-                <Link href={'/subscription/add'}>
-                    <Button className="px-1" variant={'outline'}>
-                        <MdCreateNewFolder className="w-7 h-7" />
-                    </Button>
-                </Link>
+
+                <Button onClick={onOpen} className="px-1" variant={'outline'}>
+                    <MdCreateNewFolder className="w-7 h-7" />
+                </Button>
+
             </div>
             <Separator />
             <DataTable
                 onDelete={(row) => {
-                    deleteSubscription.mutate({row})
+                    deleteSubscription.mutate({ row })
                 }}
                 filterKey='name'
                 columns={columns}
