@@ -4,6 +4,7 @@ import { ColumnDef } from "@tanstack/react-table"
 import { ArrowUpDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
+import Actions from "@/components/subscription/Actions"
 
 export type SubscriptionType = {
     id: string
@@ -65,4 +66,8 @@ export const columns: ColumnDef<SubscriptionType>[] = [
             return <div className="text-start font-medium">{formatted}</div>
         },
     },
+    {
+        id: "actions",
+        cell: ({ row }) => <Actions id={row.original.id} />
+    }
 ]

@@ -3,6 +3,7 @@
 import { useMountedState } from "react-use"
 
 import AddSubscriptionSheet from "@/components/subscription/add-subscription-sheet"
+import EditSubscriptionSheet from "@/components/subscription/edit-subscription-sheet"
 
 const SheetProvider = () => {
     const isMounted = useMountedState()
@@ -10,6 +11,7 @@ const SheetProvider = () => {
     return (
         <>
             <AddSubscriptionSheet />
+            <EditSubscriptionSheet />
         </>
     )
 }
