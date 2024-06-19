@@ -23,7 +23,7 @@ const UserSubscriptionList = () => {
         <div className='flex flex-col gap-3'>
             <div className='flex items-center justify-between'>
                 <Heading
-                    title={`User Subscription Plan List (${data.length})`}
+                    title={`User Subscription Plan Lists (${data.length})`}
                     description="Manage User Subscription Plan for Photo Optima"
                 />
             </div>
