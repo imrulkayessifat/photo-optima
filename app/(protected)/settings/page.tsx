@@ -38,6 +38,12 @@ const Page = async () => {
 
     const { shop } = await store_name.json()
 
+    if (!shop.domain) {
+        return (
+            <p>domain name is not available</p>
+        )
+    }
+
     const res = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/store`, {
         method: 'POST',
         headers: {

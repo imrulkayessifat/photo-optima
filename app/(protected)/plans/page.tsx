@@ -23,6 +23,12 @@ const Page = async () => {
     })
 
     const { shop } = await store_name.json()
+    
+    if (!shop.domain) {
+        return (
+            <p>domain name is not available</p>
+        )
+    }
 
     return (
         <PlanContext shop={shop.domain} />
