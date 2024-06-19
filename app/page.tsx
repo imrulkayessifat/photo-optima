@@ -35,6 +35,13 @@ export default async function Page({
   })
 
   const { shop: shop1 } = await store_name.json()
+
+  if (!shop1 || !shop1.domain) {
+    return (
+        <p>domain name is not available</p>
+    )
+}
+
   const res = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/store`, {
     method: 'POST',
     headers: {
