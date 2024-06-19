@@ -22,6 +22,11 @@ const Page = async () => {
 
     const { shop } = await store_name.json()
 
+    if (!shop.domain) {
+        return (
+            <p>domain name is not available</p>
+        )
+    }
 
     return (
         <BatchSetting shop={shop.domain} />
