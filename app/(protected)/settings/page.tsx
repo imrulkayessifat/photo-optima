@@ -38,7 +38,7 @@ const Page = async () => {
 
     const { shop } = await store_name.json()
 
-    if (!shop.domain) {
+    if (!shop || !shop.domain) {
         return (
             <p>domain name is not available</p>
         )
