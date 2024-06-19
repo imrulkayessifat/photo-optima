@@ -17,7 +17,7 @@ export default {
           })
           const data = await res.json()
           if (data.user && data.accessToken) {
-            return { email:data.user.email, accessToken: data.accessToken }
+            return { email: data.user.email, accessToken: data.accessToken }
           } else {
             return null
           }
