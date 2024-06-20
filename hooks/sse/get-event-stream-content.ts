@@ -10,8 +10,6 @@ export function getEventStreamContent({ queryKey }: { queryKey: any }) {
         //     withCredentials: true,
         // });
 
-        // console.info("Listenting on SEE", eventSource);
-
         // eventSource.onmessage = (event) => {
         //     const data = JSON.parse(event.data);
         //     console.log(data)
