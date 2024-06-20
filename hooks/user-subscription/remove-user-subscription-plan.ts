@@ -19,7 +19,7 @@ export const removeUserSubscriptionPlan = () => {
                 body: JSON.stringify(data)
             })
             const res =  await removeSubscription.json()
-            console.log(res)
+            
             return res;
         },
         onSuccess: () => {

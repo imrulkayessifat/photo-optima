@@ -36,8 +36,6 @@ export default async function Page({
 
   const { shop: shop1 } = await store_name.json()
 
-  console.log("shop1 : ",shop1)
-
   const res = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/store`, {
     method: 'POST',
     headers: {
