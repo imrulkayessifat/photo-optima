@@ -34,7 +34,7 @@ const BatchSetting:React.FC<BatchSettingProps> = ({
 
     useEffect(() => {
         if (shouldRedirect) {
-            redirect(`http://localhost:3000`);
+            redirect(`${process.env.NEXT_PUBLIC_FRONTEND_DOMAIN}`);
         }
     }, [shouldRedirect]);
 
