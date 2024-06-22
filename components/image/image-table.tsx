@@ -76,6 +76,13 @@ const ImageTable: React.FC<ImageTableProps> = ({
             enableHiding: false,
         },
         {
+            accessorKey: "uid",
+            header: "uid",
+            cell: ({ row }) => (
+                <div className="text-xs capitalize">{row.getValue("uid")}</div>
+            ),
+        },
+        {
             accessorKey: "id",
             header: "Image Id",
             cell: ({ row }) => (

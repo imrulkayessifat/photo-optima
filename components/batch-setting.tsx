@@ -15,12 +15,13 @@ import { Separator } from "@/components/ui/separator";
 import { useStoreData } from '@/hooks/use-store-data';
 import { getBatchCompressImageLength } from '@/hooks/get-batch-compress-image-length';
 import { getBatchRestoreImageLength } from '@/hooks/get-batch-restore-image-length';
+import Loader from '@/components/loader';
 
 interface BatchSettingProps {
-    shop:string;
+    shop: string;
 }
 
-const BatchSetting:React.FC<BatchSettingProps> = ({
+const BatchSetting: React.FC<BatchSettingProps> = ({
     shop
 }) => {
 
@@ -28,9 +29,9 @@ const BatchSetting:React.FC<BatchSettingProps> = ({
 
     const [shouldRedirect, setShouldRedirect] = useState(false);
 
-    const { data: store } = useStoreData({ shop });
-    const { data: batch_compress_images_length } = getBatchCompressImageLength({ shop });
-    const { data: batch_restore_images_length, isLoading } = getBatchRestoreImageLength({ shop });
+    const { data: store, isLoading } = useStoreData({ shop });
+    const { data: batch_compress_images_length, isLoading: isLoading1 } = getBatchCompressImageLength({ shop });
+    const { data: batch_restore_images_length, isLoading: isLoading2 } = getBatchRestoreImageLength({ shop });
 
     useEffect(() => {
         if (shouldRedirect) {
@@ -46,11 +47,9 @@ const BatchSetting:React.FC<BatchSettingProps> = ({
         )
     }
 
-    if (isLoading) {
+    if (isLoading || isLoading1 || isLoading2) {
         return (
-            <div className="text-sm mx-auto px-8 my-10">
-                Loading....
-            </div>
+            <Loader />
         )
     }
 

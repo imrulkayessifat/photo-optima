@@ -18,8 +18,8 @@ const FileRename: React.FC<FileRenameProps> = ({
     const mutation = useFileRename()
     const mutationRestoreFileName = restoreFileName();
 
-    const fileRename = async (id: string) => {
-        const data = await mutation.mutateAsync({ id, storeName })
+    const fileRename = async (uid: string) => {
+        const data = await mutation.mutateAsync({ uid, storeName })
     }
 
     const fileNameRestore = async (restoreId: string) => {
@@ -30,14 +30,14 @@ const FileRename: React.FC<FileRenameProps> = ({
         <div className="flex flex-col gap-2">
             {
                 data.fileRename === false && (
-                    <Button className='text-xs' disabled={plan === 'FREE'} onClick={() => fileRename(data.id)} variant={'outline'}>
+                    <Button className='text-xs' disabled={plan === 'FREE'} onClick={() => fileRename(data.uid)} variant={'outline'}>
                         File Rename
                     </Button>
                 )
             }
             {
                 data.fileRename === true && (
-                    <Button className='text-xs' disabled={plan === 'FREE'} onClick={() => fileNameRestore(data.id)} variant={'outline'}>
+                    <Button className='text-xs' disabled={plan === 'FREE'} onClick={() => fileNameRestore(data.uid)} variant={'outline'}>
                         Restore File Name
                     </Button>
                 )

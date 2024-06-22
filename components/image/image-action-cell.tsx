@@ -18,6 +18,7 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
     storeName,
     data
 }) => {
+
     const router = useRouter();
     const mutation = useComressImage()
     const restoreMutation = useRestoringImage()
@@ -53,47 +54,47 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
     };
 
 
-    const handleCompress = async (id: string, productid: string, url: string) => {
+    const handleCompress = async (uid: string, productid: string, url: string) => {
 
         // mutation.mutate({id,productid,url,storeName})
 
-        setImageStatus(id, 'ONGOING');
+        setImageStatus(uid, 'ONGOING');
 
         const response = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/image/compress-image`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ id, productid, url, storeName })
+            body: JSON.stringify({ uid, productid, url, storeName })
         });
         const data = await response.json()
         if (response.ok && data) {
             // pollImageStatus(id);
-            const data = await mutation.mutateAsync(id)
+            const data = await mutation.mutateAsync(uid)
 
         }
     }
 
-    const handleRestore = async (id: string, productid: string) => {
-        setImageStatus(id, 'RESTORING');
+    const handleRestore = async (uid: string, productid: string) => {
+        setImageStatus(uid, 'RESTORING');
         const response = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/image/restore-image`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ id, productid ,store_name:storeName})
+            body: JSON.stringify({ uid, productid ,store_name:storeName})
         });
 
         const data = await response.json();
         if (response.ok && data) {
-            const data = await restoreMutation.mutateAsync(id)
+            const data = await restoreMutation.mutateAsync(uid)
         }
     }
 
     return (
         <div className="flex gap-2">
             <Button
-                onClick={() => handleCompress(data.id, data.productId, data.url)}
+                onClick={() => handleCompress(data.uid, data.productId, data.url)}
                 className={`${data.status === 'COMPRESSED' || status === 'COMPRESSED' ? 'hidden' : ''} text-xs`}
                 variant={"outline"}
             >
@@ -103,7 +104,7 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
             {
                 (data.status === 'COMPRESSED' || status === 'COMPRESSED') && (
                     <Button
-                        onClick={() => handleRestore(data.id, data.productId)}
+                        onClick={() => handleRestore(data.uid, data.productId)}
                         variant={"outline"}
                         className="text-xs"
                     >

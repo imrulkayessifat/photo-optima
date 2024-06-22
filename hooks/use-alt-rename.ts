@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 interface UseAltRenameProps {
-    id: string;
+    uid: string;
     storeName: string;
 }
 
@@ -11,14 +11,14 @@ export const useAltRename = () => {
 
     const mutation = useMutation({
         mutationFn: async (data: UseAltRenameProps) => {
-            const { id, storeName } = data;
+            const { uid, storeName } = data;
             const req = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/rename/alt-rename`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    id: `${id}`,
+                    uid: `${uid}`,
                     storeName: storeName
                 })
             })

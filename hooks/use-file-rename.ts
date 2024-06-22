@@ -3,7 +3,7 @@ import { toast } from "sonner";
 
 interface UseFileRenameProps {
     storeName: string;
-    id: string;
+    uid: string;
 }
 
 export const useFileRename = () => {
@@ -11,7 +11,7 @@ export const useFileRename = () => {
 
     const mutation = useMutation({
         mutationFn: async (data: UseFileRenameProps) => {
-            const { id, storeName } = data;
+            const { uid, storeName } = data;
             const req = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/rename/file-rename`, {
                 method: 'PUT',
                 headers: {
@@ -19,7 +19,7 @@ export const useFileRename = () => {
                 },
                 body: JSON.stringify({
                     storeName: storeName,
-                    id: `${id}`,
+                    uid: `${uid}`,
                 })
             })
 
