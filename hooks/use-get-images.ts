@@ -22,7 +22,7 @@ export const useGetImages = ({ autoCompression, autoFileRename, autoAltRename, a
             return data;
         },
         // refetchInterval: allowBatchCompress === true || allowBatchRestore === true || autoCompression === true || autoFileRename === true || autoAltRename === true ? 2000 : undefined
-        refetchInterval:5000,
+        // refetchInterval:5000,
         refetchOnWindowFocus: true, 
         refetchOnReconnect: true, 
         refetchOnMount: true,

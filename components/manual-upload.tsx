@@ -66,15 +66,15 @@ const ManualUpload: React.FC<ManualUploadProps> = ({
             try {
                 const imageData = await mutation.mutateAsync(file);
                 
-                if (imageData.id && plan !== 'FREE' && auto_compression === true) {
-                    setImageStatus(imageData.id, 'ONGOING');
+                if (imageData.uid && plan !== 'FREE' && auto_compression === true) {
+                    setImageStatus(imageData.uid, 'ONGOING');
                     const response = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/image/compress-image`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                         },
                         body: JSON.stringify({
-                            id: imageData.id,
+                            uid: imageData.uid,
                             productid: imageData.productId,
                             url: imageData.url,
                             storeName: storeName,
@@ -89,14 +89,14 @@ const ManualUpload: React.FC<ManualUploadProps> = ({
 
                 if (imageData.id && plan !== 'FREE' && autoFileRename === true) {
                     const data = await mutationFileRename.mutateAsync({
-                        id: imageData.id,
+                        uid: imageData.uid,
                         storeName: storeName
                     })
                 }
 
                 if (imageData.id && plan !== 'FREE' && autoAltRename === true) {
                     const data = await mutationAltRename.mutateAsync({
-                        id: imageData.id,
+                        uid: imageData.uid,
                         storeName: storeName
                     })
                 }

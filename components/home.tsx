@@ -1,6 +1,9 @@
 "use client";
 
+import { useEffect } from "react";
 import { redirect } from "next/navigation";
+import { useQueryClient } from "@tanstack/react-query";
+import { io } from "socket.io-client";
 
 import Navbar from "@/components/navbar";
 import ImageBox from "@/components/image/image-box";
@@ -23,10 +26,43 @@ interface HomePageProps {
     compressionType: string
     jpeg: number;
     png: number;
-    others:number;
+    others: number;
 }
 
+
+export const backend = io(`${process.env.NEXT_PUBLIC_BACKENDSERVER}`);
+export const mq = io(`${process.env.NEXT_PUBLIC_MQSERVER}`);
+
 const Home = ({ store }: { store: any }) => {
+    const queryClient = useQueryClient();
+
+    useEffect(() => {
+        backend.on('connect', () => {
+            console.log('connecting to backend server')
+        })
+
+        mq.on('connect', () => {
+            console.log('connecting to mq server')
+        })
+
+        backend.on('image_model', () => {
+            console.log('backend event')
+            queryClient.invalidateQueries({ queryKey: ["images"] })
+        })
+
+        mq.on('image_model', () => {
+            console.log('mq event')
+            queryClient.invalidateQueries({ queryKey: ["images"] })
+        })
+
+        return () => {
+            backend.off('connect')
+            backend.off('image_model')
+
+            mq.off('connect')
+            mq.off('image_model')
+        }
+    }, [])
 
     return (
         <main>
