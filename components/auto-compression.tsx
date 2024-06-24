@@ -63,7 +63,7 @@ const AutoCompression: React.FC<AutoCompressionProps> = ({
                                     </div>
                                     <FormControl>
                                         <Switch
-                                            disabled={plan === 'FREE'}
+                                            disabled={plan === 'FREE' || mutation.isPending}
                                             checked={field.value}
                                             onCheckedChange={async (newValue) => {
                                                 field.onChange(newValue);
