@@ -2,19 +2,15 @@ import { useQuery } from "@tanstack/react-query";
 import { getEventStreamContent } from "@/hooks/sse/get-event-stream-content";
 
 interface UseGetImagesProps {
-    allowBatchCompress: boolean;
-    allowBatchRestore: boolean;
-    autoCompression: boolean;
-    autoFileRename: boolean;
-    autoAltRename: boolean;
+    storeName:string;
 }
 
 
-export const useGetImages = ({ autoCompression, autoFileRename, autoAltRename, allowBatchCompress, allowBatchRestore }: UseGetImagesProps) => {
+export const useGetImages = ({ storeName }: UseGetImagesProps) => {
     const query = useQuery({
         queryKey: ["images"],
         queryFn: async () => {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/image`);
+            const res = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/image/${storeName}`);
             if (!res.ok) {
                 throw new Error("Failed to fetch images");
             }

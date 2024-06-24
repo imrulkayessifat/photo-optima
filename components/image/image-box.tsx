@@ -23,7 +23,7 @@ const ImageBox: React.FC<ImageBoxProps> = ({
     autoFileRename,
     autoAltRename
 }) => {
-    const { data: images,isLoading } = useGetImages({autoCompression,autoFileRename,autoAltRename,allowBatchCompress,allowBatchRestore});
+    const { data: images,isLoading } = useGetImages({storeName});
 
     if(isLoading) {
         return (
