@@ -8,7 +8,7 @@ export default {
     Credentials({
       async authorize(credentials) {
         const validatedFields = LoginSchema.safeParse(credentials);
-
+        console.log("validated fields : ",validatedFields)
         if (validatedFields.success) {
           const res = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/auth/signin`, {
             method: 'POST',
