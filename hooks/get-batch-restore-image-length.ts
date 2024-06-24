@@ -17,9 +17,7 @@ export const getBatchRestoreImageLength = ({ shop }: GetBatchRestoreImageLengthP
 
             return batch_restore_images_length;
         },
-        refetchOnWindowFocus: true, 
-        refetchOnReconnect: true, 
-        refetchOnMount: true,
+        gcTime: 0
     })
     return query;
 }

@@ -14,7 +14,7 @@ import {
 import { editSubsciptionPlan } from "@/hooks/edit-subscription-plan";
 import { SubscriptionSchema } from "@/components/subscription/subscription-form"
 import SubscriptionForm from "@/components/subscription/subscription-form";
-import { useEditPlan } from "@/hooks/use-edit-plan";
+import { useEditPlan } from "@/hooks/subscription-plan/use-edit-plan";
 import { useGetPlan } from "@/hooks/use-get-plan";
 import Loader from "@/components/loader";
 

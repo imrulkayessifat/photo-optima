@@ -15,7 +15,7 @@ export default {
             headers: { 'Content-Type': 'application/json' }
           })
           const data = await res.json()
-          console.log("data : ",data)
+          
           if (data.user && data.accessToken) {
             return { email: data.user.email, accessToken: data.accessToken }
           } else {

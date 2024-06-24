@@ -5,7 +5,7 @@ import { Separator } from "@/components/ui/separator"
 import { DataTable } from '@/components/data-table';
 import { columns } from '@/components/user-subscription/columns'
 import { useGetUserSubscriptionPlans } from "@/hooks/user-subscription/use-get-user-subscription-plan";
-import { useDeleteSubscriptions } from '@/hooks/use-delete-subscription';
+import { useDeleteSubscriptions } from "@/hooks/subscription-plan/use-delete-subscription";
 
 import Loader from '@/components/loader';
 

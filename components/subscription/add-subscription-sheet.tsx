@@ -14,7 +14,7 @@ import {
 import { addSubsciptionPlan } from "@/hooks/add-subscription-plan"
 import { SubscriptionSchema } from "@/components/subscription/subscription-form"
 import SubscriptionForm from "@/components/subscription/subscription-form";
-import { useCreatePlan } from "@/hooks/use-create-plan";
+import { useCreatePlan } from "@/hooks/subscription-plan/use-create-plan";
 
 const AddSubscriptionSheet = () => {
     const { isOpen, onClose } = addSubsciptionPlan()

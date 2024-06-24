@@ -5,10 +5,10 @@ import { MdCreateNewFolder } from "react-icons/md"
 import { Heading } from "@/components/ui/heading"
 import { Button } from '@/components/ui/button';
 import { Separator } from "@/components/ui/separator"
-import { useGetSubscriptionPlans } from "@/hooks/use-get-subscription-plan"
+import { useGetSubscriptionPlans } from "@/hooks/subscription-plan/use-get-subscription-plan"
 import { DataTable } from '@/components/data-table';
 import { columns } from '@/components/subscription/columns'
-import { useDeleteSubscriptions } from '@/hooks/use-delete-subscription';
+import { useDeleteSubscriptions } from '@/hooks/subscription-plan/use-delete-subscription';
 
 import Loader from '@/components/loader';
 import { addSubsciptionPlan } from '@/hooks/add-subscription-plan';

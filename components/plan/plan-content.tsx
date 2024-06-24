@@ -26,20 +26,30 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import { Button } from "@/components/ui/button"
-import { plans, quotas, compare } from "@/lib/data"
+import { quotas, compare } from "@/lib/data"
 import { Separator } from "@/components/ui/separator";
+import Loader from "@/components/loader";
 import { useStoreData } from '@/hooks/use-store-data';
+import { useGetSubscriptionPlans } from "@/hooks/subscription-plan/use-get-subscription-plan";
 
 interface PlanContextProp {
 
     shop: string;
 }
 
+interface SubscriptionPlan {
+    id: number;
+    name: string;
+    bandwidth: string;
+    price: number
+}
+
 const PlanContext: React.FC<PlanContextProp> = ({
     shop
 }) => {
-    const { data: store,isLoading } = useStoreData({ shop });
-    
+    const { data: store, isLoading } = useStoreData({ shop });
+    const { data: plans, isLoading: isLoading1 } = useGetSubscriptionPlans()
+
     if (!shop) {
         return (
             <div className="text-sm mx-auto px-8 my-10">
@@ -48,13 +58,15 @@ const PlanContext: React.FC<PlanContextProp> = ({
         )
     }
 
-    if (isLoading) {
+    if (isLoading || isLoading1) {
         return (
             <div className="text-sm mx-auto px-8 my-10">
-                Loading....
+                <Loader />
             </div>
         )
     }
+
+    console.log(plans)
 
     const handleSubscribe = async (name: string, price: number) => {
         const res = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/subscribe`, {
@@ -86,14 +98,16 @@ const PlanContext: React.FC<PlanContextProp> = ({
                 </Card>
                 <div className="flex justify-center gap-5 flex-wrap">
                     {
-                        plans.map((plan, key) => (
-                            <Card className="w-[350px]" key={key} >
+                        plans.map((plan: SubscriptionPlan) => (
+                            <Card className="w-[350px]" key={plan.id} >
                                 <CardHeader className="flex items-center">
                                     <CardTitle className="text-base">{plan.name}</CardTitle>
-                                    <CardDescription className="text-green-500 text-sm">{plan.description}</CardDescription>
+                                    {/* <CardDescription className="text-green-500 text-sm">{plan.description}</CardDescription> */}
                                 </CardHeader>
                                 <CardContent className="flex flex-col items-center">
-                                    <h1 className="text-sm font-bold">{plan.bandwidth}</h1>
+                                    <h1 className="text-sm font-bold">
+                                        {parseInt(plan.bandwidth) < 1024 ? `${parseInt(plan.bandwidth)} MB` : `${parseInt(plan.bandwidth) / 1024} GB`}
+                                    </h1>
                                     <p className="text-sm">OF IMAGES PER MONTH</p>
                                 </CardContent>
                                 <CardFooter className="flex gap-2 justify-between">
@@ -112,7 +126,7 @@ const PlanContext: React.FC<PlanContextProp> = ({
                     }
                 </div>
                 <Separator />
-                <Accordion type="single" collapsible className="w-full">
+                {/* <Accordion type="single" collapsible className="w-full">
                     <AccordionItem value="item-1">
                         <AccordionTrigger>
                             <div className="flex text-base gap-3">
@@ -149,7 +163,7 @@ const PlanContext: React.FC<PlanContextProp> = ({
                             </div>
                         </AccordionContent>
                     </AccordionItem>
-                </Accordion>
+                </Accordion> */}
                 <h1 className="font-bold text-base text-center">Compare Plans</h1>
                 <Table>
                     <TableCaption>A list of photo optima features.</TableCaption>

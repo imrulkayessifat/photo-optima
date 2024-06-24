@@ -30,14 +30,14 @@ export const {
       },
       async session({ token, session }: { token: any; session: Session }) {
         session.user = token.user
-        console.log("session", session)
+       
         return session;
       },
       async jwt({ token, user }) {
         if (user) {
           token.user = user
         }
-        console.log("token", token)
+       
         return token;
       }
     },
