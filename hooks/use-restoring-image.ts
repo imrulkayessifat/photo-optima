@@ -9,7 +9,7 @@ export const useRestoringImage = () => {
         mutationFn: async (id:string) => {
             const checkStatus = async () => {
                 try {
-                    const response = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/image/image-status/${id}`);
+                    const response = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/image/manual/${id}`);
                     const data = await response.json();
 
                     if (data.error) {
