@@ -29,6 +29,7 @@ const Page = () => {
     const [isPending, startTransition] = useTransition();
     const searchParams = useSearchParams();
     const callbackUrl = searchParams.get("callbackUrl");
+
     const form = useForm<z.infer<typeof LoginSchema>>({
         resolver: zodResolver(LoginSchema),
         defaultValues: {

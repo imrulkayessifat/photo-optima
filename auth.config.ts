@@ -8,7 +8,6 @@ export default {
     Credentials({
       async authorize(credentials) {
         const validatedFields = LoginSchema.safeParse(credentials);
-        console.log("validated fields : ",validatedFields)
         if (validatedFields.success) {
           const res = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/auth/signin`, {
             method: 'POST',
@@ -16,6 +15,7 @@ export default {
             headers: { 'Content-Type': 'application/json' }
           })
           const data = await res.json()
+          console.log("data : ",data)
           if (data.user && data.accessToken) {
             return { email: data.user.email, accessToken: data.accessToken }
           } else {

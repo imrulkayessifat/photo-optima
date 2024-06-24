@@ -5,7 +5,7 @@ import { NextResponse } from 'next/server'
 interface CustomUser extends User {
   accessToken?: string;
   user?: any;
-  data?:any;
+  data?: any;
 }
 
 export const {
@@ -25,17 +25,19 @@ export const {
     callbacks: {
       async signIn({ user, account }) {
         if (!user) return false;
-        
+
         return true;
       },
       async session({ token, session }: { token: any; session: Session }) {
         session.user = token.user
+        console.log("session", session)
         return session;
       },
       async jwt({ token, user }) {
-        if(user) {
+        if (user) {
           token.user = user
         }
+        console.log("token", token)
         return token;
       }
     },
