@@ -95,6 +95,7 @@ const SubscriptionForm = ({
                     disabled={disabled}
                     type='number'
                     placeholder="price"
+                    step="0.01"
                     {...field}
                     onChange={event => field.onChange(+event.target.value)}
                   />
