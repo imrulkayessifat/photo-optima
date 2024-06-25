@@ -3,14 +3,14 @@ import PlanContext from "@/components/plan/plan-content"
 
 const Page = async () => {
 
-    const user = await currentUser();
-    if (!user) {
-        return (
-            <div className="mx-auto px-8 mt-24">
-                You don&apos;t have access to this Page.
-            </div>
-        )
-    }
+    // const user = await currentUser();
+    // if (!user) {
+    //     return (
+    //         <div className="mx-auto px-8 mt-24">
+    //             You don&apos;t have access to this Page.
+    //         </div>
+    //     )
+    // }
 
     const accessTokenResponse = await fetch(`https://${process.env.SHOPIFY_STORE_DOMAIN}/admin/oauth/access_token`, {
         method: 'POST',
@@ -41,7 +41,7 @@ const Page = async () => {
     }
 
     return (
-        <PlanContext token={user.accessToken} shop={shop.domain} />
+        <PlanContext shop={shop.domain} />
     )
 }
 

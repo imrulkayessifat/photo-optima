@@ -13,7 +13,7 @@ const Logo:React.FC<LogoProps> = ({
             alt={"photo optima"}
             width={50}
             height={50}
-            className="object-cover w-[150px] h-[50px]"
+            className="object-cover w-[180px] ml-[-20px] h-[50px]"
         />
     )
 }

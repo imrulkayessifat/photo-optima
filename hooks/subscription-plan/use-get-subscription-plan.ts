@@ -4,15 +4,12 @@ interface UseGetSubscriptionPlans {
     token: string;
 }
 
-export const useGetSubscriptionPlans = ({ token }: UseGetSubscriptionPlans) => {
+export const useGetSubscriptionPlans = () => {
     const query = useQuery({
         queryKey: ["subscription_plan"],
         queryFn: async () => {
             const res = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/subscription-plan`, {
                 method: 'GET',
-                headers: {
-                    'Authorization': `${token}`
-                },
             });
             if (!res.ok) {
                 throw new Error("Failed to fetch images");
