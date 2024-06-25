@@ -4,11 +4,17 @@ interface UseGetUserSubscriptionPlans {
     token: string;
 }
 
-export const useGetUserSubscriptionPlans = () => {
+export const useGetUserSubscriptionPlans = ({ token }: UseGetUserSubscriptionPlans) => {
     const query = useQuery({
         queryKey: ["user_subscription_plan"],
         queryFn: async () => {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/store`);
+            const res = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/store`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `${token}`
+                },
+            });
             if (!res.ok) {
                 throw new Error("Failed to fetch user subscription plan");
             }

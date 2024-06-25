@@ -16,7 +16,7 @@ interface UserSubscriptionListProps {
 const UserSubscriptionList: React.FC<UserSubscriptionListProps> = ({
     token
 }) => {
-    const { data, isLoading } = useGetUserSubscriptionPlans();
+    const { data, isLoading } = useGetUserSubscriptionPlans({token});
 
     if (isLoading) {
         return (
