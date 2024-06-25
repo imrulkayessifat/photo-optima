@@ -35,7 +35,7 @@ const EditSubscriptionSheet = () => {
         price: subscriptionQuery.data.price
     } : {
         name: '',
-        bandwidth: '',
+        bandwidth: null,
         price: null
     }
 

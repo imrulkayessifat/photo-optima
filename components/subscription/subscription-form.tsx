@@ -20,7 +20,7 @@ import { Input } from "@/components/ui/input"
 
 export const SubscriptionSchema = z.object({
   name: z.string(),
-  bandwidth: z.string(),
+  bandwidth: z.number().min(25),
   price: z.number().min(1).multipleOf(0.01)
 })
 
@@ -76,8 +76,10 @@ const SubscriptionForm = ({
                 <FormControl>
                   <Input
                     disabled={disabled}
+                    type='number'
                     placeholder="bandwidth"
                     {...field}
+                    onChange={event => field.onChange(+event.target.value)}
                   />
                 </FormControl>
                 <FormMessage />

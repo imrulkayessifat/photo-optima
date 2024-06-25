@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 interface UseCreatePlanProps {
     name: string;
-    bandwidth: string;
+    bandwidth: number;
     price: number
 }
 
