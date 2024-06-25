@@ -48,16 +48,16 @@ const Home = ({ store }: { store: any }) => {
         backend.on('image_model', () => {
             console.log('backend event')
             queryClient.invalidateQueries({ queryKey: ["images"] })
-            queryClient.invalidateQueries({ queryKey: ["getBatchRestoreImageLength"] })
-            queryClient.invalidateQueries({ queryKey: ["getBatchCompressImageLength"] })
+            // queryClient.invalidateQueries({ queryKey: ["getBatchRestoreImageLength"] })
+            // queryClient.invalidateQueries({ queryKey: ["getBatchCompressImageLength"] })
             // queryClient.invalidateQueries({queryKey:['getBatchCompressImageLength']})
         })
 
         mq.on('image_model', () => {
             console.log('mq event')
             queryClient.invalidateQueries({ queryKey: ["images"] })
-            queryClient.invalidateQueries({ queryKey: ["getBatchRestoreImageLength"] })
-            queryClient.invalidateQueries({ queryKey: ["getBatchCompressImageLength"] })
+            // queryClient.invalidateQueries({ queryKey: ["getBatchRestoreImageLength"] })
+            // queryClient.invalidateQueries({ queryKey: ["getBatchCompressImageLength"] })
         })
 
         return () => {
