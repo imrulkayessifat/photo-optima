@@ -1,5 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 
+interface UseGetUserSubscriptionPlans {
+    token: string;
+}
 
 export const useGetUserSubscriptionPlans = () => {
     const query = useQuery({
@@ -12,8 +15,8 @@ export const useGetUserSubscriptionPlans = () => {
             const { data } = await res.json();
             return data;
         },
-        refetchOnWindowFocus: true, 
-        refetchOnReconnect: true, 
+        refetchOnWindowFocus: true,
+        refetchOnReconnect: true,
         refetchOnMount: true,
     })
     return query;

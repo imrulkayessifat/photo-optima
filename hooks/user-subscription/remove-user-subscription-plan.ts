@@ -1,25 +1,30 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
-interface RemoveUserSubscriptionPlanProps {
+interface RemoveUserSubscriptionPlanDataProps {
     name: string;
     chargeId?: string;
 }
 
-export const removeUserSubscriptionPlan = () => {
+interface RemoveUserSubscriptionPlanProp {
+    token?: string;
+}
+
+export const removeUserSubscriptionPlan = ({ token }: RemoveUserSubscriptionPlanProp) => {
     const queryClient = useQueryClient();
 
     const mutation = useMutation({
-        mutationFn: async (data:RemoveUserSubscriptionPlanProps) => {
+        mutationFn: async (data: RemoveUserSubscriptionPlanDataProps) => {
             const removeSubscription = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/subscribe/remove`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `${token}`
                 },
                 body: JSON.stringify(data)
             })
-            const res =  await removeSubscription.json()
-            
+            const res = await removeSubscription.json()
+
             return res;
         },
         onSuccess: () => {

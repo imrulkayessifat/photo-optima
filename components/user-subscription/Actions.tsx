@@ -3,6 +3,7 @@
 import { useTransition } from "react";
 import { Button } from "@/components/ui/button";
 import { removeUserSubscriptionPlan } from "@/hooks/user-subscription/remove-user-subscription-plan";
+import { useCurrentUser } from "@/hooks/use-current-user";
 
 type Props = {
     name: string;
@@ -15,8 +16,10 @@ const Actions = ({
     chargeId,
     plan
 }: Props) => {
+    const user = useCurrentUser()
+    const token = user?.accessToken
     const [isPending, startTransition] = useTransition()
-    const mutation = removeUserSubscriptionPlan()
+    const mutation = removeUserSubscriptionPlan({ token })
 
     const unsubscribe = (name: string, chargeId: string) => {
         startTransition(async () => {
