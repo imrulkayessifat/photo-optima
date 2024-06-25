@@ -4,8 +4,8 @@ import { NextResponse } from 'next/server'
 
 interface CustomUser extends User {
   accessToken?: string;
-  user?: any;
-  data?: any;
+  id?: any;
+  email?: any;
 }
 
 export const {

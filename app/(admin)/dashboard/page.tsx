@@ -2,6 +2,7 @@ import { currentUser } from "@/lib/auth"
 import SubscriptionList from "@/components/subscription/subscription-list";
 import UserSubscriptionList from "@/components/user-subscription/user-subscription-list";
 
+
 const Page = async () => {
   const user = await currentUser();
   if (!user) {
@@ -15,7 +16,7 @@ const Page = async () => {
   return (
     <div className="mt-24">
       <div className="flex flex-col mx-auto px-8">
-        <SubscriptionList />
+        <SubscriptionList token={user.accessToken} />
         <UserSubscriptionList />
       </div>
     </div>

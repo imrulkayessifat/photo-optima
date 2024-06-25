@@ -21,11 +21,14 @@ type Subscription = {
 }
 
 interface SubscriptionListProps {
-    data: Subscription[]
+    token: string;
 }
 
-const SubscriptionList = () => {
-    const { data, isLoading } = useGetSubscriptionPlans();
+const SubscriptionList:React.FC<SubscriptionListProps> = ({
+    token
+}) => {
+    console.log(token)
+    const { data, isLoading } = useGetSubscriptionPlans({token});
     const deleteSubscription = useDeleteSubscriptions();
     const { onOpen } = addSubsciptionPlan()
 
