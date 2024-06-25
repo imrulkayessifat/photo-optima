@@ -15,7 +15,6 @@ export const useCreatePlan = ({ token }: UseCreatePlanProp) => {
 
     const mutation = useMutation({
         mutationFn: async (data: UseCreatePlanProps) => {
-            console.log(data)
             const req = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/subscription-plan`, {
                 method: 'POST',
                 headers: {
@@ -27,7 +26,6 @@ export const useCreatePlan = ({ token }: UseCreatePlanProp) => {
                 })
             })
             const res = await req.json()
-            console.log(res)
             return res;
         },
         onSuccess: () => {
