@@ -44,7 +44,7 @@ interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
     data: TData[]
     filterKey: string
-    onDelete: (rows: number[]) => void
+    onDelete?: (rows: number[]) => void
     disabled?: boolean
 }
 
@@ -110,8 +110,9 @@ export function DataTable<TData, TValue>({
 
                                     // Cast rows to your specific type
                                     const selectedData: MyDataType[] = selectedRows.map(row => row.original as MyDataType);
-
-                                    onDelete(selectedData.map(row => row.id));
+                                    if (onDelete) {
+                                        onDelete(selectedData.map(row => row.id));
+                                    }
 
                                     table.resetRowSelection();
                                 }}

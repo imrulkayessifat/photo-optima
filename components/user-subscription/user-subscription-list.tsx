@@ -5,7 +5,7 @@ import { Separator } from "@/components/ui/separator"
 import { DataTable } from '@/components/data-table';
 import { columns } from '@/components/user-subscription/columns'
 import { useGetUserSubscriptionPlans } from "@/hooks/user-subscription/use-get-user-subscription-plan";
-import { useDeleteSubscriptions } from "@/hooks/subscription-plan/use-delete-subscription";
+
 
 import Loader from '@/components/loader';
 
@@ -17,7 +17,6 @@ const UserSubscriptionList: React.FC<UserSubscriptionListProps> = ({
     token
 }) => {
     const { data, isLoading } = useGetUserSubscriptionPlans();
-    const deleteSubscription = useDeleteSubscriptions({ token });
 
     if (isLoading) {
         return (
@@ -35,13 +34,11 @@ const UserSubscriptionList: React.FC<UserSubscriptionListProps> = ({
             </div>
             <Separator />
             <DataTable
-                onDelete={(row) => {
-                    deleteSubscription.mutate({ row })
-                }}
+                
                 filterKey='name'
                 columns={columns}
                 data={data}
-                disabled={deleteSubscription.isPending || isLoading}
+                disabled={isLoading}
             />
         </div>
     )
