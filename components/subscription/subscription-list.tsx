@@ -27,7 +27,7 @@ interface SubscriptionListProps {
 const SubscriptionList:React.FC<SubscriptionListProps> = ({
     token
 }) => {
-    const { data, isLoading } = useGetSubscriptionPlans({token});
+    const { data, isLoading } = useGetSubscriptionPlans();
     const deleteSubscription = useDeleteSubscriptions({token});
     const { onOpen } = addSubsciptionPlan()
 
