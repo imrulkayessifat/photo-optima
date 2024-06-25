@@ -1,11 +1,14 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
+interface UseGetSubscriptionPlans {
+    token: string;
+}
 interface UseDeleteSubscriptions {
     row: number[]
 }
 
-export const useDeleteSubscriptions = () => {
+export const useDeleteSubscriptions = ({ token }: UseGetSubscriptionPlans) => {
     const queryClient = useQueryClient();
 
     const mutation = useMutation({
@@ -14,6 +17,7 @@ export const useDeleteSubscriptions = () => {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `${token}`
                 },
                 body: JSON.stringify({ ids:data.row })
             })

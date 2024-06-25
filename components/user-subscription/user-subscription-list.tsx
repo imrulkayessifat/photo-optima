@@ -9,16 +9,22 @@ import { useDeleteSubscriptions } from "@/hooks/subscription-plan/use-delete-sub
 
 import Loader from '@/components/loader';
 
-const UserSubscriptionList = () => {
+interface UserSubscriptionListProps {
+    token: string;
+}
+
+const UserSubscriptionList: React.FC<UserSubscriptionListProps> = ({
+    token
+}) => {
     const { data, isLoading } = useGetUserSubscriptionPlans();
-    const deleteSubscription = useDeleteSubscriptions();
+    const deleteSubscription = useDeleteSubscriptions({ token });
 
     if (isLoading) {
         return (
             <Loader />
         )
     }
-    
+
     return (
         <div className='flex flex-col gap-3'>
             <div className='flex items-center justify-between'>

@@ -15,15 +15,19 @@ import { addSubsciptionPlan } from "@/hooks/add-subscription-plan"
 import { SubscriptionSchema } from "@/components/subscription/subscription-form"
 import SubscriptionForm from "@/components/subscription/subscription-form";
 import { useCreatePlan } from "@/hooks/subscription-plan/use-create-plan";
+import { useCurrentUser } from "@/hooks/use-current-user";
 
 const AddSubscriptionSheet = () => {
+    const user = useCurrentUser();
     const { isOpen, onClose } = addSubsciptionPlan()
     const [isPending, startTransition] = useTransition();
-    const mutation = useCreatePlan()
+    
+    const token = user?.accessToken
+    const mutation = useCreatePlan({ token })
 
     const addSubscriptionPlan = async (data: z.infer<typeof SubscriptionSchema>) => {
-        const resData = await mutation.mutateAsync(data,{
-            onSuccess:()=>{
+        const resData = await mutation.mutateAsync(data, {
+            onSuccess: () => {
                 onClose()
             }
         })
@@ -65,7 +69,7 @@ const AddSubscriptionSheet = () => {
                         Create a new plan for your subscription
                     </SheetDescription>
                 </SheetHeader>
-                <SubscriptionForm 
+                <SubscriptionForm
                     onSubmit={onSubmit} disabled={isPending}
                 />
             </SheetContent>

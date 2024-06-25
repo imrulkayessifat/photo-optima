@@ -6,7 +6,12 @@ interface UseEditPlanProps {
     price: number
 }
 
-export const useEditPlan = (id?:string) => {
+interface UseGetPlanProps {
+    id?: string;
+    token?: string;
+}
+
+export const useEditPlan = ({ id, token }: UseGetPlanProps) => {
     const queryClient = useQueryClient();
 
     const mutation = useMutation({
@@ -15,6 +20,7 @@ export const useEditPlan = (id?:string) => {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `${token}`
                 },
                 body: JSON.stringify({
                     ...data

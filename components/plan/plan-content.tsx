@@ -67,8 +67,6 @@ const PlanContext: React.FC<PlanContextProp> = ({
         )
     }
 
-    console.log(plans)
-
     const handleSubscribe = async (name: string, price: number) => {
         const res = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/subscribe`, {
             method: 'POST',

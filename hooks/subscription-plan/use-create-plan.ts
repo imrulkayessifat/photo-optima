@@ -6,7 +6,11 @@ interface UseCreatePlanProps {
     price: number
 }
 
-export const useCreatePlan = () => {
+interface UseCreatePlanProp {
+    token?: string;
+}
+
+export const useCreatePlan = ({ token }: UseCreatePlanProp) => {
     const queryClient = useQueryClient();
 
     const mutation = useMutation({
@@ -15,6 +19,7 @@ export const useCreatePlan = () => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `${token}`
                 },
                 body: JSON.stringify({
                     ...data

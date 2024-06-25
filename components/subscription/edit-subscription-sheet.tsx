@@ -17,12 +17,16 @@ import SubscriptionForm from "@/components/subscription/subscription-form";
 import { useEditPlan } from "@/hooks/subscription-plan/use-edit-plan";
 import { useGetPlan } from "@/hooks/use-get-plan";
 import Loader from "@/components/loader";
+import { useCurrentUser } from "@/hooks/use-current-user";
 
 const EditSubscriptionSheet = () => {
-    const { isOpen, onClose, id } = editSubsciptionPlan()
+    const user = useCurrentUser();
+    const { isOpen, onClose, id } = editSubsciptionPlan();
     const [isPending, startTransition] = useTransition();
-    const subscriptionQuery = useGetPlan(id)
-    const mutation = useEditPlan(id)
+
+    const token = user?.accessToken;
+    const subscriptionQuery = useGetPlan({ id, token });
+    const mutation = useEditPlan({ id, token });
 
     const isLoading = subscriptionQuery.isLoading
     const defaultValues = subscriptionQuery.data ? {
