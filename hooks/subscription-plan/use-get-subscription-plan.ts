@@ -8,9 +8,7 @@ export const useGetSubscriptionPlans = () => {
     const query = useQuery({
         queryKey: ["subscription_plan"],
         queryFn: async () => {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/subscription-plan`, {
-                method: 'GET',
-            });
+            const res = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/subscription-plan`);
             if (!res.ok) {
                 throw new Error("Failed to fetch images");
             }
