@@ -26,8 +26,9 @@ export const useCreatePlan = ({ token }: UseCreatePlanProp) => {
                     ...data
                 })
             })
-
-            return await req.json()
+            const res = await req.json()
+            console.log(res)
+            return res;
         },
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["subscription_plan"] })
