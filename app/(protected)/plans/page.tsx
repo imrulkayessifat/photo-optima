@@ -8,9 +8,9 @@ const Page = async () => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                'client_id': process.env.NEXT_PUBLIC_SHOPIFY_API_KEY,
-                'client_secret': process.env.NEXT_PUBLIC_SHOPIFY_API_SECRET,
-                'grant_type': 'client_credentials'
+                "client_id": "0b77a1fb0b2de6c8915e1d2155b34163",
+                "client_secret": "1b6edba642c50854d3bd8f6ed0697c1c",
+                "grant_type": "client_credentials"
             })
         })
 
@@ -20,7 +20,7 @@ const Page = async () => {
 
         const { access_token } = await accessTokenResponse.json()
 
-        console.log("Invalid access token",access_token)
+        console.log("Invalid access token", access_token)
 
         const storeResponse = await fetch(`https://${process.env.SHOPIFY_STORE_DOMAIN}/admin/api/2024-04/shop.json`, {
             method: 'GET',
@@ -46,7 +46,7 @@ const Page = async () => {
         return (
             <PlanContext shop={shop.domain} />
         )
-    } catch (error:any) { // Explicitly typing error as 'any' to prevent type issues
+    } catch (error: any) { // Explicitly typing error as 'any' to prevent type issues
         console.error(error)
         return (
             <p>There was an error fetching data: {error.message}</p>

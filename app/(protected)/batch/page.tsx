@@ -7,9 +7,9 @@ const Page = async () => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                'client_id': `${process.env.NEXT_PUBLIC_SHOPIFY_API_KEY}`,
-                'client_secret': `${process.env.NEXT_PUBLIC_SHOPIFY_API_SECRET}`,
-                'grant_type': 'client_credentials'
+                "client_id": "0b77a1fb0b2de6c8915e1d2155b34163",
+                "client_secret": "1b6edba642c50854d3bd8f6ed0697c1c",
+                "grant_type": "client_credentials"
             })
         })
 
