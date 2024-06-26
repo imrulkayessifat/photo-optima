@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { QueryProvider } from "@/providers/query-provider";
+import Providers from "@/providers/providers";
 import SheetProvider from "@/providers/sheet-provider";
 import "./globals.css";
 
@@ -29,10 +30,12 @@ export default async function RootLayout({
           <meta name="test" content="test" />
         </head>
         <body className={inter.className}>
+          <Providers>
             <QueryProvider>
               <SheetProvider />
               {children}
             </QueryProvider>
+          </Providers>
           <Toaster />
         </body>
       </html>
