@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
 import { QueryProvider } from "@/providers/query-provider";
-import { ApolloWrapper } from "@/providers/apollo-provider";
+import { ApolloProvider } from "@/providers/apollo-provider";
 import SheetProvider from "@/providers/sheet-provider";
 import "./globals.css";
 
@@ -34,9 +34,9 @@ export default async function RootLayout({
         <body className={inter.className}>
           <QueryProvider>
             <SheetProvider />
-            <ApolloWrapper>
+            <ApolloProvider>
               {children}
-            </ApolloWrapper>
+            </ApolloProvider>
           </QueryProvider>
           <Toaster />
           <Script

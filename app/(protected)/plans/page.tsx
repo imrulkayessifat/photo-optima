@@ -1,7 +1,7 @@
 "use client"
 
 import PlanContext from "@/components/plan/plan-content"
-import { useQuery, gql } from '@apollo/client';
+import { useSuspenseQuery, gql } from '@apollo/client';
 import Loader from "@/components/loader";
 
 const GET_SHOP_INFO = gql`
@@ -14,11 +14,7 @@ const GET_SHOP_INFO = gql`
 
 
 const Page = () => {
-    const { loading, error, data } = useQuery(GET_SHOP_INFO);
-
-    if (loading) {
-        <Loader />
-    }
+    const { error, data } = useSuspenseQuery(GET_SHOP_INFO);
 
     if(error){
         return <p>{error.message}</p>
@@ -27,7 +23,8 @@ const Page = () => {
     console.log(data)
 
     return (
-        <PlanContext shop={data.shop.name || ""} />
+      <p></p>
+        // <PlanContext shop={ || ""} />
     );
 }
 

@@ -1,4 +1,5 @@
 "use client";
+// ^ this file needs the "use client" pragma
 
 import { ApolloLink, HttpLink } from "@apollo/client";
 import {
@@ -8,10 +9,9 @@ import {
   SSRMultipartLink,
 } from "@apollo/experimental-nextjs-app-support";
 
-
+// have a function to create a client for you
 function makeClient() {
   const httpLink = new HttpLink({
-    credentials: "same-origin",
     // this needs to be an absolute url, as relative urls cannot be used in SSR
     uri: `/api/graphql`,
     // you can disable result caching here if you want to
@@ -31,7 +31,8 @@ function makeClient() {
   });
 }
 
-export function ApolloWrapper({ children }: React.PropsWithChildren) {
+// you need to create a component to wrap your app in
+export function ApolloProvider({ children }: React.PropsWithChildren) {
   return (
     <ApolloNextAppProvider makeClient={makeClient}>
       {children}
