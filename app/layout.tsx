@@ -25,11 +25,14 @@ export default async function RootLayout({
   return (
     <SessionProvider session={session}>
       <html lang="en">
+        <head>
+          <meta name="test" content="test" />
+        </head>
         <body className={inter.className}>
-          <QueryProvider>
-            <SheetProvider />
-            {children}
-          </QueryProvider>
+            <QueryProvider>
+              <SheetProvider />
+              {children}
+            </QueryProvider>
           <Toaster />
         </body>
       </html>

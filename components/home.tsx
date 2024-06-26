@@ -67,7 +67,7 @@ const Home = ({ store }: { store: any }) => {
             mq.off('connect')
             mq.off('image_model')
         }
-    }, [])
+    }, [queryClient])
 
     return (
         <main>
