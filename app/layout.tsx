@@ -32,17 +32,17 @@ export default async function RootLayout({
           <script src="https://cdn.shopify.com/shopifycloud/app-bridge.js" async />
         </head>
         <body className={inter.className}>
-          <ApolloWrapper>
-            <QueryProvider>
-              <SheetProvider />
+          <QueryProvider>
+            <SheetProvider />
+            <ApolloWrapper>
               {children}
-            </QueryProvider>
-          </ApolloWrapper>
+            </ApolloWrapper>
+          </QueryProvider>
           <Toaster />
           <Script
-          src="https://cdn.shopify.com/shopifycloud/app-bridge.js"
-          strategy="beforeInteractive"
-        />
+            src="https://cdn.shopify.com/shopifycloud/app-bridge.js"
+            strategy="beforeInteractive"
+          />
         </body>
       </html>
     </SessionProvider>
