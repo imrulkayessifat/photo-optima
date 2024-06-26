@@ -20,10 +20,12 @@ const Page = async () => {
 
         const { access_token } = await accessTokenResponse.json()
 
+        console.log(access_token)
+
         const storeResponse = await fetch(`https://${process.env.SHOPIFY_STORE_DOMAIN}/admin/api/2024-04/shop.json`, {
             method: 'GET',
             headers: {
-                'X-Shopify-Access-Token': access_token
+                'X-Shopify-Access-Token': `${access_token}`
             }
         })
 
