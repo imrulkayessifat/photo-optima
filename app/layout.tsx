@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
 import { QueryProvider } from "@/providers/query-provider";
-import Providers from "@/providers/providers";
+import { ApolloWrapper } from "@/providers/apollo-provider";
 import SheetProvider from "@/providers/sheet-provider";
 import "./globals.css";
 
@@ -32,12 +32,12 @@ export default async function RootLayout({
           <script src="https://cdn.shopify.com/shopifycloud/app-bridge.js" async />
         </head>
         <body className={inter.className}>
-          <Providers>
+          <ApolloWrapper>
             <QueryProvider>
               <SheetProvider />
               {children}
             </QueryProvider>
-          </Providers>
+          </ApolloWrapper>
           <Toaster />
           <Script
           src="https://cdn.shopify.com/shopifycloud/app-bridge.js"
