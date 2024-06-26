@@ -17,7 +17,7 @@ const Page = async () => {
         if (!accessTokenResponse.ok) {
             const errorDetails = await accessTokenResponse.text();
             console.error('Access token fetch error details:', errorDetails);
-            throw new Error('Failed to fetch access token');
+            throw new Error('Failed to fetch access tokens');
         }
 
         const accessToken = await accessTokenResponse.json()
