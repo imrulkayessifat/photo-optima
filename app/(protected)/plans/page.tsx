@@ -8,8 +8,8 @@ const Page = async () => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                "client_id": "0b77a1fb0b2de6c8915e1d2155b34163",
-                "client_secret": "1b6edba642c50854d3bd8f6ed0697c1c",
+                "client_id": process.env.SHOPIFY_CLIENT_ID,
+                "client_secret": process.env.SHOPIFY_CLIENT_SECRET,
                 "grant_type": "client_credentials"
             })
         })
@@ -19,8 +19,6 @@ const Page = async () => {
         }
 
         const { access_token } = await accessTokenResponse.json()
-
-        console.log("Invalid access token", access_token)
 
         const storeResponse = await fetch(`https://${process.env.SHOPIFY_STORE_DOMAIN}/admin/api/2024-04/shop.json`, {
             method: 'GET',
@@ -54,4 +52,4 @@ const Page = async () => {
     }
 }
 
-export default Page
+export default Page;
