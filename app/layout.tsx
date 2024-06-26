@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import { QueryProvider } from "@/providers/query-provider";
 import Providers from "@/providers/providers";
 import SheetProvider from "@/providers/sheet-provider";
@@ -28,6 +29,7 @@ export default async function RootLayout({
       <html lang="en">
         <head>
           <meta name="test" content="test" />
+          <script src="https://cdn.shopify.com/shopifycloud/app-bridge.js" async />
         </head>
         <body className={inter.className}>
           <Providers>
@@ -37,6 +39,10 @@ export default async function RootLayout({
             </QueryProvider>
           </Providers>
           <Toaster />
+          <Script
+          src="https://cdn.shopify.com/shopifycloud/app-bridge.js"
+          strategy="beforeInteractive"
+        />
         </body>
       </html>
     </SessionProvider>

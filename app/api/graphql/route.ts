@@ -19,6 +19,8 @@ export async function POST(req: Request) {
       session,
     });
 
+    console.log("graphql : ",response)
+
     return Response.json(response.body as any, {
       headers: response.headers as any,
     });

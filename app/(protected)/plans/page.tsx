@@ -24,6 +24,8 @@ const Page = () => {
         return <p>{error.message}</p>
     }
 
+    console.log(data)
+
     return (
         <PlanContext shop={data.shop.name || ""} />
     );
