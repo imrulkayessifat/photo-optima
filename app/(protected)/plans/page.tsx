@@ -18,12 +18,14 @@ const Page = async () => {
             throw new Error('Failed to fetch access token')
         }
 
-        const { access_token } = await accessTokenResponse.json()
+        const accessToken = await accessTokenResponse.json()
+
+        console.log("invalid token : ", accessToken)
 
         const storeResponse = await fetch(`https://${process.env.SHOPIFY_STORE_DOMAIN}/admin/api/2024-04/shop.json`, {
             method: 'GET',
             headers: {
-                'X-Shopify-Access-Token': `${access_token}`
+                'X-Shopify-Access-Token': `${accessToken.access_token}`
             }
         })
 
