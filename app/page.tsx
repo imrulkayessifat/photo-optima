@@ -27,7 +27,7 @@ export default async function Page({
 
   const { access_token } = await accessTokenResponse.json()
 
-  const store_name = await fetch('https://photo-optima.myshopify.com/admin/api/2024-04/shop.json', {
+  const store_name = await fetch(`https://${process.env.SHOPIFY_STORE_DOMAIN}/admin/api/2024-04/shop.json`, {
     method: 'GET',
     headers: {
       'X-Shopify-Access-Token': `${access_token}`
