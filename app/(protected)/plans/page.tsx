@@ -1,9 +1,10 @@
-import PlanContext from "@/components/plan/plan-content"
+import { getShop } from "@/actions/get-shop";
 
 const Page = async () => {
-    const response = await fetch(`${process.env.HOST}/api/shop`);
-    const shop = await response.json()
-    console.log(shop)
+    const response = await getShop();
+
+    console.log(response)
+    
 
     return (
       <p></p>

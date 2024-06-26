@@ -1,6 +1,5 @@
-import { NextResponse } from "next/server";
-
-export async function GET(req: Request) {
+"use server"
+export const getShop = async () => {
     const shopify_shop = process.env.SHOPIFY_STORE_DOMAIN;
     const client_id = process.env.SHOPIFY_CLIENT_ID;
     const client_secret = process.env.SHOPIFY_CLIENT_SECRET;
@@ -20,7 +19,7 @@ export async function GET(req: Request) {
 
     if (!response.ok) {
         const errorDetails = await response.text();
-        return NextResponse.json(`${errorDetails}`, { status: 400 });
+        return { error: `${errorDetails}` };
     }
     const { access_token } = await response.json();
 
@@ -34,10 +33,8 @@ export async function GET(req: Request) {
 
     if (!store_data.ok) {
         const errorDetails = await store_data.text();
-        return NextResponse.json(`${errorDetails}`, { status: 400 });
+        return { error: `${errorDetails}` };
     }
     const { shop } = await store_data.json()
-
-    return NextResponse.json(shop, { status: 204 })
-
+    return { success: `${shop.domain}` }
 }
