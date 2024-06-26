@@ -26,6 +26,8 @@ const Page = async () => {
         })
 
         if (!store_name.ok) {
+            const errorDetails = await store_name.text();
+            console.error('Error details:', errorDetails);
             throw new Error('Failed to fetch shop data')
         }
 
