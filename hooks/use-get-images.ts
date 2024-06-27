@@ -12,8 +12,10 @@ export const useGetImages = ({ storeName, shopifyAccessToken }: UseGetImagesProp
         queryKey: ["images"],
         queryFn: async () => {
             const res = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/image/${storeName}`, {
+                method:'GET',
                 headers: {
-                    'Authorization': `${shopifyAccessToken}`
+                    'Authorization': `${shopifyAccessToken}`,
+                    'Shop':`${storeName}`
                 }
             });
             if (!res.ok) {
