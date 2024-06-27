@@ -76,9 +76,10 @@ const Home = ({ store, shopifyAccessToken }: { store: any, shopifyAccessToken: s
                 <div className="flex flex-wrap md:flex-nowrap mx-auto px-8 my-10 gap-2 w-full">
                     <AutoCompression shopifyAccessToken={shopifyAccessToken} plan={store.plan} auto_compression={store.autoCompression} store_name={store.name} />
                     <AutoFileRename shopifyAccessToken={shopifyAccessToken} plan={store.plan} auto_file_rename={store.autoFileRename} store_name={store.name} />
-                    <AutoAltRename  shopifyAccessToken={shopifyAccessToken} plan={store.plan} auto_alt_rename={store.autoAltRename} store_name={store.name} />
+                    <AutoAltRename shopifyAccessToken={shopifyAccessToken} plan={store.plan} auto_alt_rename={store.autoAltRename} store_name={store.name} />
                 </div>
                 <ManualUpload
+                    shopifyAccessToken={shopifyAccessToken}
                     plan={store.plan}
                     auto_compression={store.autoCompression}
                     autoFileRename={store.autoFileRename}
