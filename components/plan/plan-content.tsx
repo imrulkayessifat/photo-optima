@@ -33,8 +33,9 @@ import { useStoreData } from '@/hooks/use-store-data';
 import { useGetSubscriptionPlans } from "@/hooks/subscription-plan/use-get-subscription-plan";
 
 interface PlanContextProp {
-    
+
     shop: string;
+    access_token: string;
 }
 
 interface SubscriptionPlan {
@@ -45,10 +46,11 @@ interface SubscriptionPlan {
 }
 
 const PlanContext: React.FC<PlanContextProp> = ({
-    
-    shop
+
+    shop,
+    access_token
 }) => {
-    const { data: store, isLoading } = useStoreData({ shop });
+    const { data: store, isLoading } = useStoreData({ shop, access_token });
     const { data: plans, isLoading: isLoading1 } = useGetSubscriptionPlans()
 
     if (!shop) {

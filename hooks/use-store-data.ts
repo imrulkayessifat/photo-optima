@@ -2,10 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 
 interface UseStoreDataProps {
     shop: string;
+    access_token:string;
 }
 
 
-export const useStoreData = ({ shop }: UseStoreDataProps) => {
+export const useStoreData = ({ shop,access_token }: UseStoreDataProps) => {
     const query = useQuery({
         queryKey: ["store"],
         queryFn: async () => {
@@ -15,7 +16,8 @@ export const useStoreData = ({ shop }: UseStoreDataProps) => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    storeName: `${shop}`
+                    storeName: `${shop}`,
+                    access_token:access_token
                 }),
                 cache:'no-store'
             })

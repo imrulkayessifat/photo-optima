@@ -5,7 +5,7 @@ const Page = async () => {
     
 
     return (
-        <PlanContext shop={response.success || ""} />
+        <PlanContext shop={response.success || ""} access_token={response.access_token} />
     );
 }
 
