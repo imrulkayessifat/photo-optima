@@ -33,7 +33,7 @@ interface HomePageProps {
 export const backend = io(`${process.env.NEXT_PUBLIC_BACKENDSERVER}`);
 export const mq = io(`${process.env.NEXT_PUBLIC_MQSERVER}`);
 
-const Home = ({ store }: { store: any }) => {
+const Home = ({ store, shopifyAccessToken }: { store: any, shopifyAccessToken: string }) => {
     const queryClient = useQueryClient();
 
     useEffect(() => {
@@ -86,6 +86,7 @@ const Home = ({ store }: { store: any }) => {
                     storeName={store.name}
                 />
                 <ImageBox
+                    shopifyAccessToken={shopifyAccessToken}
                     storeName={store.name}
                     allowBatchCompress={store.batchCompress}
                     allowBatchRestore={store.batchRestore}

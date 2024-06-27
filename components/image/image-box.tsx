@@ -5,6 +5,7 @@ import { useGetImages } from "@/hooks/use-get-images";
 import ImagestList from "@/components/image/imageslist";
 
 interface ImageBoxProps {
+    shopifyAccessToken:string;
     storeName:string;
     plan: string;
     autoCompression:boolean;
@@ -15,6 +16,7 @@ interface ImageBoxProps {
 }
 
 const ImageBox: React.FC<ImageBoxProps> = ({
+    shopifyAccessToken,
     storeName,
     plan,
     autoCompression,
@@ -23,7 +25,7 @@ const ImageBox: React.FC<ImageBoxProps> = ({
     autoFileRename,
     autoAltRename
 }) => {
-    const { data: images,isLoading } = useGetImages({storeName});
+    const { data: images,isLoading } = useGetImages({storeName,shopifyAccessToken});
 
     if(isLoading) {
         return (

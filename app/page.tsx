@@ -3,7 +3,7 @@ import Home from "@/components/home";
 import { ExitClient } from "@/components/exit-client";
 import { getShop } from "@/actions/get-shop";
 import shopify from "@/lib/shopify/initialize-context";
-
+import { loadSession } from "@/lib/db/session-storage";
 
 export default async function Page({
   params,
@@ -41,7 +41,7 @@ export default async function Page({
   // const { shop: shop1 } = await store_name.json()
   const sessionId = shopify.session.getOfflineId(`${response.success}`);
 
-  console.log("session id", sessionId)
+  const session = await loadSession(sessionId);
 
   const res = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/store`, {
     method: 'POST',
@@ -57,9 +57,13 @@ export default async function Page({
 
   const { data } = await res.json();
 
+  if(!session.accessToken) {
+    return ;
+  }
+
   if (!shop || !host) {
     return <div>
-      <Home store={data} />
+      <Home shopifyAccessToken={session.accessToken} store={data} />
     </div>;
   }
 
@@ -75,5 +79,5 @@ export default async function Page({
   }
 
 
-  return <Home store={data} />;
+  return <Home shopifyAccessToken={session.accessToken} store={data} />;
 }
