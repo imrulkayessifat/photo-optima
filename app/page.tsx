@@ -2,7 +2,7 @@ import { performChecks } from "@/lib/shopify/shopify-oauth";
 import Home from "@/components/home";
 import { ExitClient } from "@/components/exit-client";
 import { getShop } from "@/actions/get-shop";
-
+import shopify from "@/lib/shopify/initialize-context";
 
 
 export default async function Page({
@@ -39,6 +39,9 @@ export default async function Page({
   // })
 
   // const { shop: shop1 } = await store_name.json()
+  const sessionId = shopify.session.getOfflineId(`${response.success}`);
+
+  console.log("session id", sessionId)
 
   const res = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/store`, {
     method: 'POST',
