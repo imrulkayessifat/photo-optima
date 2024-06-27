@@ -47,6 +47,7 @@ import FileRename from "@/components/image/file-rename"
 
 
 const ImageTable: React.FC<ImageTableProps> = ({
+    shopifyAccessToken,
     storeName,
     data,
     plan
@@ -163,13 +164,13 @@ const ImageTable: React.FC<ImageTableProps> = ({
                             <DropdownMenuLabel className="text-sm">Actions</DropdownMenuLabel>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem>
-                                <ImageActionCell storeName={storeName} data={row.original} />
+                                <ImageActionCell shopifyAccessToken={shopifyAccessToken} storeName={storeName} data={row.original} />
                             </DropdownMenuItem>
                             <DropdownMenuItem>
-                                <FileRename storeName={storeName} plan={plan} data={row.original} />
+                                <FileRename shopifyAccessToken={shopifyAccessToken} storeName={storeName} plan={plan} data={row.original} />
                             </DropdownMenuItem>
                             <DropdownMenuItem>
-                                <AltRename storeName={storeName} plan={plan} data={row.original} />
+                                <AltRename shopifyAccessToken={shopifyAccessToken} storeName={storeName} plan={plan} data={row.original} />
                             </DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>

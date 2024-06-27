@@ -2,10 +2,11 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 interface RestoreFileNameProps {
+    storeName:string;
     restoreId: string;
 }
 
-export const restoreFileName = () => {
+export const restoreFileName = ({ shopifyAccessToken }: { shopifyAccessToken: string }) => {
     const queryClient = useQueryClient();
 
     const mutation = useMutation({
@@ -15,6 +16,8 @@ export const restoreFileName = () => {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization':`${shopifyAccessToken}`,
+                    'Shop':`${data.storeName}`
                 },
                 body: JSON.stringify({
                     restoreId: `${restoreId}`,

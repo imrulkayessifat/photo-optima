@@ -17,6 +17,7 @@ export type ProductDataProps = {
 }
 
 export interface ImageTableProps {
+    shopifyAccessToken:string;
     storeName:string;
     plan:string;
     data: any

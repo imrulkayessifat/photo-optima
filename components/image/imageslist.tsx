@@ -5,12 +5,14 @@ import { Separator } from "@/components/ui/separator";
 import ImageTable from '@/components/image/image-table';
 
 interface ProductListDataProps {
+    shopifyAccessToken:string;
     storeName:string
     plan:string;
     images: any;
 }
 
 const ImagestList: React.FC<ProductListDataProps> = ({
+    shopifyAccessToken,
     storeName,
     plan,
     images
@@ -25,7 +27,7 @@ const ImagestList: React.FC<ProductListDataProps> = ({
                 />
             </div>
             <Separator />
-            <ImageTable storeName={storeName} plan={plan} data={images} />
+            <ImageTable shopifyAccessToken={shopifyAccessToken} storeName={storeName} plan={plan} data={images} />
         </div>
     )
 }

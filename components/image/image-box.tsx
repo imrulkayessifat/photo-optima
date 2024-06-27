@@ -35,7 +35,7 @@ const ImageBox: React.FC<ImageBoxProps> = ({
         )
     }
     return (
-        <ImagestList storeName={storeName} plan={plan} images={images} />
+        <ImagestList shopifyAccessToken={shopifyAccessToken} storeName={storeName} plan={plan} images={images} />
     )
 }
 

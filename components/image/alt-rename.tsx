@@ -5,25 +5,27 @@ import { useAltRename } from '@/hooks/use-alt-rename';
 import { restoreAltTag } from '@/hooks/restore-alt-tag';
 
 interface AltRenameProps {
+    shopifyAccessToken:string;
     storeName: string;
     plan: string;
     data: any
 }
 
 const AltRename: React.FC<AltRenameProps> = ({
+    shopifyAccessToken,
     storeName,
     plan,
     data
 }) => {
-    const mutation = useAltRename()
-    const mutationRestoreAltTag = restoreAltTag();
+    const mutation = useAltRename({shopifyAccessToken})
+    const mutationRestoreAltTag = restoreAltTag({shopifyAccessToken});
 
     const altRename = async (uid: string) => {
         const data = await mutation.mutateAsync({ uid, storeName })
     }
 
     const altTagRestore = async (restoreId: string) => {
-        const data = await mutationRestoreAltTag.mutateAsync({ restoreId })
+        const data = await mutationRestoreAltTag.mutateAsync({ restoreId,storeName })
     }
     
     return (

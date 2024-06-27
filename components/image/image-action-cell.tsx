@@ -11,10 +11,12 @@ import { useRestoringImage } from "@/hooks/use-restoring-image";
 
 
 interface ImageCellProps {
-    storeName:string;
+    shopifyAccessToken: string;
+    storeName: string;
     data: any
 }
 const ImageActionCell: React.FC<ImageCellProps> = ({
+    shopifyAccessToken,
     storeName,
     data
 }) => {
@@ -64,6 +66,8 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `${shopifyAccessToken}`,
+                'Shop': `${storeName}`
             },
             body: JSON.stringify({ uid, productid, url, storeName })
         });
@@ -81,8 +85,10 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `${shopifyAccessToken}`,
+                'Shop': `${storeName}`
             },
-            body: JSON.stringify({ uid, productid ,store_name:storeName})
+            body: JSON.stringify({ uid, productid, store_name: storeName })
         });
 
         const data = await response.json();

@@ -6,7 +6,7 @@ interface UseFileRenameProps {
     uid: string;
 }
 
-export const useFileRename = () => {
+export const useFileRename = ({ shopifyAccessToken }: { shopifyAccessToken: string }) => {
     const queryClient = useQueryClient();
 
     const mutation = useMutation({
@@ -16,6 +16,8 @@ export const useFileRename = () => {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `${shopifyAccessToken}`,
+                    'Shop': `${data.storeName}`
                 },
                 body: JSON.stringify({
                     storeName: storeName,

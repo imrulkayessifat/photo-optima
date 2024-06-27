@@ -6,7 +6,7 @@ interface UseAltRenameProps {
     storeName: string;
 }
 
-export const useAltRename = () => {
+export const useAltRename = ({shopifyAccessToken}:{shopifyAccessToken:string}) => {
     const queryClient = useQueryClient();
 
     const mutation = useMutation({
@@ -16,6 +16,8 @@ export const useAltRename = () => {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization':`${shopifyAccessToken}`,
+                    'Shop':`${storeName}`
                 },
                 body: JSON.stringify({
                     uid: `${uid}`,
