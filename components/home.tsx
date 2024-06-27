@@ -38,7 +38,7 @@ const Home = ({ store, shopifyAccessToken }: { store: any, shopifyAccessToken: s
 
     useEffect(() => {
         backend.on('connect', () => {
-            console.log('connecting to backend server')
+            console.log('connecting to backend server!')
         })
 
         mq.on('connect', () => {
