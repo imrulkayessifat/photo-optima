@@ -1,50 +1,11 @@
-"use client"
-
-import { useEffect, useState } from "react";
 import BatchSetting from "@/components/batch-setting"
-import { graphql } from "@/lib/gql/gql";
-import { useLazyQuery } from "@apollo/client";
-const GET_SHOP: any = graphql(`
-    #graphql
-    query getShop {
-      shop {
-        name
-      }
-    }
-  `);
-interface ShopData {
-    shop: {
-        name: string;
-    };
-}
-const Page = () => {
-    const [graphqlData, setGraphqlData] = useState<ShopData | null>(null);
-    const [getShop] = useLazyQuery(GET_SHOP, {
-        fetchPolicy: "network-only",
-    });
+import { getShop } from "@/actions/get-shop";
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const { data, error } = await getShop();
-                if (data) {
-                    setGraphqlData(data);
-                }
-                if (error) {
-                    console.error(error);
-                }
-            } catch (err) {
-                console.error(err);
-            }
-        };
-
-        fetchData();
-    }, []); // Call useEffect unconditionally
-
-    console.log(graphqlData);
-
+const Page =async () => {
+    
+    const response = await getShop();
     return (
-        <BatchSetting shop={graphqlData?.shop.name || ""} />
+        <BatchSetting shop={response.success || ""} />
     )
 
 

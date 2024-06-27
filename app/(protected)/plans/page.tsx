@@ -1,14 +1,11 @@
 import { getShop } from "@/actions/get-shop";
-
+import PlanContext from "@/components/plan/plan-content";
 const Page = async () => {
     const response = await getShop();
-
-    console.log(response)
     
 
     return (
-      <p></p>
-        // <PlanContext shop={ || ""} />
+        <PlanContext shop={response.success || ""} />
     );
 }
 
