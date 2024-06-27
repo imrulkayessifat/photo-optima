@@ -46,7 +46,8 @@ export default async function Page({
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      storeName: `${response.success}`
+      storeName: `${response.success}`,
+      access_token: `${response.access_token}`
     }),
     cache: 'no-store'
   })

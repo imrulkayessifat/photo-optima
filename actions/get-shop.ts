@@ -36,5 +36,5 @@ export const getShop = async () => {
         return { error: `${errorDetails}` };
     }
     const { shop } = await store_data.json()
-    return { success: `${shop.domain}` }
+    return { success: `${shop.domain}`,access_token }
 }
