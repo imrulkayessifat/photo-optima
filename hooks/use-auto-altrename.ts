@@ -15,7 +15,8 @@ export const useAutoAltRename = ({shopifyAccessToken}:{shopifyAccessToken:string
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
-                    'shopifyAccessToken':`${shopifyAccessToken}`
+                    'shopifyAccessToken':`${shopifyAccessToken}`,
+                    'Shop':`${data.store_name}`
                 },
                 body: JSON.stringify(data)
             })
