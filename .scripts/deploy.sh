@@ -7,9 +7,6 @@ echo "Deployment started..."
 git pull origin main
 echo "New changes copied to server !"
 
-echo "Removing cache"
-rm -rf node_modules .next
-
 echo "Installing Dependencies..."
 npm install --yes
 
