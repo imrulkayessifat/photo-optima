@@ -18,18 +18,20 @@ import { AutoAltRenameSchema } from "@/lib/schemas"
 import { useAutoAltRename } from "@/hooks/use-auto-altrename"
 
 interface AutoAltRenameProps {
+    shopifyAccessToken:string;
     auto_alt_rename: boolean;
     store_name: string;
     plan: string;
 }
 
 const AutoAltRename: React.FC<AutoAltRenameProps> = ({
+    shopifyAccessToken,
     auto_alt_rename,
     store_name,
     plan
 }) => {
 
-    const mutation = useAutoAltRename()
+    const mutation = useAutoAltRename({shopifyAccessToken})
 
     const form = useForm<z.infer<typeof AutoAltRenameSchema>>({
         resolver: zodResolver(AutoAltRenameSchema),

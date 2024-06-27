@@ -74,9 +74,9 @@ const Home = ({ store, shopifyAccessToken }: { store: any, shopifyAccessToken: s
             <Navbar />
             <div className="mt-24">
                 <div className="flex flex-wrap md:flex-nowrap mx-auto px-8 my-10 gap-2 w-full">
-                    <AutoCompression plan={store.plan} auto_compression={store.autoCompression} store_name={store.name} />
-                    <AutoFileRename plan={store.plan} auto_file_rename={store.autoFileRename} store_name={store.name} />
-                    <AutoAltRename plan={store.plan} auto_alt_rename={store.autoAltRename} store_name={store.name} />
+                    <AutoCompression shopifyAccessToken={shopifyAccessToken} plan={store.plan} auto_compression={store.autoCompression} store_name={store.name} />
+                    <AutoFileRename shopifyAccessToken={shopifyAccessToken} plan={store.plan} auto_file_rename={store.autoFileRename} store_name={store.name} />
+                    <AutoAltRename  shopifyAccessToken={shopifyAccessToken} plan={store.plan} auto_alt_rename={store.autoAltRename} store_name={store.name} />
                 </div>
                 <ManualUpload
                     plan={store.plan}

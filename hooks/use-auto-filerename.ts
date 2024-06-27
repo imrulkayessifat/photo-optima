@@ -6,7 +6,7 @@ interface UseAutoFileRenameProps {
     auto_file_rename?: boolean;
 }
 
-export const useAutoFileRename = () => {
+export const useAutoFileRename = ({shopifyAccessToken}:{shopifyAccessToken:string}) => {
     const queryClient = useQueryClient();
 
     const mutation = useMutation({
@@ -15,6 +15,7 @@ export const useAutoFileRename = () => {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
+                    'shopifyAccessToken':`${shopifyAccessToken}`
                 },
                 body: JSON.stringify(data)
             })

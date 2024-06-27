@@ -20,18 +20,20 @@ import { AutoFileRenameSchema } from "@/lib/schemas"
 import { useAutoFileRename } from "@/hooks/use-auto-filerename"
 
 interface AutoFileRenameProps {
+    shopifyAccessToken:string;
     auto_file_rename: boolean;
     store_name: string;
     plan: string;
 }
 
 const AutoFileRename: React.FC<AutoFileRenameProps> = ({
+    shopifyAccessToken,
     auto_file_rename,
     store_name,
     plan
 }) => {
 
-    const mutation = useAutoFileRename()
+    const mutation = useAutoFileRename({shopifyAccessToken})
 
     const form = useForm<z.infer<typeof AutoFileRenameSchema>>({
         resolver: zodResolver(AutoFileRenameSchema),

@@ -6,7 +6,7 @@ interface UseAutoCompressionProps {
     auto_compression?: boolean;
 }
 
-export const useAutoCompression = () => {
+export const useAutoCompression = ({shopifyAccessToken}:{shopifyAccessToken:string}) => {
     const queryClient = useQueryClient();
 
     const mutation = useMutation({
@@ -15,6 +15,7 @@ export const useAutoCompression = () => {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
+                    'shopifyAccessToken':`${shopifyAccessToken}`
                 },
                 body: JSON.stringify(data)
             })

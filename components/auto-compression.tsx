@@ -20,18 +20,20 @@ import { AutoCompressionSchema } from "@/lib/schemas"
 import { useAutoCompression } from "@/hooks/use-auto-compression"
 
 interface AutoCompressionProps {
+    shopifyAccessToken:string;
     auto_compression: boolean;
     store_name: string;
     plan: string;
 }
 
 const AutoCompression: React.FC<AutoCompressionProps> = ({
+    shopifyAccessToken,
     auto_compression,
     store_name,
     plan
 }) => {
 
-    const mutation = useAutoCompression()
+    const mutation = useAutoCompression({shopifyAccessToken})
 
     const form = useForm<z.infer<typeof AutoCompressionSchema>>({
         resolver: zodResolver(AutoCompressionSchema),

@@ -6,7 +6,7 @@ interface UseAutoAltRenameProps {
     auto_alt_rename?: boolean;
 }
 
-export const useAutoAltRename = () => {
+export const useAutoAltRename = ({shopifyAccessToken}:{shopifyAccessToken:string}) => {
     const queryClient = useQueryClient();
 
     const mutation = useMutation({
@@ -15,6 +15,7 @@ export const useAutoAltRename = () => {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
+                    'shopifyAccessToken':`${shopifyAccessToken}`
                 },
                 body: JSON.stringify(data)
             })
