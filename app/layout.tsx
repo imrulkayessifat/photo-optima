@@ -29,7 +29,7 @@ export default async function RootLayout({
       <html lang="en">
         <head>
           <meta name="test" content="test" />
-          <script src="https://cdn.shopify.com/shopifycloud/app-bridge.js" async />
+          {/* <script src="https://cdn.shopify.com/shopifycloud/app-bridge.js" async /> */}
         </head>
         <body className={inter.className}>
           <QueryProvider>
@@ -39,10 +39,10 @@ export default async function RootLayout({
             </ApolloProvider>
           </QueryProvider>
           <Toaster />
-          <Script
+          {/* <Script
             src="https://cdn.shopify.com/shopifycloud/app-bridge.js"
             strategy="beforeInteractive"
-          />
+          /> */}
         </body>
       </html>
     </SessionProvider>
