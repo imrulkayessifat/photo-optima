@@ -12,33 +12,36 @@ import CompressionSetting from "@/components/compression-setting"
 import FileRenameSetting from "@/components/file-rename-setting";
 import AltRenameSetting from "@/components/alt-rename-setting";
 import { Separator } from "@/components/ui/separator"
+import { getShop } from "@/actions/get-shop";
 
 const Page = async () => {
 
-    const accessTokenResponse = await fetch(`https://${process.env.SHOPIFY_STORE_DOMAIN}/admin/oauth/access_token`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            'client_id': `${process.env.NEXT_PUBLIC_SHOPIFY_API_KEY}`,
-            'client_secret': `${process.env.NEXT_PUBLIC_SHOPIFY_API_SECRET}`,
-            'grant_type': 'client_credentials'
-        })
-    })
+    const response = await getShop();
 
-    const { access_token } = await accessTokenResponse.json()
+    // const accessTokenResponse = await fetch(`https://${process.env.SHOPIFY_STORE_DOMAIN}/admin/oauth/access_token`, {
+    //     method: 'POST',
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({
+    //         'client_id': `${process.env.NEXT_PUBLIC_SHOPIFY_API_KEY}`,
+    //         'client_secret': `${process.env.NEXT_PUBLIC_SHOPIFY_API_SECRET}`,
+    //         'grant_type': 'client_credentials'
+    //     })
+    // })
 
-    const store_name = await fetch('https://photo-optima.myshopify.com/admin/api/2024-04/shop.json', {
-        method: 'GET',
-        headers: {
-            'X-Shopify-Access-Token': `${access_token}`
-        }
-    })
+    // const { access_token } = await accessTokenResponse.json()
 
-    const { shop } = await store_name.json()
+    // const store_name = await fetch('https://photo-optima.myshopify.com/admin/api/2024-04/shop.json', {
+    //     method: 'GET',
+    //     headers: {
+    //         'X-Shopify-Access-Token': `${access_token}`
+    //     }
+    // })
 
-    if (!shop || !shop.domain) {
+    // const { shop } = await store_name.json()
+
+    if (!response.success) {
         return (
             <p>domain name is not available</p>
         )
@@ -50,13 +53,13 @@ const Page = async () => {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            storeName: `${shop.domain}`
+            storeName: `${response.success}`
         })
     })
 
     const store = await res.json();
 
-    if(store.data===null){
+    if (store.data === null) {
         return (
             <div>
                 ....store not available
@@ -64,11 +67,11 @@ const Page = async () => {
         )
     }
 
-    const getFileRenameSetting = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/filerename/${shop.domain}`);
+    const getFileRenameSetting = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/filerename/${response.success}`);
 
     const fileRenameSetting = await getFileRenameSetting.json();
 
-    const getAltRenameSetting = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/altrename/${shop.domain}`);
+    const getAltRenameSetting = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/altrename/${response.success}`);
 
     const altRenameSetting = await getAltRenameSetting.json();
 
@@ -82,12 +85,12 @@ const Page = async () => {
                         jpeg={store.data.jpeg}
                         png={store.data.png}
                         others={store.data.others}
-                        store_name={shop}
+                        store_name={response.success}
                         compressionType={store.data.compressionType}
                     />
                     <Separator />
                     <FileRenameSetting
-                        storename={shop}
+                        storename={response.success}
                         product_vendor={fileRenameSetting.filerename.product_vendor}
                         variant_title={fileRenameSetting.filerename.variant_title}
                         product_page_title={fileRenameSetting.filerename.product_page_title}
@@ -98,7 +101,7 @@ const Page = async () => {
                     />
                     <Separator />
                     <AltRenameSetting
-                        storename={shop}
+                        storename={response.success}
                         product_vendor={altRenameSetting.altrename.product_vendor}
                         variant_title={altRenameSetting.altrename.variant_title}
                         product_page_title={altRenameSetting.altrename.product_page_title}
