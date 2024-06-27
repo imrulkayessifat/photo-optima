@@ -15,7 +15,7 @@ export const useAutoCompression = ({shopifyAccessToken}:{shopifyAccessToken:stri
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
-                    'shopifyAccessToken':`${shopifyAccessToken}`,
+                    'Authorization':`${shopifyAccessToken}`,
                     'Shop':`${data.store_name}`
                 },
                 body: JSON.stringify(data)
