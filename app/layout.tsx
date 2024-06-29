@@ -33,7 +33,7 @@ export default async function RootLayout({
         <head>
           <meta name="shopify-api-key" content="0b77a1fb0b2de6c8915e1d2155b34163" />
           {/* eslint-disable-next-line @next/next/no-sync-scripts */}
-          <script src="https://cdn.shopify.com/shopifycloud/app-bridge.js" async></script>
+          <script src="https://cdn.shopify.com/shopifycloud/app-bridge.js"></script>
         </head>
         <body className={inter.className}>
           <QueryProvider>
