@@ -7,6 +7,10 @@ echo "Deployment started..."
 git pull origin main
 echo "New changes copied to server !"
 
+## remove package-lock
+echo "removing package lock"
+rm -rf package-lock.json
+
 echo "Installing Dependencies..."
 npm install --yes
 
