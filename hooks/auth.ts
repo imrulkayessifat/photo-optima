@@ -102,7 +102,9 @@ export function useVerifySession() {
 export function useSessionCheck() {
   const [verified, setVerified] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [shop, setShop] = useState<string>()
   const searchParams = useSearchParams();
+
 
   // todo: add the ability to check if the user is the owner and supply the authErrorType
 
@@ -113,10 +115,12 @@ export function useSessionCheck() {
       checkSession(searchParams.get("shop")!).then(() => {
         setVerified(true);
         setLoading(false);
+        setShop(searchParams.get("shop")!)
       });
     }
   }, [searchParams]);
 
+  console.log("session shop : ", shop)
   return {
     verified,
     loading,
