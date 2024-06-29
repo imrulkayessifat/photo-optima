@@ -15,6 +15,8 @@ export default async function Page({
 
   const response = await getShop();
 
+  console.log("response : ",response)
+
   const res = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/store`, {
     method: 'POST',
     headers: {

@@ -13,7 +13,8 @@ export const getShop = async () => {
             'client_id': `${client_id}`,
             'client_secret': `${client_secret}`,
             'grant_type': 'client_credentials'
-        })
+        }),
+        cache: 'no-store'
     })
 
 
@@ -28,7 +29,8 @@ export const getShop = async () => {
         headers: {
             'Content-Type': 'application/json',
             'X-Shopify-Access-Token': access_token
-        }
+        },
+        cache: 'no-store'
     })
 
     if (!store_data.ok) {
