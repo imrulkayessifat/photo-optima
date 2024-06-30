@@ -13,7 +13,7 @@ export const getShop = async () => {
     const client_id = process.env.SHOPIFY_CLIENT_ID;
     const client_secret = process.env.SHOPIFY_CLIENT_SECRET;
 
-    const response = await fetch(`https://${shopify_shop}/admin/oauth/access_token`, {
+    const response = await fetch(`https://${shopify_shop_name}/admin/oauth/access_token`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -33,7 +33,7 @@ export const getShop = async () => {
     }
     const { access_token } = await response.json();
 
-    const store_data = await fetch(`https://${shopify_shop}/admin/api/2024-04/shop.json`, {
+    const store_data = await fetch(`https://${shopify_shop_name}/admin/api/2024-04/shop.json`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
