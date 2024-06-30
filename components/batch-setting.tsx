@@ -19,21 +19,21 @@ import Loader from '@/components/loader';
 
 interface BatchSettingProps {
     shop: string;
-    access_token:string;
+    access_token: string;
 }
 
 const BatchSetting: React.FC<BatchSettingProps> = ({
     shop,
     access_token
 }) => {
-    console.log("batch",shop)
+    console.log("batch", shop)
     const [isPending, startTransition] = useTransition();
 
     const [shouldRedirect, setShouldRedirect] = useState(false);
 
-    const { data: store, isLoading } = useStoreData({ shop,access_token });
-    const { data: batch_compress_images_length, isLoading: isLoading1 } = getBatchCompressImageLength({ shop,access_token });
-    const { data: batch_restore_images_length, isLoading: isLoading2 } = getBatchRestoreImageLength({ shop,access_token });
+    const { data: store, isLoading } = useStoreData({ shop, access_token });
+    const { data: batch_compress_images_length, isLoading: isLoading1 } = getBatchCompressImageLength({ shop, access_token });
+    const { data: batch_restore_images_length, isLoading: isLoading2 } = getBatchRestoreImageLength({ shop, access_token });
 
     useEffect(() => {
         if (shouldRedirect) {
@@ -60,6 +60,8 @@ const BatchSetting: React.FC<BatchSettingProps> = ({
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `${access_token}`,
+                'Shop': `${shop}`
             },
             body: JSON.stringify({ store_name: store.name })
         })
@@ -74,6 +76,8 @@ const BatchSetting: React.FC<BatchSettingProps> = ({
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `${access_token}`,
+                'Shop': `${shop}`
             },
             body: JSON.stringify({ store_name: store.name })
         })
