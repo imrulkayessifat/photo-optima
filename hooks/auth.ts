@@ -116,13 +116,14 @@ export function useSessionCheck() {
       checkSession(searchParams.get("shop")!).then(() => {
         setVerified(true);
         setLoading(false);
-        if (searchParams.get("shop")) {
-          setCookie("shop", shop)
-        }
         setShop(searchParams.get("shop")!)
       });
     }
   }, [searchParams]);
+
+  if (shop !== undefined) {
+    setCookie("shop", shop)
+  }
 
   console.log("session shop : ", shop)
   return {
