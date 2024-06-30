@@ -1,6 +1,5 @@
-
 "use client"
-import { useAppBridge } from "@shopify/app-bridge-react";
+
 import {
   HttpLink,
   ApolloClient,
@@ -8,13 +7,6 @@ import {
   ApolloProvider as ApolloProviderClient,
 } from "@apollo/client";
 
-const config = {
-  // The client ID provided for your application in the Partner Dashboard.
-  apiKey: `${process.env.SHOPIFY_CLIENT_ID}`,
-  // The host of the specific shop that's embedding your app. This value is provided by Shopify as a URL query parameter that's appended to your application URL when your app is loaded inside the Shopify admin.
-  host: new URLSearchParams(location.search).get("host"),
-  forceRedirect: true
-};
 
 export default function ApolloProvider({
   children,
