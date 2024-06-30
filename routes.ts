@@ -9,9 +9,8 @@ export const publicRoutes = [
   "/help",
   "/plans",
   "/settings",
-  "/api/shop",
   "/api/graphql",
-  "/api/auth/callback"
+  
 ];
 
 /**
