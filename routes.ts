@@ -10,7 +10,7 @@ export const publicRoutes = [
   "/plans",
   "/settings",
   "/api/graphql",
-  
+  "/api/auth/callback"
 ];
 
 /**
