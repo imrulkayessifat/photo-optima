@@ -216,7 +216,7 @@ const FileRenameSetting: React.FC<FileRenameSettingProps> = ({
                         />
                     </div>
 
-                    <Button className="p-4 w-20" type="submit">Save</Button>
+                    <Button disabled={mutation.isPending} className="p-4 w-20" type="submit">Save</Button>
                 </form>
             </Form>
         </>
