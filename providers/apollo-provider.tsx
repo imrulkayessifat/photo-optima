@@ -26,8 +26,6 @@ export default function ApolloProvider({
     link: http,
   });
 
-  console.log("client",client)
-
   return (
     <ApolloProviderClient client={client}>{children}</ApolloProviderClient>
   );

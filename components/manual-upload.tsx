@@ -1,8 +1,5 @@
 "use client"
 
-import { useSearchParams } from 'next/navigation';
-
-
 import * as z from "zod"
 import { toast } from "sonner";
 import { useEffect, useTransition } from "react";
@@ -44,8 +41,6 @@ const ManualUpload: React.FC<ManualUploadProps> = ({
     storeName,
     plan
 }) => {
-    const searchParams = useSearchParams();
-    const shop = searchParams.get('shop');
 
     const [isPending, startTransition] = useTransition();
     const setImageStatus = useStore(state => state.setImageStatus);

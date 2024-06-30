@@ -58,12 +58,6 @@ const Navbar = () => {
                                     <span>Plans</span>
                                 </DropdownMenuItem>
                             </Link>
-                            <Link href={"/help"}>
-                                <DropdownMenuItem className="cursor-pointer">
-                                    <Keyboard className="mr-2 h-4 w-4" />
-                                    <span>Help</span>
-                                </DropdownMenuItem>
-                            </Link>
                         </DropdownMenuGroup>
                         <DropdownMenuSeparator />
                     </DropdownMenuContent>

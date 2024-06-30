@@ -2,7 +2,6 @@
 
 import { useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { getCookie } from 'cookies-next';
 
 import { Button } from "@/components/ui/button";
 import { useStore } from "@/hooks/compress-status";
