@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import Error from 'next/error';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function GET(req: NextApiRequest, res: NextApiResponse) {
   const { code, shop } = req.query as { code: string; shop: string };
 
   const accessTokenRequestUrl = `https://${shop}/admin/oauth/access_token`;
