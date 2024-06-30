@@ -2,12 +2,20 @@
 import { Suspense } from "react";
 import SessionProvider from "@/providers/session-provider";
 
+function SessionSuspense({ children }: { children: React.ReactNode }) {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            {children}
+        </Suspense>
+    );
+}
+
 export default function Providers({ children }: { children: React.ReactNode }) {
     return (
-        <Suspense>
+        <SessionSuspense>
             <SessionProvider>
                 {children}
             </SessionProvider>
-        </Suspense>
+        </SessionSuspense>
     );
 }
