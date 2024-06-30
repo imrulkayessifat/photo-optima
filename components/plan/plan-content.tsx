@@ -74,6 +74,8 @@ const PlanContext: React.FC<PlanContextProp> = ({
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `${access_token}`,
+                'Shop': `${shop}`
             },
             body: JSON.stringify({
                 plan: name,
