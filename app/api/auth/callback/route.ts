@@ -60,14 +60,14 @@ export async function GET(req: Request) {
     //   maxAge: 60 * 60 * 24 * 7,
     // });
 
-    // const response = NextResponse.redirect(redirectUrl);
-    // response.cookies.set("shopifySession", session.id, {
-    //   httpOnly: true,
-    //   sameSite: "lax",
-    //   secure: true,
-    //   expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7), // in 1 week
-    // });
-    return NextResponse.redirect(redirectUrl);
+    const response = NextResponse.redirect(redirectUrl);
+    response.cookies.set("shopifySession", session.id, {
+      httpOnly: true,
+      sameSite: "lax",
+      secure: true,
+      expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7), // in 1 week
+    });
+    return response;
   } catch (e: any) {
     console.warn(e);
     switch (true) {
