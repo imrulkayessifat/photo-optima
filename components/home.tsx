@@ -4,9 +4,6 @@ import { useEffect } from "react";
 import { redirect } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
 import { io } from "socket.io-client";
-import { gql } from "@apollo/client";
-import { useLazyQuery } from "@apollo/client";
-import { Button } from "./ui/button";
 
 import Navbar from "@/components/navbar";
 import ImageBox from "@/components/image/image-box";
@@ -32,23 +29,11 @@ interface HomePageProps {
     others: number;
 }
 
-const GET_SHOP = gql(`
-    #graphql
-    query getShop {
-      shop {
-        name
-      }
-    }
-  `);
-
 export const backend = io(`${process.env.NEXT_PUBLIC_BACKENDSERVER}`);
 export const mq = io(`${process.env.NEXT_PUBLIC_MQSERVER}`);
 
 const Home = ({ store, shopifyAccessToken }: { store: any, shopifyAccessToken: string }) => {
     const queryClient = useQueryClient();
-    const [getShop] = useLazyQuery(GET_SHOP, {
-        fetchPolicy: "network-only",
-    });
 
     useEffect(() => {
         backend.on('connect', () => {
@@ -83,11 +68,6 @@ const Home = ({ store, shopifyAccessToken }: { store: any, shopifyAccessToken: s
         }
     }, [queryClient])
 
-    const handleShop = async () => {
-        const { data, error } = await getShop();
-        console.log("graphql : ", data)
-    }
-
     return (
         <main>
             <Navbar />
@@ -97,9 +77,6 @@ const Home = ({ store, shopifyAccessToken }: { store: any, shopifyAccessToken: s
                     <AutoFileRename shopifyAccessToken={shopifyAccessToken} plan={store.plan} auto_file_rename={store.autoFileRename} store_name={store.name} />
                     <AutoAltRename shopifyAccessToken={shopifyAccessToken} plan={store.plan} auto_alt_rename={store.autoAltRename} store_name={store.name} />
                 </div>
-                <Button onClick={() => handleShop}>
-
-                </Button>
                 <ManualUpload
                     shopifyAccessToken={shopifyAccessToken}
                     plan={store.plan}

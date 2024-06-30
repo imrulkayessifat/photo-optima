@@ -13,9 +13,13 @@ export default async function Page({
   // we can perform some checks to see if the app has been installed and that it is still valid
   const { shop, host, hmac, embedded } = searchParams;
 
+  const nextApiGetShop = await fetch(`${process.env.HOST}/api/shop`);
+  const nextApiGetShopRes = await nextApiGetShop.json();
+  console.log("nextApiGetShopRes", nextApiGetShopRes)
+
   const response = await getShop();
 
-  console.log("response : ",response)
+  console.log("response : ", response)
 
   const res = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/store`, {
     method: 'POST',
