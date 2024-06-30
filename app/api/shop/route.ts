@@ -6,5 +6,5 @@ export async function GET(request: Request) {
     console.log("next api host", host)
     console.log("next api shop",shop)
 
-    return Response.json({ data: '' })
+    return Response.json({ data: shop })
 }
