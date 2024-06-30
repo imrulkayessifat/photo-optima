@@ -3,6 +3,7 @@ import Home from "@/components/home";
 import { ExitClient } from "@/components/exit-client";
 import { getShop } from "@/actions/get-shop";
 
+
 export default async function Page({
   params,
   searchParams,

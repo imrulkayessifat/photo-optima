@@ -11,9 +11,9 @@ export default function ApolloProvider({
 }: {
   children: React.ReactNode;
 }) {
-  // const app = useAppBridge();
-  // const token = app.idToken();
-  // console.log("Token: ", token);
+  const app = useAppBridge();
+  const token = app.idToken();
+  console.log("Token: ", token);
   const http = new HttpLink({
     uri: `/api/graphql`,
     fetch: fetch,
@@ -23,6 +23,8 @@ export default function ApolloProvider({
     cache: new InMemoryCache(),
     link: http,
   });
+
+  console.log("client",client)
 
   return (
     <ApolloProviderClient client={client}>{children}</ApolloProviderClient>
