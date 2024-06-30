@@ -2,6 +2,7 @@ import { checkSession } from "@/actions/shopify-session";
 import { useAppBridge } from "@shopify/app-bridge-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { setCookie } from "cookies-next";
 
 interface VerifyResponse {
   status: "success" | "error";
@@ -121,8 +122,10 @@ export function useSessionCheck() {
   }, [searchParams]);
 
   console.log("session shop : ", shop)
+  setCookie("shop",shop);
   return {
     verified,
+    shop,
     loading,
   };
 }

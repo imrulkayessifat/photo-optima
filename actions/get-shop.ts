@@ -1,5 +1,13 @@
 "use server"
+
+import { cookies } from "next/headers";
+
+// import { useSessionCheck } from "@/hooks/auth";
 export const getShop = async () => {
+    // const { shop:client_shop } = useSessionCheck();
+    // console.log("client shop : ",client_shop)
+    const cookieStore = cookies();
+    console.log("get shop in server action : ",cookieStore.get("shop"))
     const shopify_shop = process.env.SHOPIFY_STORE_DOMAIN;
     const client_id = process.env.SHOPIFY_CLIENT_ID;
     const client_secret = process.env.SHOPIFY_CLIENT_SECRET;
