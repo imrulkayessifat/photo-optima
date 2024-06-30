@@ -41,6 +41,7 @@
     "axios": "^1.6.7",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
+    "cookies-next": "^4.2.1",
     "event-source-polyfill": "^1.0.31",
     "install": "^0.13.0",
     "lucide-react": "^0.357.0",
