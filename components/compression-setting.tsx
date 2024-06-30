@@ -139,7 +139,7 @@ const CompressionSetting: React.FC<CompressionSettingProp> = ({
                             </FormItem>
                         )}
                     />
-                    <Button disabled={compressionType === state} type="submit">
+                    <Button disabled={compressionType === state || mutation.isPending} type="submit">
                         Save
                     </Button>
                 </form>
