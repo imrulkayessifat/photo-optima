@@ -8,7 +8,8 @@ export const publicRoutes = [
   "/batch",
   "/help",
   "/plans",
-  "/settings"
+  "/settings",
+  "/api/shop"
 ];
 
 /**
