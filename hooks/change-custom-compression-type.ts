@@ -2,14 +2,14 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 interface CustomCompressionTypeData {
-    store_name:string;
+    store_name: string;
     jpeg: number;
     png: number;
     others: number;
 }
 
 
-export const changeCustomCompressionType = () => {
+export const changeCustomCompressionType = ({ shopifyAccessToken }: { shopifyAccessToken: string }) => {
     const queryClient = useQueryClient();
 
     const mutation = useMutation({
@@ -18,6 +18,8 @@ export const changeCustomCompressionType = () => {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `${shopifyAccessToken}`,
+                    'Shop': `${data.store_name}`
                 },
                 body: JSON.stringify(data)
             })

@@ -68,11 +68,21 @@ const Page = async () => {
         )
     }
 
-    const getFileRenameSetting = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/filerename/${response.success}`);
+    const getFileRenameSetting = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/filerename/${response.success}`, {
+        headers: {
+            'Authorization': `${response.access_token}`,
+            'Shop': `${response.success}`
+        }
+    });
 
     const fileRenameSetting = await getFileRenameSetting.json();
 
-    const getAltRenameSetting = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/altrename/${response.success}`);
+    const getAltRenameSetting = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/altrename/${response.success}`, {
+        headers: {
+            'Authorization': `${response.access_token}`,
+            'Shop': `${response.success}`
+        }
+    });
 
     const altRenameSetting = await getAltRenameSetting.json();
 
@@ -83,6 +93,7 @@ const Page = async () => {
                 <Separator />
                 <div className='flex flex-col gap-2'>
                     <CompressionSetting
+                        shopifyAccessToken={response.access_token}
                         jpeg={store.data.jpeg}
                         png={store.data.png}
                         others={store.data.others}
@@ -91,6 +102,7 @@ const Page = async () => {
                     />
                     <Separator />
                     <FileRenameSetting
+                        shopifyAccessToken={response.access_token}
                         storename={response.success}
                         product_vendor={fileRenameSetting.filerename.product_vendor}
                         variant_title={fileRenameSetting.filerename.variant_title}
@@ -102,6 +114,7 @@ const Page = async () => {
                     />
                     <Separator />
                     <AltRenameSetting
+                        shopifyAccessToken={response.access_token}
                         storename={response.success}
                         product_vendor={altRenameSetting.altrename.product_vendor}
                         variant_title={altRenameSetting.altrename.variant_title}

@@ -7,7 +7,7 @@ interface CompressionTypeData {
 }
 
 
-export const changeCompressionType = () => {
+export const changeCompressionType = ({shopifyAccessToken}:{shopifyAccessToken:string}) => {
     const queryClient = useQueryClient();
 
     const mutation = useMutation({
@@ -16,6 +16,8 @@ export const changeCompressionType = () => {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization':`${shopifyAccessToken}`,
+                    'Shop':`${data.store_name}`
                 },
                 body: JSON.stringify(data)
             })

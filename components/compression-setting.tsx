@@ -29,6 +29,7 @@ const FormSchema = z.object({
 })
 
 interface CompressionSettingProp {
+    shopifyAccessToken: string;
     jpeg: number;
     png: number;
     others: number;
@@ -37,6 +38,7 @@ interface CompressionSettingProp {
 }
 
 const CompressionSetting: React.FC<CompressionSettingProp> = ({
+    shopifyAccessToken,
     jpeg,
     png,
     others,
@@ -44,7 +46,7 @@ const CompressionSetting: React.FC<CompressionSettingProp> = ({
     compressionType
 }) => {
 
-    const mutation = changeCompressionType()
+    const mutation = changeCompressionType({ shopifyAccessToken })
 
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
@@ -120,6 +122,7 @@ const CompressionSetting: React.FC<CompressionSettingProp> = ({
                                                             </FormLabel>
 
                                                             <CustomCompression
+                                                                shopifyAccessToken={shopifyAccessToken}
                                                                 store_name={store_name}
                                                                 jpeg={jpeg}
                                                                 png={png}

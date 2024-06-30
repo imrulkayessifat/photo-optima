@@ -26,6 +26,7 @@ const FormSchema = z.object({
 });
 
 interface AltRenameSettingProps {
+    shopifyAccessToken:string;
     storename: string;
     product_vendor: boolean;
     variant_title: boolean;
@@ -37,6 +38,7 @@ interface AltRenameSettingProps {
 }
 
 const AltRenameSetting: React.FC<AltRenameSettingProps> = ({
+    shopifyAccessToken,
     storename,
     product_vendor,
     variant_title,
@@ -47,7 +49,7 @@ const AltRenameSetting: React.FC<AltRenameSettingProps> = ({
     product_sku
 }) => {
 
-    const mutation = useAltRenameSetting();
+    const mutation = useAltRenameSetting({shopifyAccessToken});
 
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),

@@ -12,7 +12,7 @@ interface UseAltRenameSettingProps {
     product_sku: boolean;
 }
 
-export const useAltRenameSetting = () => {
+export const useAltRenameSetting = ({shopifyAccessToken}:{shopifyAccessToken:string}) => {
     const queryClient = useQueryClient();
 
     const mutation = useMutation({
@@ -21,6 +21,8 @@ export const useAltRenameSetting = () => {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization':`${shopifyAccessToken}`,
+                    'Shop':`${data.storename}`
                 },
                 body: JSON.stringify(data)
             })

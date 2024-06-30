@@ -26,6 +26,7 @@ const FormSchema = z.object({
 });
 
 interface FileRenameSettingProps {
+    shopifyAccessToken:string;
     storename: string;
     product_vendor: boolean;
     variant_title: boolean;
@@ -37,6 +38,7 @@ interface FileRenameSettingProps {
 }
 
 const FileRenameSetting: React.FC<FileRenameSettingProps> = ({
+    shopifyAccessToken,
     storename,
     product_vendor,
     variant_title,
@@ -47,7 +49,7 @@ const FileRenameSetting: React.FC<FileRenameSettingProps> = ({
     product_sku
 }) => {
 
-    const mutation = useFileRenameSetting();
+    const mutation = useFileRenameSetting({shopifyAccessToken});
 
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
