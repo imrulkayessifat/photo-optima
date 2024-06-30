@@ -64,12 +64,6 @@ const Navbar = () => {
                                     <span>Help</span>
                                 </DropdownMenuItem>
                             </Link>
-                            <Link href={"/login"}>
-                                <DropdownMenuItem className="cursor-pointer">
-                                    <Keyboard className="mr-2 h-4 w-4" />
-                                    <span>Login</span>
-                                </DropdownMenuItem>
-                            </Link>
                         </DropdownMenuGroup>
                         <DropdownMenuSeparator />
                     </DropdownMenuContent>
