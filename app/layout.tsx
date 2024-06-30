@@ -31,9 +31,11 @@ export default function RootLayout({
         <script src="https://cdn.shopify.com/shopifycloud/app-bridge.js"></script>
       </head>
       <body className={inter.className}>
-        <QueryProvider>
-          {children}
-        </QueryProvider>
+        <Providers>
+          <QueryProvider>
+            {children}
+          </QueryProvider>
+        </Providers>
         <Toaster />
         <Script
           src="https://cdn.shopify.com/shopifycloud/app-bridge.js"
