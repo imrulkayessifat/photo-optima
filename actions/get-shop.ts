@@ -1,9 +1,9 @@
 "use server"
 
 export const getShop = async () => {
-    // const shopData = await fetch(`${process.env.HOST}/api/shop`)
-    // const shopDataRes = await shopData.json()
-    // console.log("shopData : ",shopDataRes)
+    const shopData = await fetch(`${process.env.HOST}/api/shop`)
+    const shopDataRes = await shopData.json()
+    console.log("shopData : ",shopDataRes)
     const shopify_shop = process.env.SHOPIFY_STORE_DOMAIN;
     const client_id = process.env.SHOPIFY_CLIENT_ID;
     const client_secret = process.env.SHOPIFY_CLIENT_SECRET;
