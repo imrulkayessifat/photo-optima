@@ -122,10 +122,10 @@ export function useSessionCheck() {
   }, [searchParams]);
 
   if (shop !== undefined) {
+    console.log("session shop : ", shop)
     setCookie("shop", shop)
   }
 
-  console.log("session shop : ", shop)
   return {
     verified,
     shop,
