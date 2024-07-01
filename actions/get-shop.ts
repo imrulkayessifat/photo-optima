@@ -1,6 +1,12 @@
 "use server"
 
+import { cookies } from "next/headers";
+
 export const getShop = async () => {
+
+    const cookieStore = cookies()
+
+    console.log("shop in get shop : ",cookieStore.get("shop"))
 
     const shopify_shop = process.env.SHOPIFY_STORE_DOMAIN;
     const client_id = process.env.SHOPIFY_CLIENT_ID;
