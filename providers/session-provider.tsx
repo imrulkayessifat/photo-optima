@@ -14,15 +14,15 @@ export default function SessionProvider({
   //   verified,
   //   loading
   // } = useVerifySession();
-  const { verified, loading } = useSessionCheck();
+  const { verified, loading,shop } = useSessionCheck();
   const authRedirect = useAuthRedirect();
 
   useEffect(() => {
-    if (!verified && !loading) {
+    if (!verified && !loading && !shop) {
       console.log("redirecting to auth");
       authRedirect();
     }
-  }, [verified, loading, authRedirect]);
+  }, [verified, loading,shop, authRedirect]);
 
   // if (!verified || loading) {
   //   shopify.loading(true);
