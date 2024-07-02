@@ -1,8 +1,11 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
+import {jwtDecode} from "jwt-decode"
 
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
     const requestHeaders = new Headers(request.headers)
-    console.log("request : ",requestHeaders.get("authorization"))
+    const token = requestHeaders.get("authorization")
+    console.log("token : ",jwtDecode(token as any));
+
 }
