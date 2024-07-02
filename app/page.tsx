@@ -23,7 +23,7 @@ export default async function Page({
   //   )
   // }
 
-  console.log(cookies().get("store"))
+  console.log("store : ",cookies().get("store"))
 
 
   // const response = await getShop();
