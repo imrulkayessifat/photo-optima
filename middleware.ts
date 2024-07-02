@@ -52,7 +52,7 @@ export function middleware(request: NextRequest, response: NextResponse) {
         applySetCookie(request, res);
         return res;
     }
-
+    return null;
 }
 
 export const config = {
