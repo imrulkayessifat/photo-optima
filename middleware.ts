@@ -7,7 +7,7 @@ export function middleware(request: NextRequest) {
     const requestHeaders = new Headers(request.headers)
     const token = requestHeaders.get("authorization")
     console.log("token", token)
-    if (!token) {
+    if (token) {
         console.log("decode token : ", jwtDecode(token as string));
     }
 
