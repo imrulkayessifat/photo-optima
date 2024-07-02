@@ -18,7 +18,7 @@ export default async function Page({
   const cookieStore = cookies();
 
   if (shop) {
-    setShop(shop as string);
+    await setShop(shop as string);
   }
 
   if (!cookieStore.get("shop")) {
