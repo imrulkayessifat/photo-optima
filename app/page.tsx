@@ -16,14 +16,13 @@ export default async function Page({
   // we can perform some checks to see if the app has been installed and that it is still valid
   const { shop, host, hmac, embedded } = searchParams;
 
+  if (!cookies().get("store")) {
+    return (
+      <ReloadWindow />
+    )
+  }
 
-  // if (!cookieStore.get("shop")) {
-  //   return (
-  //     <ReloadWindow />
-  //   )
-  // }
-
-  console.log("store : ",cookies().get("store"))
+  console.log("store : ", cookies().get("store"))
 
 
   // const response = await getShop();

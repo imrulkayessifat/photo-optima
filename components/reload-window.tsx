@@ -6,11 +6,11 @@ import { useRouter } from 'next/router'
 const ReloadWindow = () => {
     const router = useRouter();
 
-    console.log("router",router)
+    console.log("router", router)
 
-    useEffect(()=>{
+    useEffect(() => {
         router.reload()
-    },[])
+    }, [router])
     return (
         <div></div>
     )
