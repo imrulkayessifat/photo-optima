@@ -26,6 +26,8 @@ export function addHandlers() {
 }
 
 export async function registerWebhooks(session: Session) {
+
+  console.log("registerWebhooks :",session)
   addHandlers();
   const responses = await shopify.webhooks.register({ session });
   console.log("Webhooks added", responses);
