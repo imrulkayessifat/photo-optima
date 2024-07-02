@@ -3,7 +3,8 @@ import Home from "@/components/home";
 import { ExitClient } from "@/components/exit-client";
 import { getShop } from "@/actions/get-shop";
 import { cookies } from "next/headers";
-import SetShop from "@/components/set-shop";
+import ReloadWindow from "@/components/reload-window";
+import { setShop } from "@/actions/set-shop";
 
 export default async function Page({
   params,
@@ -17,12 +18,12 @@ export default async function Page({
   const cookieStore = cookies();
 
   if (shop) {
-    cookieStore.set("shop", shop as string)
+    setShop(shop as string);
   }
 
   if (!cookieStore.get("shop")) {
     return (
-      <SetShop />
+      <ReloadWindow />
     )
   }
 

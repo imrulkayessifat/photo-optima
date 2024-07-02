@@ -3,7 +3,7 @@
 import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-const SetShop = () => {
+const ReloadWindow = () => {
     const router = useRouter();
 
     console.log("router",router)
@@ -16,4 +16,4 @@ const SetShop = () => {
     )
 }
 
-export default SetShop
+export default ReloadWindow;
