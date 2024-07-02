@@ -23,7 +23,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  console.log("headers", headers)
+  console.log("headers", headers())
+  console.log("headers", headers().get('store'))
   return (
     <html lang="en">
       <head>
