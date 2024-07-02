@@ -4,6 +4,7 @@ import { AppInstallations } from "@/lib/db/app-installations";
 import { loadSession } from "../db/session-storage";
 import shopify from "@/lib/shopify/initialize-context";
 import { verifyAuth } from "@/lib/shopify/verify";
+import { cookies } from "next/headers";
 
 const TEST_GRAPHQL_QUERY = `
 {
@@ -32,7 +33,7 @@ export function serverSideRedirect(
     shop: sanitizedShop,
     host,
   });
-  console.log("oauth",host)
+  console.log("oauth", host)
   if (embedded === "1") {
     return `${process.env.HOST}/api/auth?${queryParams.toString()}`;
   } else {
@@ -93,8 +94,14 @@ export async function performChecks(
 ) {
   "use server"
 
+  const cookieStore = cookies()
+
+  if (shop) {
+    cookieStore.set("shop", shop)
+  }
+
   const isInstalled = await checkInstallation(shop);
-  console.log("shopify",host)
+  console.log("shopify", host)
   if (!isInstalled) {
     return serverSideRedirect(shop, host, embedded);
   }
