@@ -121,11 +121,6 @@ export function useSessionCheck() {
     }
   }, [searchParams]);
 
-  if (shop !== undefined) {
-    console.log("session shop : ", shop)
-    setCookie("shop", shop)
-  }
-
   return {
     verified,
     shop,
