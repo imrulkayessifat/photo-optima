@@ -4,7 +4,6 @@ import { ExitClient } from "@/components/exit-client";
 import { getShop } from "@/actions/get-shop";
 import { cookies } from "next/headers";
 import ReloadWindow from "@/components/reload-window";
-import { setShop } from "@/actions/set-shop";
 import { headers } from "next/headers";
 
 export default async function Page({
@@ -17,9 +16,6 @@ export default async function Page({
   // we can perform some checks to see if the app has been installed and that it is still valid
   const { shop, host, hmac, embedded } = searchParams;
 
-  // if (shop) {
-  //   await setShop(shop as string);
-  // }
 
   // if (!cookieStore.get("shop")) {
   //   return (
