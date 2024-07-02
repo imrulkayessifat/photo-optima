@@ -4,7 +4,7 @@ import { ExitClient } from "@/components/exit-client";
 import { getShop } from "@/actions/get-shop";
 import { cookies } from "next/headers";
 import ReloadWindow from "@/components/reload-window";
-import { headers } from "next/headers";
+
 
 export default async function Page({
   params,
@@ -23,7 +23,6 @@ export default async function Page({
   //   )
   // }
 
-  console.log("store : ",cookies().get("store"))
 
 
   // const response = await getShop();

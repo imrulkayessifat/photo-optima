@@ -4,6 +4,7 @@ import Script from "next/script";
 import { QueryProvider } from "@/providers/query-provider";
 import Providers from "@/providers/providers";
 import "./globals.css";
+import { headers } from "next/headers";
 
 import { Toaster } from "@/components/ui/sonner"
 
@@ -22,7 +23,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
+  console.log("headers", headers)
   return (
     <html lang="en">
       <head>
