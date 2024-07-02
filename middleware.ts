@@ -49,10 +49,9 @@ export function middleware(request: NextRequest, response: NextResponse) {
         console.log("decode token : ", jwtDecode(token as string));
         const shop: TokenProps = jwtDecode(token as string)
         res.cookies.set("store", shop.dest)
-
+        applySetCookie(request, res);
+        return res;
     }
-    applySetCookie(request, res);
-    return res;
 
 }
 
