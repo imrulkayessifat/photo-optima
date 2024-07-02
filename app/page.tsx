@@ -27,10 +27,7 @@ export default async function Page({
   //   )
   // }
 
-  if(cookies().has("shop") || headers().has("shop1")){
-    console.log("cookie : ", cookies().get("shop"))
-    console.log("header : ", headers().get("shop1"))
-  }
+  console.log(cookies().get("store"))
 
 
   // const response = await getShop();

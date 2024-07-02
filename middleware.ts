@@ -26,7 +26,7 @@ export function middleware(request: NextRequest) {
     if (token) {
         console.log("decode token : ", jwtDecode(token as string));
         const shop: TokenProps = jwtDecode(token as string)
-        response.cookies.set("shop", shop.dest)
+        response.cookies.set("store", shop.dest)
 
     }
     return response;
