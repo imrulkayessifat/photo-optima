@@ -13,8 +13,16 @@ import FileRenameSetting from "@/components/file-rename-setting";
 import AltRenameSetting from "@/components/alt-rename-setting";
 import { Separator } from "@/components/ui/separator"
 import { getShop } from "@/actions/get-shop";
+import { cookies } from "next/headers";
+import PushMain from "@/components/push-main";
 
 const Page = async () => {
+
+    if (!cookies().get("shop")) {
+        return (
+            <PushMain />
+        )
+    }
 
     const response = await getShop();
 
