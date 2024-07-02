@@ -6,7 +6,8 @@ import {jwtDecode} from "jwt-decode"
 export function middleware(request: NextRequest) {
     const requestHeaders = new Headers(request.headers)
     const token = requestHeaders.get("authorization")
-    console.log("token : ",token)
-    // console.log("decode token : ",jwtDecode(token as string));
+    if(!token){
+        console.log("decode token : ",jwtDecode(token as string));
+    }
 
 }
