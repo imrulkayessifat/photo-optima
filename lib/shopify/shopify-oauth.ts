@@ -4,7 +4,6 @@ import { AppInstallations } from "@/lib/db/app-installations";
 import { loadSession } from "../db/session-storage";
 import shopify from "@/lib/shopify/initialize-context";
 import { verifyAuth } from "@/lib/shopify/verify";
-import { cookies } from "next/headers";
 
 const TEST_GRAPHQL_QUERY = `
 {
@@ -93,12 +92,6 @@ export async function performChecks(
   embedded: string,
 ) {
   "use server"
-
-  const cookieStore = cookies()
-
-  if (shop) {
-    cookieStore.set("shop", shop)
-  }
 
   const isInstalled = await checkInstallation(shop);
   console.log("shopify", host)
