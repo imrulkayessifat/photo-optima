@@ -5,6 +5,7 @@ import { getShop } from "@/actions/get-shop";
 import { cookies } from "next/headers";
 import ReloadWindow from "@/components/reload-window";
 import { setShop } from "@/actions/set-shop";
+import { headers } from "next/headers";
 
 export default async function Page({
   params,
@@ -26,7 +27,11 @@ export default async function Page({
   //   )
   // }
 
-  console.log("page : ", cookies().get("shop"))
+  if(cookies().has("shop") || headers().has("shop1")){
+    console.log("cookie : ", cookies().get("shop"))
+    console.log("header : ", headers().get("shop1"))
+  }
+
 
   // const response = await getShop();
 

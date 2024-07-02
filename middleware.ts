@@ -20,11 +20,15 @@ interface TokenProps {
 export function middleware(request: NextRequest) {
     const requestHeaders = new Headers(request.headers)
     const token = requestHeaders.get("authorization")
-    console.log("token", token)
+    let response = NextResponse.next()
+    
+
     if (token) {
         console.log("decode token : ", jwtDecode(token as string));
         const shop: TokenProps = jwtDecode(token as string)
-        cookies().set("shop", shop.dest)
+        response.cookies.set("shop", shop.dest)
+
     }
+    return response;
 
 }
