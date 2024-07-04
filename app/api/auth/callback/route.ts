@@ -38,7 +38,11 @@ export async function GET(req: Request) {
 
     await shopify.webhooks.register({ session });
 
-    const sanitizedHost = shopify.utils.sanitizeHost(host || "");
+    if(!host){
+      throw new Error("No host provided");
+    }
+
+    const sanitizedHost = shopify.utils.sanitizeHost(host);
 
     console.log("sanitizedHost :", sanitizedHost)
     if (!host || host == null) {

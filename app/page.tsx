@@ -56,9 +56,9 @@ export default async function Page({
     embedded as string,
   );
 
-  // if (redirectUri) {
-  //   return <ExitClient redirectUri={redirectUri} />;
-  // }
+  if (redirectUri) {
+    return <ExitClient redirectUri={redirectUri} />;
+  }
 
 
   return (
