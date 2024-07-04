@@ -1,13 +1,14 @@
 "use client";
 
 import React, { useEffect } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter,usePathname } from 'next/navigation'
 
 const PushMain = () => {
     const router = useRouter();
+    const pathName = usePathname();
 
     useEffect(() => {
-        router.push('/')
+        router.push(pathName)
     }, [router])
     return (
         <div>PushMain</div>
