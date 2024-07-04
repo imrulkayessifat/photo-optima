@@ -52,6 +52,10 @@ export async function GET(req: Request) {
 
     console.log("sanitizedHost : ",sanitizedHost)
 
+    if (!sanitizedHost) {
+      throw new Error("Received invalid host argument");
+    }
+
     let redirectUrl = `/?shop=${session.shop}&host=${encodeURIComponent(sanitizedHost!)}`;
     console.log("redirectUrl", redirectUrl)
     if (shopify.config.isEmbeddedApp) {
