@@ -48,7 +48,9 @@ export async function GET(req: Request) {
     // console.log("sanitizedHost", sanitizedHost)
 
     console.log("callback api host : ",host)
-    const sanitizedHost = shopify.utils.sanitizeHost(host || "");
+    const sanitizedHost = shopify.utils.sanitizeHost(host);
+
+    console.log("sanitizedHost : ",sanitizedHost)
 
     let redirectUrl = `/?shop=${session.shop}&host=${encodeURIComponent(sanitizedHost!)}`;
     console.log("redirectUrl", redirectUrl)
