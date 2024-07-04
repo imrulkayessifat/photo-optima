@@ -18,12 +18,6 @@ import PushMain from "@/components/push-main";
 
 const Page = async () => {
 
-    if (!cookies().get("shop")) {
-        return (
-            <PushMain />
-        )
-    }
-
     const response = await getShop();
 
     // const accessTokenResponse = await fetch(`https://${process.env.SHOPIFY_STORE_DOMAIN}/admin/oauth/access_token`, {
