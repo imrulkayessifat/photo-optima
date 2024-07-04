@@ -6,8 +6,6 @@ import { useRouter } from 'next/navigation'
 const ReloadWindow = () => {
     const router = useRouter();
 
-    console.log("router", router)
-
     useEffect(() => {
         router.refresh()
     }, [router])
