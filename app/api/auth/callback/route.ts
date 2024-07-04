@@ -17,8 +17,6 @@ export async function GET(req: Request) {
   const shop = url.searchParams.get("shop");
   const host = url.searchParams.get("host");
 
-  console.log("host", host)
-
   // todo: validate hmac
 
   if (!shop) {
@@ -40,21 +38,14 @@ export async function GET(req: Request) {
 
     await shopify.webhooks.register({ session });
 
+    const sanitizedHost = shopify.utils.sanitizeHost(host || "");
+
+    console.log("sanitizedHost :", sanitizedHost)
     if (!host || host == null) {
       return new NextResponse("Missing host parameter", { status: 400 });
     }
 
-    const sanitizedHost = Buffer.from(host, 'base64').toString('utf-8');
-    console.log("sanitizedHost", sanitizedHost)
-
-    if (!sanitizedHost) {
-      throw new Error("Received invalid host argument");
-    }
-
-    let redirectUrl = `/?shop=${session.shop}&host=${encodeURIComponent(host)}`;
-    console.log("redirectUrl", redirectUrl)
-
-    console.log("is embeddedApp", shopify.config.isEmbeddedApp)
+    let redirectUrl = `/?shop=${session.shop}&host=${encodeURIComponent(sanitizedHost!)}`;
     if (shopify.config.isEmbeddedApp) {
       redirectUrl = await shopify.auth.getEmbeddedAppUrl({
         rawRequest: req,
@@ -64,7 +55,7 @@ export async function GET(req: Request) {
 
     return NextResponse.redirect(redirectUrl);
   } catch (e: any) {
-    console.warn("callback api error :",e);
+    console.warn("call back api error : ", e);
     switch (true) {
       case e instanceof InvalidOAuthError:
         return new NextResponse(e.message, { status: 403 });
@@ -76,4 +67,6 @@ export async function GET(req: Request) {
         return new NextResponse("An error occurred", { status: 500 });
     }
   }
+
+
 }
