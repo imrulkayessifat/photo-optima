@@ -56,5 +56,5 @@ export function middleware(request: NextRequest, response: NextResponse) {
 }
 
 export const config = {
-  matcher: ['/', '/batch'],
+  matcher: ['/', '/batch','/plans','/settings'],
 }

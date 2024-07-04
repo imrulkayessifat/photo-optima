@@ -3,6 +3,12 @@ import PlanContext from "@/components/plan/plan-content";
 import { cookies } from "next/headers";
 import PushMain from "@/components/push-main";
 const Page = async () => {
+    if (!cookies().get("shop")) {
+        return (
+            <PushMain />
+        )
+    }
+
     const response = await getShop();
     
 
