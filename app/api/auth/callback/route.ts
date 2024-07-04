@@ -46,33 +46,25 @@ export async function GET(req: Request) {
 
     const sanitizedHost = Buffer.from(host, 'base64').toString('utf-8');
     console.log("sanitizedHost", sanitizedHost)
-    
+
     if (!sanitizedHost) {
       throw new Error("Received invalid host argument");
     }
 
     let redirectUrl = `/?shop=${session.shop}&host=${encodeURIComponent(host)}`;
     console.log("redirectUrl", redirectUrl)
+
+    console.log("is embeddedApp", shopify.config.isEmbeddedApp)
     if (shopify.config.isEmbeddedApp) {
       redirectUrl = await shopify.auth.getEmbeddedAppUrl({
         rawRequest: req,
         rawResponse: new NextResponse(),
       });
     }
-    // cookies().set("shop", session.shop, {
-    //   maxAge: 60 * 60 * 24 * 7,
-    // });
 
-    const response = NextResponse.redirect(redirectUrl);
-    response.cookies.set("shopifySession", session.id, {
-      httpOnly: true,
-      sameSite: "lax",
-      secure: true,
-      expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7), // in 1 week
-    });
-    return response;
+    return NextResponse.redirect(redirectUrl);
   } catch (e: any) {
-    console.warn(e);
+    console.warn("callback api error :",e);
     switch (true) {
       case e instanceof InvalidOAuthError:
         return new NextResponse(e.message, { status: 403 });
