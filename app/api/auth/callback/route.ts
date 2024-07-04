@@ -44,14 +44,9 @@ export async function GET(req: Request) {
       return new NextResponse("Missing host parameter", { status: 400 });
     }
 
-    // const sanitizedHost = Buffer.from(host || '', 'base64').toString('utf-8');
-    // console.log("sanitizedHost", sanitizedHost)
-
-    console.log("callback api host : ",host)
-    const sanitizedHost = shopify.utils.sanitizeHost(host);
-
-    console.log("sanitizedHost : ",sanitizedHost)
-
+    const sanitizedHost = Buffer.from(host, 'base64').toString('utf-8');
+    console.log("sanitizedHost", sanitizedHost)
+    
     if (!sanitizedHost) {
       throw new Error("Received invalid host argument");
     }
