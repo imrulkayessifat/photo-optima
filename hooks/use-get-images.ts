@@ -26,9 +26,9 @@ export const useGetImages = ({ storeName, shopifyAccessToken }: UseGetImagesProp
         },
         // refetchInterval: allowBatchCompress === true || allowBatchRestore === true || autoCompression === true || autoFileRename === true || autoAltRename === true ? 2000 : undefined
         // refetchInterval:5000,
-        refetchOnWindowFocus: true,
-        refetchOnReconnect: true,
-        refetchOnMount: true,
+        // refetchOnWindowFocus: true,
+        // refetchOnReconnect: true,
+        // refetchOnMount: true,
         // queryFn:getEventStreamContent,
         // retry:1
     })
