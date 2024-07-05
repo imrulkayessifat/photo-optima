@@ -43,6 +43,8 @@ export default async function Page({
 
   const { data } = await res.json();
 
+  console.log("debug null plan",data)
+
   if (!shop || !host) {
     return <div>
       <Home shopifyAccessToken={response.access_token} store={data} />
