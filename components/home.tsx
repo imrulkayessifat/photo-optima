@@ -36,35 +36,32 @@ const Home = ({ store, shopifyAccessToken }: { store: any, shopifyAccessToken: s
     const queryClient = useQueryClient();
 
     useEffect(() => {
-        backend.on('connect', () => {
+
+        const handleBackendConnect = () => {
             console.log('connecting to backend server')
-        })
+        }
 
-        mq.on('connect', () => {
-            console.log('connecting to mq server')
-        })
+        const handleMqConnect = () => {
+            console.log('connecting to mq server');
+        }
 
-        backend.on('image_model', () => {
-            console.log('backend event')
+        const handleImageModelEvent = () => {
+            console.log('image_model event received')
             queryClient.invalidateQueries({ queryKey: ["images"] })
-            // queryClient.invalidateQueries({ queryKey: ["getBatchRestoreImageLength"] })
-            // queryClient.invalidateQueries({ queryKey: ["getBatchCompressImageLength"] })
-            // queryClient.invalidateQueries({queryKey:['getBatchCompressImageLength']})
-        })
+        }
 
-        mq.on('image_model', () => {
-            console.log('mq event')
-            queryClient.invalidateQueries({ queryKey: ["images"] })
-            // queryClient.invalidateQueries({ queryKey: ["getBatchRestoreImageLength"] })
-            // queryClient.invalidateQueries({ queryKey: ["getBatchCompressImageLength"] })
-        })
+        backend.on('connect',handleBackendConnect)
+        backend.on('image_model',handleImageModelEvent)
+
+        mq.on('connect', handleMqConnect)
+        mq.on('image_model',handleImageModelEvent)
 
         return () => {
-            backend.off('connect')
-            backend.off('image_model')
+            backend.off('connect',handleBackendConnect)
+            backend.off('image_model',handleImageModelEvent)
 
-            mq.off('connect')
-            mq.off('image_model')
+            mq.off('connect',handleMqConnect)
+            mq.off('image_model',handleImageModelEvent)
         }
     }, [queryClient])
 
