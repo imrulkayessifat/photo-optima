@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { uploadFile } from '@uploadcare/upload-client'
 
-export const useUploadImage = () => {
+export const useUploadImage = ({ storeName }: { storeName: string }) => {
     const queryClient = useQueryClient();
 
     const mutation = useMutation({
@@ -31,7 +31,7 @@ export const useUploadImage = () => {
                     store: 'auto',
                     metadata: {
                         subsystem: 'js-client',
-                        pet: 'NOTCOMPRESSED'
+                        pet: `${storeName}-NOTCOMPRESSED`
                     }
                 }
             )

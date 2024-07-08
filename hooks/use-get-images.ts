@@ -24,13 +24,7 @@ export const useGetImages = ({ storeName, shopifyAccessToken }: UseGetImagesProp
             const { data } = await res.json();
             return data;
         },
-        // refetchInterval: allowBatchCompress === true || allowBatchRestore === true || autoCompression === true || autoFileRename === true || autoAltRename === true ? 2000 : undefined
-        // refetchInterval:5000,
-        // refetchOnWindowFocus: true,
-        // refetchOnReconnect: true,
-        // refetchOnMount: true,
         // queryFn:getEventStreamContent,
-        // retry:1
     })
     return query;
 }

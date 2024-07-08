@@ -10,7 +10,7 @@ const PushMain = () => {
 
     useEffect(() => {
         router.push(pathName)
-    }, [router])
+    }, [router,pathName])
     return (
         <div>PushMain</div>
     )

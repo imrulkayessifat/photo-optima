@@ -44,7 +44,7 @@ const ManualUpload: React.FC<ManualUploadProps> = ({
 
     const [isPending, startTransition] = useTransition();
     const setImageStatus = useStore(state => state.setImageStatus);
-    const mutation = useUploadImage()
+    const mutation = useUploadImage({storeName})
     const mutationCompress = useComressImage()
     const mutationFileRename = useFileRename({ shopifyAccessToken })
 const mutationAltRename = useAltRename({ shopifyAccessToken });
