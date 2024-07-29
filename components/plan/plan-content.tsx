@@ -218,7 +218,7 @@ const PlanContext: React.FC<PlanContextProp> = ({
                                     </AccordionTrigger>
                                     <AccordionContent className="md:w-[450px]">
                                         <p className="text-sm">
-                                            Absolutely! Simply open the Crush.pics app, click “Upgrade Plan” in the top right section of the app dashboard and choose the plan you’d like. Once selected you’ll be prompted by Shopify to complete the process.
+                                            Absolutely! Simply open the photooptima app, click “Upgrade Plan” in the top right section of the app dashboard and choose the plan you’d like. Once selected you’ll be prompted by Shopify to complete the process.
                                         </p>
                                     </AccordionContent>
                                 </AccordionItem>
@@ -234,7 +234,7 @@ const PlanContext: React.FC<PlanContextProp> = ({
                                     </AccordionTrigger>
                                     <AccordionContent className="md:w-[450px]">
                                         <p className="text-sm">
-                                            Absolutely! Simply open the Crush.pics app, click “Upgrade Plan” in the top right section of the app dashboard and choose the plan you’d like. Once selected you’ll be prompted by Shopify to complete the process.
+                                            Absolutely! Simply open the photooptima app, click “Upgrade Plan” in the top right section of the app dashboard and choose the plan you’d like. Once selected you’ll be prompted by Shopify to complete the process.
                                         </p>
                                     </AccordionContent>
                                 </AccordionItem>
