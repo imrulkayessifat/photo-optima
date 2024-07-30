@@ -50,7 +50,7 @@ export function middleware(request: NextRequest, response: NextResponse) {
     res.cookies.set("shop", shop.dest.replace(/^https?:\/\//, ''))
 
   }
-  // applySetCookie(request, res);
+  applySetCookie(request, res);
   return res;
 
 }
