@@ -48,11 +48,10 @@ export function middleware(request: NextRequest, response: NextResponse) {
     res.cookies.delete("shop");
     console.log("decode token : ", jwtDecode(token as string));
     const shop: TokenProps = jwtDecode(token as string)
-    res.cookies.set("shop", shop.dest.replace(/^https?:\/\//, ''), { path: '/' })
+    res.cookies.set("shop", shop.dest.replace(/^https?:\/\//, ''))
 
   }
   applySetCookie(request, res);
-  res.headers.set('x-middleware-cache', 'no-cache');
   return res;
 
 }
