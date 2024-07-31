@@ -2,6 +2,7 @@
 
 import { useAppBridge } from "@shopify/app-bridge-react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export function useAppRouter() {
     const router = useRouter();

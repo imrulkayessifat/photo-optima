@@ -29,7 +29,7 @@ const Navbar = () => {
     return (
         <header className={`fixed z-40 top-0 bg-white dark:bg-[#0f0f0f] shadow-sm py-5 w-screen`}>
             <div className='mx-auto px-8 flex justify-between items-center'>
-                <Button onClick={() => push('/')}>
+                <Button variant={"outline"} onClick={() => push('/')}>
                     <Logo src="/photo-optima.svg" />
                 </Button>
                 <DropdownMenu>
