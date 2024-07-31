@@ -16,8 +16,8 @@ export default async function Page({
 }) {
   // we can perform some checks to see if the app has been installed and that it is still valid
   const { shop, host, hmac, embedded } = searchParams;
-  console.log("shop",shop)
-  if (!cookies().get("shop")) {
+  console.log("shop", shop)
+  if (cookies().get("shop") !== shop) {
     return (
       <ReloadWindow />
     )
@@ -44,7 +44,7 @@ export default async function Page({
 
   const { data } = await res.json();
 
-  console.log("debug null plan",data)
+  console.log("debug null plan", data)
 
   if (!shop || !host) {
     return <div>
