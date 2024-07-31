@@ -45,6 +45,7 @@ export function middleware(request: NextRequest, response: NextResponse) {
   let res = NextResponse.next()
   
   if (token) {
+    res.cookies.delete("shop");
     console.log("decode token : ", jwtDecode(token as string));
     const shop: TokenProps = jwtDecode(token as string)
     res.cookies.set("shop", shop.dest.replace(/^https?:\/\//, ''))
