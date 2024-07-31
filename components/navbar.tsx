@@ -24,8 +24,8 @@ import Logo from "@/components/logo";
 import { useAppRouter } from "@/hooks/use-app-router";
 
 const Navbar = () => {
-    const { shop } = useAppRouter();
-    console.log("app bridge shop",shop)
+    const { push } = useAppRouter();
+    
     return (
         <header className={`fixed z-40 top-0 bg-white dark:bg-[#0f0f0f] shadow-sm py-5 w-screen`}>
             <div className='mx-auto px-8 flex justify-between items-center'>
