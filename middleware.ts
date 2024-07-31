@@ -41,7 +41,7 @@ function applySetCookie(req: NextRequest, res: NextResponse) {
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest, response: NextResponse) {
   console.log("browser cookie : ", cookies().get("shop"))
-  cookies().delete("shop");
+
   const requestHeaders = new Headers(request.headers)
   const token = requestHeaders.get("authorization")
   let res = NextResponse.next()
