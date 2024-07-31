@@ -20,12 +20,7 @@ export default async function Page({
   console.log("shop", shop)
   console.log("cookie shop : ", cookies().get("shop")!.value)
 
-  if (!shop) {
-    return (
-      <PushMain />
-    )
-  }
-  if (cookies().get("shop")!.value !== shop) {
+  if (cookies().get("shop")!.value !== shop || !shop) {
     return (
       <ReloadWindow />
     )
