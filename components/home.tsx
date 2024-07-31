@@ -2,7 +2,6 @@
 
 import { useEffect } from "react";
 import { redirect } from "next/navigation";
-import { useAppRouter } from "@/hooks/use-app-router";
 import { useQueryClient } from "@tanstack/react-query";
 import { io } from "socket.io-client";
 
@@ -35,9 +34,7 @@ export const mq = io(`${process.env.NEXT_PUBLIC_MQSERVER}`);
 
 const Home = ({ store, shopifyAccessToken }: { store: any, shopifyAccessToken: string }) => {
     const queryClient = useQueryClient();
-    const { shop: appBridgeShop } = useAppRouter()
 
-    console.log("app bridge shop", appBridgeShop);
 
     useEffect(() => {
 
