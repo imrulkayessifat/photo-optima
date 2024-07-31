@@ -52,6 +52,7 @@ export function middleware(request: NextRequest, response: NextResponse) {
 
   }
   applySetCookie(request, res);
+  res.headers.set('x-middleware-cache', 'no-cache');
   return res;
 
 }
