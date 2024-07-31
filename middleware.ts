@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { ResponseCookies, RequestCookies } from 'next/dist/server/web/spec-extension/cookies';
 import { jwtDecode } from "jwt-decode"
-
+import { cookies } from "next/headers";
 
 interface TokenProps {
   iss: string,
@@ -40,12 +40,12 @@ function applySetCookie(req: NextRequest, res: NextResponse) {
 
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest, response: NextResponse) {
+  console.log("browser cookie : ", cookies().get("shop"))
+  cookies().delete("shop");
   const requestHeaders = new Headers(request.headers)
   const token = requestHeaders.get("authorization")
   let res = NextResponse.next()
   res.headers.set("x-middleware-cache", "no-cache");
-
-  console.log("req token : ",token)
 
   if (token) {
     console.log("decode token : ", jwtDecode(token as string));
