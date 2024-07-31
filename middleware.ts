@@ -45,6 +45,8 @@ export function middleware(request: NextRequest, response: NextResponse) {
   let res = NextResponse.next()
   res.headers.set("x-middleware-cache", "no-cache");
 
+  console.log("req token : ",token)
+
   if (token) {
     console.log("decode token : ", jwtDecode(token as string));
     const shop: TokenProps = jwtDecode(token as string)
