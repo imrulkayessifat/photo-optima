@@ -19,7 +19,7 @@ export default async function Page({
   const { shop, host, hmac, embedded } = searchParams;
   console.log(shop,cookies().get("shop")?.value)
 
-  if (!cookies().get("shop") || !shop || cookies().get("shop")?.value !== shop) {
+  if (!cookies().get("shop") || cookies().get("shop")?.value !== shop) {
     console.log("call 2")
     return (
       <ReloadWindow />
