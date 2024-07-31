@@ -43,13 +43,12 @@ export function middleware(request: NextRequest, response: NextResponse) {
   const requestHeaders = new Headers(request.headers)
   const token = requestHeaders.get("authorization")
   let res = NextResponse.next()
-  
+  res.headers.set("x-middleware-cache", "no-cache");
+
   if (token) {
-    res.cookies.delete("shop");
     console.log("decode token : ", jwtDecode(token as string));
     const shop: TokenProps = jwtDecode(token as string)
     res.cookies.set("shop", shop.dest.replace(/^https?:\/\//, ''))
-
   }
   applySetCookie(request, res);
   return res;
@@ -57,5 +56,5 @@ export function middleware(request: NextRequest, response: NextResponse) {
 }
 
 export const config = {
-  matcher: ['/', '/batch','/plans','/settings'],
+  matcher: ['/', '/batch', '/plans', '/settings'],
 }
