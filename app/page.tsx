@@ -19,12 +19,14 @@ export default async function Page({
   const { shop, host, hmac, embedded } = searchParams;
   console.log(shop,cookies().get("shop")?.value)
   if (cookies().get("shop")?.value !== shop) {
+    console.log("call 1")
     return (
       <ReloadWindow />
     )
   }
 
   if (!cookies().get("shop")) {
+    console.log("call 2")
     return (
       <ReloadWindow />
     )
