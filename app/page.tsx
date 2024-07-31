@@ -5,6 +5,7 @@ import { getShop } from "@/actions/get-shop";
 import { cookies } from "next/headers";
 import ReloadWindow from "@/components/reload-window";
 
+export const fetchCache = 'force-no-store';
 
 export default async function Page({
   params,
