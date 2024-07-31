@@ -4,6 +4,7 @@ import { ExitClient } from "@/components/exit-client";
 import { getShop } from "@/actions/get-shop";
 import { cookies } from "next/headers";
 import ReloadWindow from "@/components/reload-window";
+import PushMain from "@/components/push-main";
 
 export const fetchCache = 'force-no-store';
 
@@ -17,7 +18,13 @@ export default async function Page({
   // we can perform some checks to see if the app has been installed and that it is still valid
   const { shop, host, hmac, embedded } = searchParams;
   console.log("shop", shop)
-  console.log("cookie shop : ",cookies().get("shop")!.value)
+  console.log("cookie shop : ", cookies().get("shop")!.value)
+
+  if (!shop) {
+    return (
+      <PushMain />
+    )
+  }
   if (cookies().get("shop")!.value !== shop) {
     return (
       <ReloadWindow />
