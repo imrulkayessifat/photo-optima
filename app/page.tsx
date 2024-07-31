@@ -17,8 +17,8 @@ export default async function Page({
   // we can perform some checks to see if the app has been installed and that it is still valid
   const { shop, host, hmac, embedded } = searchParams;
   console.log("shop", shop)
-  console.log("cookie shop : ",cookies().get("shop"))
-  if (cookies().get("shop") !== shop) {
+  console.log("cookie shop : ",cookies().get("shop")!.value)
+  if (cookies().get("shop")!.value !== shop) {
     return (
       <ReloadWindow />
     )
