@@ -18,6 +18,7 @@ export async function GET(req: Request) {
   console.log("authorized code : ",url)
   const shop = url.searchParams.get("shop");
   const host = url.searchParams.get("host");
+  const code = url.searchParams.get("code")
 
   // todo: validate hmac
 
@@ -51,7 +52,7 @@ export async function GET(req: Request) {
       return new NextResponse("Missing host parameter", { status: 400 });
     }
 
-    let redirectUrl = `/?shop=${session.shop}&host=${encodeURIComponent(sanitizedHost!)}`;
+    let redirectUrl = `/?shop=${session.shop}&host=${encodeURIComponent(sanitizedHost!)}&code=${code}`;
     if (shopify.config.isEmbeddedApp) {
       redirectUrl = await shopify.auth.getEmbeddedAppUrl({
         rawRequest: req,
