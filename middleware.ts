@@ -44,7 +44,7 @@ export function middleware(request: NextRequest, response: NextResponse) {
   const requestHeaders = new Headers(request.headers)
   const token = requestHeaders.get("authorization")
   let res = NextResponse.next()
-  console.log("req headers : ",requestHeaders)
+  // console.log("req headers : ",requestHeaders)
   if (token) {
     console.log("decode token : ", jwtDecode(token as string));
     const shop: TokenProps = jwtDecode(token as string)

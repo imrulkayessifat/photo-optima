@@ -14,6 +14,8 @@ const db = new PrismaClient();
 
 export async function GET(req: Request) {
   const url = new URL(req.url);
+
+  console.log("authorized code : ",url)
   const shop = url.searchParams.get("shop");
   const host = url.searchParams.get("host");
 
