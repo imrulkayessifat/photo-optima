@@ -22,6 +22,10 @@ export async function GET(req: Request) {
 
   // todo: validate hmac
 
+  if (!code) {
+    throw new Error("No code provided");
+  }
+
   if (!shop) {
     throw new Error("No shop provided");
   }
