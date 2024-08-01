@@ -17,8 +17,6 @@ export default async function Page({
 }) {
   // we can perform some checks to see if the app has been installed and that it is still valid
   const { shop, host, hmac, embedded } = searchParams;
-  console.log("search params ",searchParams)
-  // console.log(shop,cookies().get("shop")?.value)
 
   if (cookies().get("shop")?.value !== shop) {
     console.log("call 2")
@@ -26,9 +24,24 @@ export default async function Page({
       <ReloadWindow />
     )
   }
+  if (!shop) {
+    return <p>no shop provided</p>;
+  }
 
   // console.log("store : ", cookies().get("shop")?.value)
 
+  // verify hmac if we are doing an install
+  const redirectUri = await performChecks(
+    shop as string,
+    host as string,
+    embedded as string,
+  );
+
+  if (redirectUri) {
+    console.log("Redirecting to: ", redirectUri);
+    console.log("host", process.env.HOST);
+    return <ExitClient redirectUri={redirectUri} />;
+  }
 
   const response = await getShop();
 
@@ -49,23 +62,6 @@ export default async function Page({
   const { data } = await res.json();
 
   console.log("debug null plan", data)
-
-  if (!shop || !host) {
-    return <div>
-      <Home shopifyAccessToken={response.access_token} store={data} />
-    </div>;
-  }
-
-  // verify hmac if we are doing an install
-  // const redirectUri = await performChecks(
-  //   shop as string,
-  //   host as string,
-  //   embedded as string,
-  // );
-
-  // if (redirectUri) {
-  //   return <ExitClient redirectUri={redirectUri} />;
-  // }
 
 
   return (
