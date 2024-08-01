@@ -18,6 +18,7 @@ export default async function Page({
   // we can perform some checks to see if the app has been installed and that it is still valid
   const { shop, host, hmac, embedded } = searchParams;
 
+  console.log("search params : ",searchParams)
   if (cookies().get("shop")?.value !== shop) {
     console.log("call 2")
     return (
