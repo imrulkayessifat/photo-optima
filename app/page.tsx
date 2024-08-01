@@ -6,7 +6,7 @@ import { cookies } from "next/headers";
 import ReloadWindow from "@/components/reload-window";
 import PushMain from "@/components/push-main";
 
-export const fetchCache = 'force-no-store';
+// export const fetchCache = 'force-no-store';
 
 export default async function Page({
   params,
