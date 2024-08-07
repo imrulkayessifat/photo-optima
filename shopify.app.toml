@@ -21,11 +21,11 @@ redirect_urls = [ "https://app.photooptima.com/api/auth/callback" ]
 api_version = "2024-04"
 
 [[webhooks.subscriptions]]
-topics = ["product/create"]
+topics = ["products/create"]
 uri = "https://app1.photooptima.com/webhooks/product/create"
 
 [[webhooks.subscriptions]]
-topics = ["product/update"]
+topics = ["products/update"]
 uri = "https://app1.photooptima.com/webhooks/product/update"
 
   [webhooks.privacy_compliance]
