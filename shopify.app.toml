@@ -20,6 +20,14 @@ redirect_urls = [ "https://app.photooptima.com/api/auth/callback" ]
 [webhooks]
 api_version = "2024-04"
 
+[[webhooks.subscriptions]]
+topics = ["product/create"]
+uri = "https://app1.photooptima.com/webhooks/product/create"
+
+[[webhooks.subscriptions]]
+topics = ["product/update"]
+uri = "https://app1.photooptima.com/webhooks/product/update"
+
   [webhooks.privacy_compliance]
   customer_deletion_url = "https://app1.photooptima.com/webhooks/compliance/customer-erasure"
   customer_data_request_url = "https://app1.photooptima.com/webhooks/compliance/customer-request"
