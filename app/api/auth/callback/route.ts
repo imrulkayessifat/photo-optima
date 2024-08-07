@@ -4,6 +4,7 @@ import {
   CookieNotFound,
   InvalidOAuthError,
   InvalidSession,
+  DeliveryMethod,
   Session,
 } from "@shopify/shopify-api";
 import { cookies } from "next/headers";
@@ -44,6 +45,18 @@ export async function GET(req: Request) {
     await storeSession(session);
 
     await shopify.webhooks.register({ session });
+
+    shopify.webhooks.addHandlers({
+      PRODUCTS_CREATE: [{
+        deliveryMethod: DeliveryMethod.Http,
+        callbackUrl: "https://app1.photooptima.com/webhooks/product/create",
+      }],
+      PRODUCTS_UPDATE: [{
+        deliveryMethod: DeliveryMethod.Http,
+        callbackUrl: "https://app1.photooptima.com/webhooks/product/update",
+      }],
+    });
+    console.log("Added handlers");
 
     if(!host){
       throw new Error("No host provided");
