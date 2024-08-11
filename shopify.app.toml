@@ -33,5 +33,9 @@ api_version = "2024-04"
   topics = [ "products/update" ]
   uri = "https://app1.photooptima.com/webhooks/product/update"
 
+  [[webhooks.subscriptions]]
+  topics = [ "app/uninstalled" ]
+  uri = "https://app1.photooptima.com/webhooks/app/uninstalled"
+
 [pos]
 embedded = true
