@@ -13,10 +13,10 @@ export function addHandlers() {
       ["APP_UNINSTALLED"]: {
         deliveryMethod: DeliveryMethod.Http,
         callbackUrl: "/api/webhooks",
-        // callback: async (_topic, shop, _body) => {
-        //   console.log("Uninstalled app from shop: " + shop);
-        //   await AppInstallations.delete(shop);
-        // },
+        callback: async (_topic, shop, _body) => {
+          console.log("Uninstalled app from shop: " + shop);
+          await AppInstallations.delete(shop);
+        },
       },
     });
     console.log("Added handlers");
