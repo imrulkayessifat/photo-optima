@@ -94,7 +94,8 @@ export async function performChecks(
   "use server"
 
   const isInstalled = await checkInstallation(shop);
-  console.log("shopify", host)
+  console.log("shopify: ", host)
+  console.log("isInstalled : ",isInstalled)
   if (!isInstalled) {
     return serverSideRedirect(shop, host, embedded);
   }
