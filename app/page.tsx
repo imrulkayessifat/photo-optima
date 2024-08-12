@@ -64,7 +64,7 @@ export default async function Page({
 
   console.log("debug null plan", data)
 
-  const subscriptionPlanRes = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/subscription-plan/${shop}`)
+  const subscriptionPlanRes = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/subscription-plan/${data.plan}`)
 
   const { data: subscriptionPlan } = await subscriptionPlanRes.json();
 
