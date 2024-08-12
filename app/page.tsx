@@ -68,7 +68,7 @@ export default async function Page({
 
   const { data: subscriptionPlan } = await subscriptionPlanRes.json();
 
-  console.log("subscription plan : ",subscriptionPlan)
+  console.log("subscription plan  : ",subscriptionPlan)
 
 
   return (
