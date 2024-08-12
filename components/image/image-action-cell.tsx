@@ -12,12 +12,16 @@ import { useRestoringImage } from "@/hooks/use-restoring-image";
 interface ImageCellProps {
     shopifyAccessToken: string;
     storeName: string;
-    data: any
+    data: any;
+    bandwidth: number;
+    dataUsed: number;
 }
 const ImageActionCell: React.FC<ImageCellProps> = ({
     shopifyAccessToken,
     storeName,
-    data
+    data,
+    bandwidth,
+    dataUsed,
 }) => {
 
     const router = useRouter();
@@ -26,7 +30,7 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
     const setImageStatus = useStore(state => state.setImageStatus);
     const status = useStore(state => state.imageStatus[data.id]);
 
-
+    console.log("disable", bandwidth, dataUsed)
 
     const [isPending, startTransition] = useTransition();
 

@@ -5,29 +5,28 @@ import { useGetImages } from "@/hooks/use-get-images";
 import ImagestList from "@/components/image/imageslist";
 
 interface ImageBoxProps {
-    shopifyAccessToken:string;
-    storeName:string;
+    shopifyAccessToken: string;
+    storeName: string;
     plan: string;
-    autoCompression:boolean;
-    allowBatchCompress:boolean;
-    allowBatchRestore:boolean;
-    autoFileRename:boolean;
-    autoAltRename:boolean;
+    bandwidth: number;
+    dataUsed: number;
+    autoCompression: boolean;
+    allowBatchCompress: boolean;
+    allowBatchRestore: boolean;
+    autoFileRename: boolean;
+    autoAltRename: boolean;
 }
 
 const ImageBox: React.FC<ImageBoxProps> = ({
     shopifyAccessToken,
     storeName,
     plan,
-    autoCompression,
-    allowBatchCompress,
-    allowBatchRestore,
-    autoFileRename,
-    autoAltRename
+    bandwidth,
+    dataUsed
 }) => {
-    const { data: images,isLoading } = useGetImages({storeName,shopifyAccessToken});
+    const { data: images, isLoading } = useGetImages({ storeName, shopifyAccessToken });
 
-    if(isLoading) {
+    if (isLoading) {
         return (
             <div className="text-sm mx-auto px-8 my-10">
                 Loading....
@@ -35,7 +34,7 @@ const ImageBox: React.FC<ImageBoxProps> = ({
         )
     }
     return (
-        <ImagestList shopifyAccessToken={shopifyAccessToken} storeName={storeName} plan={plan} images={images} />
+        <ImagestList shopifyAccessToken={shopifyAccessToken} storeName={storeName} plan={plan} images={images} bandwidth={bandwidth} dataUsed={dataUsed} />
     )
 }
 

@@ -32,7 +32,7 @@ interface HomePageProps {
 export const backend = io(`${process.env.NEXT_PUBLIC_BACKENDSERVER}`);
 export const mq = io(`${process.env.NEXT_PUBLIC_MQSERVER}`);
 
-const Home = ({ store, shopifyAccessToken }: { store: any, shopifyAccessToken: string }) => {
+const Home = ({ store, shopifyAccessToken, bandwidth }: { store: any, shopifyAccessToken: string, bandwidth: number }) => {
     const queryClient = useQueryClient();
 
 
@@ -66,6 +66,8 @@ const Home = ({ store, shopifyAccessToken }: { store: any, shopifyAccessToken: s
         }
     }, [queryClient])
 
+
+
     return (
         <main>
             <Navbar />
@@ -92,6 +94,8 @@ const Home = ({ store, shopifyAccessToken }: { store: any, shopifyAccessToken: s
                     autoFileRename={store.autoFileRename}
                     autoAltRename={store.autoAltRename}
                     plan={store.plan}
+                    bandwidth={bandwidth}
+                    dataUsed={store.dataUsed}
                 />
             </div>
         </main>

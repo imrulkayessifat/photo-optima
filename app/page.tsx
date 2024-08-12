@@ -73,7 +73,7 @@ export default async function Page({
 
   return (
     <>
-      <Home shopifyAccessToken={response.access_token} store={data} />
+      <Home shopifyAccessToken={response.access_token} store={data}  bandwidth={subscriptionPlan.bandwidth}/>
     </>
   )
 }

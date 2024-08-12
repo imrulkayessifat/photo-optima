@@ -50,6 +50,8 @@ const ImageTable: React.FC<ImageTableProps> = ({
     shopifyAccessToken,
     storeName,
     data,
+    bandwidth,
+    dataUsed,
     plan
 }) => {
 
@@ -164,7 +166,7 @@ const ImageTable: React.FC<ImageTableProps> = ({
                             <DropdownMenuLabel className="text-sm">Actions</DropdownMenuLabel>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem>
-                                <ImageActionCell shopifyAccessToken={shopifyAccessToken} storeName={storeName} data={row.original} />
+                                <ImageActionCell shopifyAccessToken={shopifyAccessToken} storeName={storeName} data={row.original} bandwidth={bandwidth} dataUsed={dataUsed} />
                             </DropdownMenuItem>
                             <DropdownMenuItem>
                                 <FileRename shopifyAccessToken={shopifyAccessToken} storeName={storeName} plan={plan} data={row.original} />

@@ -20,7 +20,9 @@ export interface ImageTableProps {
     shopifyAccessToken:string;
     storeName:string;
     plan:string;
-    data: any
+    data: any;
+    bandwidth: number;
+    dataUsed: number;
 }
 
 export type ImageDataProps = {
