@@ -57,12 +57,18 @@ export default async function Page({
       storeName: `${response.success}`,
       access_token: `${response.access_token}`
     }),
-    cache: 'no-store'
+    // cache: 'no-store'
   })
 
   const { data } = await res.json();
 
   console.log("debug null plan", data)
+
+  const subscriptionPlanRes = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/subscription-plan/${shop}`)
+
+  const { data: subscriptionPlan } = await subscriptionPlanRes.json();
+
+  console.log("subscription plan : ",subscriptionPlan)
 
 
   return (
