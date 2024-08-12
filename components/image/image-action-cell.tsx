@@ -103,6 +103,7 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
     return (
         <div className="flex gap-2">
             <Button
+                disabled={bandwidth < dataUsed}
                 onClick={() => handleCompress(data.uid, data.productId, data.url)}
                 className={`${data.status === 'COMPRESSED' || status === 'COMPRESSED' ? 'hidden' : ''} text-xs`}
                 variant={"outline"}
@@ -113,6 +114,7 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
             {
                 (data.status === 'COMPRESSED' || status === 'COMPRESSED') && (
                     <Button
+                        disabled={bandwidth < dataUsed}
                         onClick={() => handleRestore(data.uid, data.productId)}
                         variant={"outline"}
                         className="text-xs"
