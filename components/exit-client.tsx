@@ -2,6 +2,8 @@
 
 import { useEffect } from "react";
 
+import Loader from "@/components/loader";
+
 export function ExitClient(props: { redirectUri: string }) {
   const { redirectUri } = props;
   useEffect(() => {
@@ -16,7 +18,7 @@ export function ExitClient(props: { redirectUri: string }) {
 
   return (
     <div>
-      Getting session tokens...
+      <Loader />
     </div>
   );
 }

@@ -3,6 +3,7 @@
 import { useGetImages } from "@/hooks/use-get-images";
 
 import ImagestList from "@/components/image/imageslist";
+import Loader from "@/components/loader";
 
 interface ImageBoxProps {
     shopifyAccessToken: string;
@@ -29,7 +30,7 @@ const ImageBox: React.FC<ImageBoxProps> = ({
     if (isLoading) {
         return (
             <div className="text-sm mx-auto px-8 my-10">
-                Loading....
+                <Loader />
             </div>
         )
     }
