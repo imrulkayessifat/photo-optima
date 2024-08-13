@@ -80,6 +80,7 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
             const data = await mutation.mutateAsync(uid)
 
         }
+        router.refresh()
     }
 
     const handleRestore = async (uid: string, productid: string) => {
@@ -98,6 +99,7 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
         if (response.ok && data) {
             const data = await restoreMutation.mutateAsync(uid)
         }
+        router.refresh()
     }
 
     return (
