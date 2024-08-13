@@ -31,7 +31,7 @@ export const useUploadImage = ({ storeName }: { storeName: string }) => {
                     store: 'auto',
                     metadata: {
                         subsystem: 'js-client',
-                        pet: `${storeName}-NOTCOMPRESSED`
+                        pet: `${storeName}~NOTCOMPRESSED`
                     }
                 }
             )
