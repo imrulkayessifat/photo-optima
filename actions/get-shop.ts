@@ -33,7 +33,6 @@ export const getShop = async () => {
             'Content-Type': 'application/json',
             'X-Shopify-Access-Token': access_token
         },
-        cache: 'no-store'
     })
 
     if (!store_data.ok) {

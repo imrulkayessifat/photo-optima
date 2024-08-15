@@ -57,7 +57,6 @@ export default async function Page({
       storeName: `${response.success}`,
       access_token: `${response.access_token}`
     }),
-    // cache: 'no-store'
   })
 
   const { data } = await res.json();

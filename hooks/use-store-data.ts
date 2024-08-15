@@ -19,7 +19,6 @@ export const useStoreData = ({ shop,access_token }: UseStoreDataProps) => {
                     storeName: `${shop}`,
                     access_token:access_token
                 }),
-                cache:'no-store'
             })
             if (!res.ok) {
                 throw new Error("Failed to fetch images");
@@ -27,11 +26,6 @@ export const useStoreData = ({ shop,access_token }: UseStoreDataProps) => {
             const { data } = await res.json();
             return data;
         },
-        // staleTime: 0, // Data will be considered stale immediately
-         // Disable caching
-        refetchOnWindowFocus: true, 
-        refetchOnReconnect: true, 
-        refetchOnMount: true,
 
     })
     return query;

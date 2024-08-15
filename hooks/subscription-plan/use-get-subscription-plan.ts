@@ -15,9 +15,6 @@ export const useGetSubscriptionPlans = () => {
             const { data } = await res.json();
             return data;
         },
-        // refetchOnWindowFocus: true,
-        // refetchOnReconnect: true,
-        // refetchOnMount: true,
     })
     return query;
 }

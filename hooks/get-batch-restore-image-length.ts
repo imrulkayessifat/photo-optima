@@ -23,7 +23,6 @@ export const getBatchRestoreImageLength = ({ shop, access_token }: GetBatchResto
 
             return batch_restore_images_length;
         },
-        gcTime: 0
     })
     return query;
 }

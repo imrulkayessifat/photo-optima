@@ -23,7 +23,6 @@ export const getBatchCompressImageLength = ({ shop,access_token }: GetBatchCompr
 
             return batch_compress_images_length;
         },
-        gcTime: 0
     })
     return query;
 }
