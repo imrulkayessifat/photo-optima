@@ -15,7 +15,6 @@ export default async function Page({
   params: any;
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  // we can perform some checks to see if the app has been installed and that it is still valid
   const { shop, host, hmac, embedded } = searchParams;
 
   console.log("search params : ",searchParams)
@@ -29,14 +28,14 @@ export default async function Page({
     return <p>no shop provided</p>;
   }
 
-  // console.log("store : ", cookies().get("shop")?.value)
-
-  // verify hmac if we are doing an install
+  const startPerformChecks = performance.now();
   const redirectUri = await performChecks(
     shop as string,
     host as string,
     embedded as string,
   );
+  const endPerformChecks = performance.now();
+  console.log(`performChecks execution time: ${endPerformChecks - startPerformChecks}ms`);
 
   if (redirectUri) {
     console.log("Redirecting to: ", redirectUri);
@@ -44,10 +43,12 @@ export default async function Page({
     return <ExitClient redirectUri={redirectUri} />;
   }
 
+  const startGetShop = performance.now();
   const response = await getShop();
+  const endGetShop = performance.now();
+  console.log(`getShop execution time: ${endGetShop - startGetShop}ms`);
 
-  console.log("response : ", response)
-
+  const startStoreFetch = performance.now();
   const res = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/store`, {
     method: 'POST',
     headers: {
@@ -60,14 +61,16 @@ export default async function Page({
   })
 
   const { data } = await res.json();
+  const endStoreFetch = performance.now();
+  console.log(`/store fetch execution time: ${endStoreFetch - startStoreFetch}ms`);
 
-  console.log("debug null plan", data)
 
+  const startSubscriptionPlanFetch = performance.now();
   const subscriptionPlanRes = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/subscription-plan/${data.plan}`)
 
   const { data: subscriptionPlan } = await subscriptionPlanRes.json();
-
-  console.log("subscription plan  : ",subscriptionPlan)
+  const endSubscriptionPlanFetch = performance.now();
+  console.log(`/subscription-plan fetch execution time: ${endSubscriptionPlanFetch - startSubscriptionPlanFetch}ms`);
 
 
   return (
