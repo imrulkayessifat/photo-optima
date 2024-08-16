@@ -15,6 +15,7 @@ import { Separator } from "@/components/ui/separator";
 import { useStoreData } from '@/hooks/use-store-data';
 import { getBatchCompressImageLength } from '@/hooks/get-batch-compress-image-length';
 import { getBatchRestoreImageLength } from '@/hooks/get-batch-restore-image-length';
+import { useAppRouter } from "@/hooks/use-app-router";
 import Loader from '@/components/loader';
 
 interface BatchSettingProps {
@@ -28,6 +29,7 @@ const BatchSetting: React.FC<BatchSettingProps> = ({
 }) => {
     console.log("batch", shop)
     const [isPending, startTransition] = useTransition();
+    const { push } = useAppRouter();
 
     const [shouldRedirect, setShouldRedirect] = useState(false);
 
@@ -37,7 +39,7 @@ const BatchSetting: React.FC<BatchSettingProps> = ({
 
     useEffect(() => {
         if (shouldRedirect) {
-            redirect(`${process.env.NEXT_PUBLIC_FRONTEND_DOMAIN}`);
+            push(`/`);
         }
     }, [shouldRedirect]);
 
