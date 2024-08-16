@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect, useTransition } from 'react';
-import { redirect } from 'next/navigation';
+import { useRouter } from "next/navigation";
 import Link from "next/link"
 import { toast } from 'sonner';
 
@@ -30,6 +30,7 @@ const BatchSetting: React.FC<BatchSettingProps> = ({
     console.log("batch", shop)
     const [isPending, startTransition] = useTransition();
     const { push } = useAppRouter();
+    const router = useRouter();
 
     const [shouldRedirect, setShouldRedirect] = useState(false);
 
@@ -38,6 +39,7 @@ const BatchSetting: React.FC<BatchSettingProps> = ({
     const { data: batch_restore_images_length, isLoading: isLoading2 } = getBatchRestoreImageLength({ shop, access_token });
 
     useEffect(() => {
+        router.refresh()
         if (shouldRedirect) {
             push(`/`);
         }
