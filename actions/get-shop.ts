@@ -41,5 +41,5 @@ export const getShop = async () => {
     }
     const { shop } = await store_data.json()
     console.log("shop in server action : ",shop)
-    return { success: `${shop.domain}`, access_token }
+    return { success: `${shop.myshopify_domain}`, access_token }
 }
