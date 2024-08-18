@@ -40,5 +40,6 @@ export const getShop = async () => {
         return { error: `${errorDetails}` };
     }
     const { shop } = await store_data.json()
+    console.log("shop in server action : ",shop)
     return { success: `${shop.domain}`, access_token }
 }
