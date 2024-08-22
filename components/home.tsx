@@ -46,10 +46,10 @@ const Home = ({ store, shopifyAccessToken, bandwidth }: { store: any, shopifyAcc
             console.log('connecting to mq server');
         }
 
-        const handleImageModelEvent = () => {
-            console.log('image_model event received')
-            queryClient.invalidateQueries({ queryKey: ["images"] })
-        }
+        const handleImageModelEvent = (data: { eventId: string, productId: string, imageId: string }) => {
+            console.log(`image_model event received for eventId: ${data.eventId}`);
+            queryClient.invalidateQueries({ queryKey: ["images"] });
+        };
 
         backend.on('connect', handleBackendConnect)
         backend.on('image_model', handleImageModelEvent)
