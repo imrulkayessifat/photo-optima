@@ -30,7 +30,7 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
     const setImageStatus = useStore(state => state.setImageStatus);
     const status = useStore(state => state.imageStatus[data.id]);
 
-    console.log("disable", bandwidth, dataUsed)
+    console.log("disable", bandwidth, dataUsed,data)
 
     const [isPending, startTransition] = useTransition();
 
