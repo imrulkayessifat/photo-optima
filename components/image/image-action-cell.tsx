@@ -59,7 +59,7 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
     };
 
 
-    const handleCompress = async (uid: string, productid: string, url: string) => {
+    const handleCompress = async (uid: string, productid: string, url: string,size:number) => {
 
         // mutation.mutate({id,productid,url,storeName})
 
@@ -72,7 +72,7 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
                 'Authorization': `${shopifyAccessToken}`,
                 'Shop': `${storeName}`
             },
-            body: JSON.stringify({ uid, productid, url, storeName })
+            body: JSON.stringify({ uid, productid, url, storeName,size })
         });
         const data = await response.json()
         if (response.ok && data) {
@@ -106,7 +106,7 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
         <div className="flex gap-2">
             <Button
                 disabled={bandwidth < dataUsed}
-                onClick={() => handleCompress(data.uid, data.productId, data.url)}
+                onClick={() => handleCompress(data.uid, data.productId, data.url,data.size)}
                 className={`${data.status === 'COMPRESSED' || status === 'COMPRESSED' ? 'hidden' : ''} text-xs`}
                 variant={"outline"}
             >
