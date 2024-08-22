@@ -30,7 +30,7 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
     const setImageStatus = useStore(state => state.setImageStatus);
     const status = useStore(state => state.imageStatus[data.id]);
 
-    console.log("disable", bandwidth, dataUsed,data)
+    console.log("disable", bandwidth, dataUsed, data)
 
     const [isPending, startTransition] = useTransition();
 
@@ -59,11 +59,13 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
     };
 
 
-    const handleCompress = async (uid: string, productid: string, url: string,size:number) => {
+    const handleCompress = async (uid: string, productid: string, url: string, size: number, extension: string) => {
 
         // mutation.mutate({id,productid,url,storeName})
 
         setImageStatus(uid, 'ONGOING');
+
+        console.log('extension',extension)
 
         const response = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/image/compress-image`, {
             method: 'POST',
@@ -72,7 +74,7 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
                 'Authorization': `${shopifyAccessToken}`,
                 'Shop': `${storeName}`
             },
-            body: JSON.stringify({ uid, productid, url, storeName,size })
+            body: JSON.stringify({ uid, productid, url, storeName, size, extension })
         });
         const data = await response.json()
         if (response.ok && data) {
@@ -106,7 +108,7 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
         <div className="flex gap-2">
             <Button
                 disabled={bandwidth < dataUsed}
-                onClick={() => handleCompress(data.uid, data.productId, data.url,data.size)}
+                onClick={() => handleCompress(data.uid, data.productId, data.url, data.size, data.extension)}
                 className={`${data.status === 'COMPRESSED' || status === 'COMPRESSED' ? 'hidden' : ''} text-xs`}
                 variant={"outline"}
             >
