@@ -77,11 +77,11 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
             body: JSON.stringify({ uid, productid, url, storeName, size, extension })
         });
         const data = await response.json()
-        // if (response.ok && data) {
-        //     // pollImageStatus(id);
-        //     const data = await mutation.mutateAsync(uid)
+        if (response.ok && data) {
+            // pollImageStatus(id);
+            const data = await mutation.mutateAsync(uid)
 
-        // }
+        }
         router.refresh()
     }
 
