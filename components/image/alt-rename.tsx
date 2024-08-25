@@ -8,14 +8,18 @@ interface AltRenameProps {
     shopifyAccessToken:string;
     storeName: string;
     plan: string;
-    data: any
+    data: any;
+    bandwidth: number;
+    dataUsed: number;
 }
 
 const AltRename: React.FC<AltRenameProps> = ({
     shopifyAccessToken,
     storeName,
     plan,
-    data
+    data,
+    bandwidth,
+    dataUsed,
 }) => {
     const mutation = useAltRename({shopifyAccessToken})
     const mutationRestoreAltTag = restoreAltTag({shopifyAccessToken});
@@ -32,14 +36,14 @@ const AltRename: React.FC<AltRenameProps> = ({
         <div className="flex flex-col gap-2">
             {
                 data.altRename === false && (
-                    <Button className='text-xs' disabled={plan === 'FREE' || data.status === 'ONGOING' || data.status === 'RESTORING'} onClick={() => altRename(data.uid)} variant={'outline'}>
+                    <Button className='text-xs' disabled={plan === 'FREE' || bandwidth < dataUsed || data.status === 'ONGOING' || data.status === 'RESTORING'} onClick={() => altRename(data.uid)} variant={'outline'}>
                         Alt Rename
                     </Button>
                 )
             }
             {
                 data.altRename === true && (
-                    <Button className='text-xs' disabled={plan === 'FREE' || data.status === 'ONGOING' || data.status === 'RESTORING'} onClick={() => altTagRestore(data.uid)} variant={'outline'}>
+                    <Button className='text-xs' disabled={plan === 'FREE' || bandwidth < dataUsed || data.status === 'ONGOING' || data.status === 'RESTORING'} onClick={() => altTagRestore(data.uid)} variant={'outline'}>
                         Restore Alt Tag
                     </Button>
                 )

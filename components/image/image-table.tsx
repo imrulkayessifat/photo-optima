@@ -171,10 +171,10 @@ const ImageTable: React.FC<ImageTableProps> = ({
                                 <ImageActionCell shopifyAccessToken={shopifyAccessToken} storeName={storeName} data={row.original} bandwidth={bandwidth} dataUsed={dataUsed} />
                             </DropdownMenuItem>
                             <DropdownMenuItem>
-                                <FileRename shopifyAccessToken={shopifyAccessToken} storeName={storeName} plan={plan} data={row.original} />
+                                <FileRename shopifyAccessToken={shopifyAccessToken} storeName={storeName} plan={plan} data={row.original} bandwidth={bandwidth} dataUsed={dataUsed}/>
                             </DropdownMenuItem>
                             <DropdownMenuItem>
-                                <AltRename shopifyAccessToken={shopifyAccessToken} storeName={storeName} plan={plan} data={row.original} />
+                                <AltRename shopifyAccessToken={shopifyAccessToken} storeName={storeName} plan={plan} data={row.original} bandwidth={bandwidth} dataUsed={dataUsed}/>
                             </DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
