@@ -52,9 +52,11 @@ const Home = ({ store, shopifyAccessToken, bandwidth }: { store: any, shopifyAcc
         }
 
         const handleImageModelEvent = () => {
-            console.log(`image_model event received for eventId`);
-            queryClient.invalidateQueries({ queryKey: ["images"] });
-            router.refresh()
+            setTimeout(() => {
+                console.log(`image_model event received for eventId`);
+                queryClient.invalidateQueries({ queryKey: ["images"] });
+                router.refresh();
+            }, 2000);
         };
 
         backend.on('connect', handleBackendConnect)
