@@ -76,11 +76,13 @@ const Home = ({ store, shopifyAccessToken, bandwidth }: { store: any, shopifyAcc
         <main>
             <Navbar />
             <div className="mt-24">
-                <Card className="mx-auto px-8">
-                    <CardContent className="p-6">
-                        <p className="text-sm">You have used <span className="font-bold">{store.dataUsed}MB/{bandwidth}MB</span> of your subscription plan.</p>
-                    </CardContent>
-                </Card>
+                <div className="mx-auto px-8">
+                    <Card>
+                        <CardContent className="p-6">
+                            <p className="text-sm">You have used <span className="font-bold">{store.dataUsed} MB/{bandwidth} MB</span> of your subscription plan.</p>
+                        </CardContent>
+                    </Card>
+                </div>
                 <div className="flex flex-wrap md:flex-nowrap mx-auto px-8 my-10 gap-2 w-full">
                     <AutoCompression shopifyAccessToken={shopifyAccessToken} plan={store.plan} auto_compression={store.autoCompression} store_name={store.name} />
                     <AutoFileRename shopifyAccessToken={shopifyAccessToken} plan={store.plan} auto_file_rename={store.autoFileRename} store_name={store.name} />
