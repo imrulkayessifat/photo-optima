@@ -32,14 +32,14 @@ const FileRename: React.FC<FileRenameProps> = ({
         <div className="flex flex-col gap-2">
             {
                 data.fileRename === false && (
-                    <Button className='text-xs' disabled={plan === 'FREE'} onClick={() => fileRename(data.uid)} variant={'outline'}>
+                    <Button className='text-xs' disabled={plan === 'FREE' || data.status === 'ONGOING' || data.status === 'RESTORING'} onClick={() => fileRename(data.uid)} variant={'outline'}>
                         File Rename
                     </Button>
                 )
             }
             {
                 data.fileRename === true && (
-                    <Button className='text-xs' disabled={plan === 'FREE'} onClick={() => fileNameRestore(data.uid)} variant={'outline'}>
+                    <Button className='text-xs' disabled={plan === 'FREE' || data.status === 'ONGOING' || data.status === 'RESTORING'} onClick={() => fileNameRestore(data.uid)} variant={'outline'}>
                         Restore File Name
                     </Button>
                 )

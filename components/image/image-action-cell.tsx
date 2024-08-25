@@ -65,7 +65,7 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
 
         setImageStatus(uid, 'ONGOING');
 
-        console.log('extension',extension)
+        console.log('extension', extension)
 
         const response = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/image/compress-image`, {
             method: 'POST',
@@ -107,7 +107,7 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
     return (
         <div className="flex gap-2">
             <Button
-                disabled={bandwidth < dataUsed}
+                disabled={bandwidth < dataUsed || data.status === 'ONGOING' || data.status === 'RESTORING'}
                 onClick={() => handleCompress(data.uid, data.productId, data.url, data.size, data.extension)}
                 className={`${data.status === 'COMPRESSED' || status === 'COMPRESSED' ? 'hidden' : ''} text-xs`}
                 variant={"outline"}
@@ -118,7 +118,7 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
             {
                 (data.status === 'COMPRESSED' || status === 'COMPRESSED') && (
                     <Button
-                        disabled={bandwidth < dataUsed}
+                        disabled={bandwidth < dataUsed || data.status === 'ONGOING' || data.status === 'RESTORING'}
                         onClick={() => handleRestore(data.uid, data.productId)}
                         variant={"outline"}
                         className="text-xs"
