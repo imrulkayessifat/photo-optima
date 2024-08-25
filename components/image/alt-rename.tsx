@@ -32,14 +32,14 @@ const AltRename: React.FC<AltRenameProps> = ({
         <div className="flex flex-col gap-2">
             {
                 data.altRename === false && (
-                    <Button className='text-xs' disabled={plan === 'FREE'} onClick={() => altRename(data.uid)} variant={'outline'}>
+                    <Button className='text-xs' disabled={plan === 'FREE' || data.status === 'ONGOING' || data.status === 'RESTORING'} onClick={() => altRename(data.uid)} variant={'outline'}>
                         Alt Rename
                     </Button>
                 )
             }
             {
                 data.altRename === true && (
-                    <Button className='text-xs' disabled={plan === 'FREE'} onClick={() => altTagRestore(data.uid)} variant={'outline'}>
+                    <Button className='text-xs' disabled={plan === 'FREE' || data.status === 'ONGOING' || data.status === 'RESTORING'} onClick={() => altTagRestore(data.uid)} variant={'outline'}>
                         Restore Alt Tag
                     </Button>
                 )
