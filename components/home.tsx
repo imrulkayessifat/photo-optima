@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
 import { io } from "socket.io-client";
 
@@ -38,6 +38,7 @@ export const mq = io(`${process.env.NEXT_PUBLIC_MQSERVER}`);
 
 const Home = ({ store, shopifyAccessToken, bandwidth }: { store: any, shopifyAccessToken: string, bandwidth: number }) => {
     const queryClient = useQueryClient();
+    const router = useRouter()
 
 
     useEffect(() => {
@@ -53,6 +54,7 @@ const Home = ({ store, shopifyAccessToken, bandwidth }: { store: any, shopifyAcc
         const handleImageModelEvent = () => {
             console.log(`image_model event received for eventId`);
             queryClient.invalidateQueries({ queryKey: ["images"] });
+            router.refresh()
         };
 
         backend.on('connect', handleBackendConnect)
