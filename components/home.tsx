@@ -33,6 +33,14 @@ interface HomePageProps {
     others: number;
 }
 
+function debounce(func: (...args: any[]) => void, wait: number) {
+    let timeout: ReturnType<typeof setTimeout>;
+    return (...args: any[]) => {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func(...args), wait);
+    };
+}
+
 export const backend = io(`${process.env.NEXT_PUBLIC_BACKENDSERVER}`);
 export const mq = io(`${process.env.NEXT_PUBLIC_MQSERVER}`);
 
@@ -51,13 +59,11 @@ const Home = ({ store, shopifyAccessToken, bandwidth }: { store: any, shopifyAcc
             console.log('connecting to mq server');
         }
 
-        const handleImageModelEvent = () => {
-            setTimeout(() => {
-                console.log(`image_model event received for eventId`);
-                queryClient.invalidateQueries({ queryKey: ["images"] });
-                router.refresh();
-            }, 2000);
-        };
+        const handleImageModelEvent = debounce(() => {
+            console.log(`image_model event received for eventId`);
+            queryClient.invalidateQueries({ queryKey: ["images"] });
+            router.refresh();
+        }, 2000);
 
         backend.on('connect', handleBackendConnect)
         backend.on('image_model', handleImageModelEvent)
