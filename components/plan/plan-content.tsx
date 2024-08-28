@@ -118,7 +118,7 @@ const PlanContext: React.FC<PlanContextProp> = ({
                                         store.plan === plan.name ? (
                                             <Button disabled className="cursor-not-allowed" >Selected</Button>
                                         ) : (
-                                            <Button onClick={() => handleSubscribe(plan.name, plan.price)}>Start compressing</Button>
+                                            <Button disabled={plan.name === 'FREE'} onClick={() => handleSubscribe(plan.name, plan.price)}>Start compressing</Button>
 
                                         )
                                     }
