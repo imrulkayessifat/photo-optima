@@ -24,13 +24,17 @@ interface AutoFileRenameProps {
     auto_file_rename: boolean;
     store_name: string;
     plan: string;
+    bandwidth: number;
+    dataUsed: number;
 }
 
 const AutoFileRename: React.FC<AutoFileRenameProps> = ({
     shopifyAccessToken,
     auto_file_rename,
     store_name,
-    plan
+    plan,
+    bandwidth,
+    dataUsed
 }) => {
 
     const mutation = useAutoFileRename({shopifyAccessToken})
@@ -65,7 +69,7 @@ const AutoFileRename: React.FC<AutoFileRenameProps> = ({
                                     </div>
                                     <FormControl>
                                         <Switch
-                                            disabled={plan === 'FREE'  || mutation.isPending}
+                                            disabled={plan === 'FREE'  || bandwidth < dataUsed || mutation.isPending}
                                             checked={field.value}
                                             onCheckedChange={async (newValue) => {
                                                 field.onChange(newValue);

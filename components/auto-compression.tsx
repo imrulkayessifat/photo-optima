@@ -24,13 +24,17 @@ interface AutoCompressionProps {
     auto_compression: boolean;
     store_name: string;
     plan: string;
+    bandwidth: number;
+    dataUsed: number;
 }
 
 const AutoCompression: React.FC<AutoCompressionProps> = ({
     shopifyAccessToken,
     auto_compression,
     store_name,
-    plan
+    plan,
+    bandwidth,
+    dataUsed
 }) => {
 
     const mutation = useAutoCompression({shopifyAccessToken})
@@ -65,7 +69,7 @@ const AutoCompression: React.FC<AutoCompressionProps> = ({
                                     </div>
                                     <FormControl>
                                         <Switch
-                                            disabled={plan === 'FREE' || mutation.isPending}
+                                            disabled={plan === 'FREE' || bandwidth < dataUsed || mutation.isPending}
                                             checked={field.value}
                                             onCheckedChange={async (newValue) => {
                                                 field.onChange(newValue);

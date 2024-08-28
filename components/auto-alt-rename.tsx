@@ -18,20 +18,24 @@ import { AutoAltRenameSchema } from "@/lib/schemas"
 import { useAutoAltRename } from "@/hooks/use-auto-altrename"
 
 interface AutoAltRenameProps {
-    shopifyAccessToken:string;
+    shopifyAccessToken: string;
     auto_alt_rename: boolean;
     store_name: string;
     plan: string;
+    bandwidth: number;
+    dataUsed: number;
 }
 
 const AutoAltRename: React.FC<AutoAltRenameProps> = ({
     shopifyAccessToken,
     auto_alt_rename,
     store_name,
-    plan
+    plan,
+    bandwidth,
+    dataUsed
 }) => {
 
-    const mutation = useAutoAltRename({shopifyAccessToken})
+    const mutation = useAutoAltRename({ shopifyAccessToken })
 
     const form = useForm<z.infer<typeof AutoAltRenameSchema>>({
         resolver: zodResolver(AutoAltRenameSchema),
@@ -63,7 +67,7 @@ const AutoAltRename: React.FC<AutoAltRenameProps> = ({
                                     </div>
                                     <FormControl>
                                         <Switch
-                                            disabled={plan === 'FREE'  || mutation.isPending}
+                                            disabled={plan === 'FREE' || bandwidth < dataUsed || mutation.isPending}
                                             checked={field.value}
                                             onCheckedChange={async (newValue) => {
                                                 field.onChange(newValue);
