@@ -66,9 +66,11 @@ export default async function Page({
 
 
   const startSubscriptionPlanFetch = performance.now();
+  console.log(data.plan)
   const subscriptionPlanRes = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/subscription-plan/${data.plan}`)
 
   const { data: subscriptionPlan } = await subscriptionPlanRes.json();
+  console.log(data)
   const endSubscriptionPlanFetch = performance.now();
   console.log(`/subscription-plan fetch execution time: ${endSubscriptionPlanFetch - startSubscriptionPlanFetch}ms`);
 
