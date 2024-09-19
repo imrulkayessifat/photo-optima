@@ -49,6 +49,7 @@ export default async function Page({
   console.log(`getShop execution time: ${endGetShop - startGetShop}ms`);
 
   const startStoreFetch = performance.now();
+  console.log(response)
   const res = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/store`, {
     method: 'POST',
     headers: {
