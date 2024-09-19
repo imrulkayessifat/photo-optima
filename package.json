@@ -39,6 +39,7 @@
     "@tanstack/react-table": "^8.13.2",
     "@uploadcare/blocks": "0.39.0",
     "axios": "^1.6.7",
+    "bottleneck": "^2.19.5",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "cookies-next": "^4.2.1",
