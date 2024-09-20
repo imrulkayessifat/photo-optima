@@ -96,7 +96,7 @@ export async function verifyAuth(shop: string, online?: boolean) {
   const offlineSession = sessions.find((session) => session.isOnline === false);
 
   if (!offlineSession) {
-    console.log("No offline session found");
+  
     throw new SessionNotFoundError(false);
   }
 
@@ -123,7 +123,7 @@ export async function verifyRequest(req: Request, isOnline: boolean) {
       }
       return handleSessionToken(token, isOnline);
     } else {
-      console.log("No session id found and no bearerPresent");
+      
       throw new SessionNotFoundError(isOnline);
     }
   }
@@ -147,7 +147,7 @@ export async function verifyRequest(req: Request, isOnline: boolean) {
         }
         return handleSessionToken(token, isOnline);
       } else {
-        console.log("Session not found and no bearerPresent");
+        
         throw new SessionNotFoundError(isOnline);
       }
     }
@@ -195,7 +195,7 @@ export async function handleSessionToken(
       await tokenExchange(shop, sessionToken, online);
       return verifyAuth(shop, online);
     } else {
-      console.log("Can't do anything about this error:");
+    
       throw error;
     }
   }

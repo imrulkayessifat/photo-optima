@@ -14,21 +14,21 @@ export function addHandlers() {
         deliveryMethod: DeliveryMethod.Http,
         callbackUrl: "/api/webhooks",
         callback: async (_topic, shop, _body) => {
-          console.log("Uninstalled app from shop: " + shop);
+         
           await AppInstallations.delete(shop);
         },
       },
     });
-    console.log("Added handlers");
+   
   } else {
-    console.log("Handlers already added");
+    
   }
 }
 
 export async function registerWebhooks(session: Session) {
 
-  console.log("registerWebhooks :", session)
+
   addHandlers();
   const responses = await shopify.webhooks.register({ session });
-  console.log("Webhooks added", responses);
+
 }

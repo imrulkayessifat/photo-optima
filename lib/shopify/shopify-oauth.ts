@@ -32,7 +32,7 @@ export function serverSideRedirect(
     shop: sanitizedShop,
     host,
   });
-  console.log("oauth", host)
+
   if (embedded === "1") {
     return `${process.env.HOST}/api/auth?${queryParams.toString()}`;
   } else {
@@ -53,12 +53,12 @@ export async function checkInstallation(shop: string) {
 export async function verify(shop: string) {
   const sanitizedShop = shopify.utils.sanitizeShop(shop);
   if (!sanitizedShop) {
-    console.log("Invalid shop provided");
+  
     return false;
   }
 
   // Check for active session
-  console.log("Checking for offline token");
+ 
   const sessionId = shopify.session.getOfflineId(sanitizedShop);
   try {
     const session = await loadSession(sessionId);
@@ -94,8 +94,7 @@ export async function performChecks(
   "use server"
 
   const isInstalled = await checkInstallation(shop);
-  console.log("shopify: ", host)
-  console.log("isInstalled : ",isInstalled)
+ 
   if (!isInstalled) {
     return serverSideRedirect(shop, host, embedded);
   }

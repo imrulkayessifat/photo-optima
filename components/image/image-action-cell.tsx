@@ -30,8 +30,6 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
     const setImageStatus = useStore(state => state.setImageStatus);
     const status = useStore(state => state.imageStatus[data.id]);
 
-    console.log("disable", bandwidth, dataUsed, data)
-
     const [isPending, startTransition] = useTransition();
 
     const pollImageStatus = (id: string) => {
@@ -64,8 +62,6 @@ const ImageActionCell: React.FC<ImageCellProps> = ({
         // mutation.mutate({id,productid,url,storeName})
 
         setImageStatus(uid, 'ONGOING');
-
-        console.log('extension', extension)
 
         const response = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/image/compress-image`, {
             method: 'POST',

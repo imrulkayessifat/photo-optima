@@ -10,7 +10,6 @@ export async function checkSession(shop: string) {
     await verifyAuth(shop);
     return true;
   } catch (error) {
-    console.log(error);
     return false;
   }
 }
@@ -24,7 +23,6 @@ export async function doServerAction(sessionIdToken: string): Promise<{
       status: "success",
     };
   } catch (error) {
-    console.log(error);
     return {
       status: "error",
     };

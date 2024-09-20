@@ -19,14 +19,11 @@ export async function POST(req: Request) {
       session,
     });
 
-    console.log("graphql : ",response)
-
     return Response.json(response.body as any, {
       headers: response.headers as any,
     });
   } catch (error) {
     if (error instanceof GraphqlQueryError) {
-      console.log(JSON.stringify(error.response));
       return new NextResponse(
         JSON.stringify({ errors: error.body?.errors.graphQLErrors }),
         {

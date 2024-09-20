@@ -25,11 +25,8 @@ export const rateLimiter = async (url: string, options?: RequestInit, attempt: n
         const retryAfterHeader = response.headers.get('Retry-After');
 
         const [currentCalls, maxCalls] = callLimitHeader.split('/').map(Number);
-        console.log(`rate limiting : ${currentCalls}/${maxCalls}`);
 
         if (response.status === 429 || (currentCalls >= maxCalls && retryAfterHeader)) {
-            console.log("Rate limit exceeded. Retrying after delay.");
-            console.log("retryAfterHeader : ", retryAfterHeader);
             const retryAfter = retryAfterHeader ? parseFloat(retryAfterHeader) : backoffFactor * attempt;
             await new Promise((resolve) => setTimeout(resolve, retryAfter * 1000));
             return rateLimiter(url, options, attempt + 1);
@@ -37,7 +34,6 @@ export const rateLimiter = async (url: string, options?: RequestInit, attempt: n
         return response;
 
     } catch (error) {
-        console.error(`Fetch failed for ${attempt} URL: ${url} ${options?.method}`, error);
         if (attempt < maxAttempts) {
             await new Promise((resolve) => setTimeout(resolve, backoffFactor * 1000)); // Exponential backoff
             return rateLimiter(url, options, attempt + 1); // Return the recursive call
@@ -51,13 +47,7 @@ export const getShop = async () => {
 
     const cookieStore = cookies()
 
-    console.log("shop in get shop : ", cookieStore.get("shop"))
-
     const clientShop = cookieStore.get("shop")?.value;
-
-    const shopify_shop = process.env.SHOPIFY_STORE_DOMAIN;
-    const client_id = process.env.SHOPIFY_CLIENT_ID;
-    const client_secret = process.env.SHOPIFY_CLIENT_SECRET;
 
     const response = await fetch(`${process.env.NEXT_PUBLIC_MQSERVER}/session/${clientShop}`, {
         method: 'GET',
@@ -69,8 +59,6 @@ export const getShop = async () => {
         return { error: `${errorDetails}` };
     }
     const { access_token } = await response.json();
-
-    console.log("access token : ", access_token)
 
     const store_data = await rateLimiter(`https://${clientShop}/admin/api/2024-04/shop.json`, {
         method: 'GET',
@@ -85,6 +73,5 @@ export const getShop = async () => {
         return { error: `${errorDetails}` };
     }
     const { shop } = await store_data.json()
-    console.log("shop in server action : ", shop)
     return { success: `${shop.myshopify_domain}`, access_token }
 }

@@ -27,7 +27,6 @@ const BatchSetting: React.FC<BatchSettingProps> = ({
     shop,
     access_token
 }) => {
-    console.log("batch", shop)
     const [isPending, startTransition] = useTransition();
     const { push } = useAppRouter();
     const router = useRouter();

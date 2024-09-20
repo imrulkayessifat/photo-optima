@@ -19,7 +19,7 @@ export default function SessionProvider({
 
   useEffect(() => {
     if (!verified && !loading && !shop) {
-      console.log("redirecting to auth");
+      
       authRedirect();
     }
   }, [verified, loading,shop, authRedirect]);

@@ -21,14 +21,12 @@ export function useAuthRedirect() {
       const embedded = searchParams?.get("embedded");
       const authUrl = `${process.env.NEXT_PUBLIC_HOST}/api/auth?${searchParams?.toString()}`;
       if (embedded === "1") {
-        console.log("redirecting using app");
         window.open(authUrl, "_top");
       } else {
-        console.log("redirecting using window");
         window.location.href = authUrl;
       }
     } else {
-      console.log("app or router not defined");
+
     }
   }, [searchParams, router]);
 
@@ -66,7 +64,6 @@ export function useVerifySession() {
 
   useEffect(() => {
     if (queryParams && app) {
-      console.log("verifying session");
       fetch(`/api/auth/verify?${queryParams.toString()}`)
         .then(async (response) => {
           setLoading(true);
@@ -84,7 +81,6 @@ export function useVerifySession() {
           setLoading(false);
         })
         .catch((err) => {
-          console.log(err);
           setLoading(false);
           setVerified(false);
         });
@@ -111,7 +107,6 @@ export function useSessionCheck() {
 
   useEffect(() => {
     if (searchParams && searchParams.get("shop") !== null) {
-      console.log("verifying session");
       setLoading(true);
       checkSession(searchParams.get("shop")!).then(() => {
         setVerified(true);

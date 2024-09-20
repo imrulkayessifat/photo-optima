@@ -16,7 +16,6 @@ const db = new PrismaClient();
 export async function GET(req: Request) {
   const url = new URL(req.url);
 
-  console.log("authorized code : ", url)
   const shop = url.searchParams.get("shop");
   const host = url.searchParams.get("host");
   const code = url.searchParams.get("code")
@@ -38,8 +37,6 @@ export async function GET(req: Request) {
 
     const { session } = callbackResponse;
 
-    console.log("session accessToken : ", session.accessToken)
-
     if (!session || !session.accessToken) {
       throw new Error("Could not validate auth callback");
     }
@@ -54,7 +51,6 @@ export async function GET(req: Request) {
 
     const sanitizedHost = shopify.utils.sanitizeHost(host);
 
-    console.log("sanitizedHost :", sanitizedHost)
     if (!host || host == null) {
       return new NextResponse("Missing host parameter", { status: 400 });
     }
