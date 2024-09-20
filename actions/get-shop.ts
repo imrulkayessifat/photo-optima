@@ -23,10 +23,14 @@ export const rateLimiter = async (url: string, options?: RequestInit, attempt: n
 
         const callLimitHeader = response.headers.get('X-Shopify-Shop-Api-Call-Limit') || '0/40';
         const retryAfterHeader = response.headers.get('Retry-After');
-
         const [currentCalls, maxCalls] = callLimitHeader.split('/').map(Number);
 
+        console.log("response status :", response.status)
+
         if (response.status === 429 || (currentCalls >= maxCalls && retryAfterHeader)) {
+
+            console.log("retryAfter Header :", retryAfterHeader)
+            
             const retryAfter = retryAfterHeader ? parseFloat(retryAfterHeader) : backoffFactor * attempt;
             await new Promise((resolve) => setTimeout(resolve, retryAfter * 1000));
             return rateLimiter(url, options, attempt + 1);
