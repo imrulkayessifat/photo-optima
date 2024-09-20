@@ -27,12 +27,13 @@ export const rateLimiter = async (url: string, options?: RequestInit, attempt: n
         const [currentCalls, maxCalls] = callLimitHeader.split('/').map(Number);
         console.log(`rate limiting : ${currentCalls}/${maxCalls}`);
 
-        if (retryAfterHeader) {
-            console.log("retryAfterHeader : ", retryAfterHeader)
-            await new Promise((resolve) => setTimeout(resolve, parseFloat(retryAfterHeader) * 1000))
-
-            return rateLimiter(url, options);
-        } 
+        if (response.status === 429 || (currentCalls >= maxCalls && retryAfterHeader)) {
+            console.log("Rate limit exceeded. Retrying after delay.");
+            console.log("retryAfterHeader : ", retryAfterHeader);
+            const retryAfter = retryAfterHeader ? parseFloat(retryAfterHeader) : backoffFactor * attempt;
+            await new Promise((resolve) => setTimeout(resolve, retryAfter * 1000));
+            return rateLimiter(url, options, attempt + 1);
+        }
         return response;
 
     } catch (error) {
@@ -84,6 +85,6 @@ export const getShop = async () => {
         return { error: `${errorDetails}` };
     }
     const { shop } = await store_data.json()
-    console.log("shop in server action : ",shop)
+    console.log("shop in server action : ", shop)
     return { success: `${shop.myshopify_domain}`, access_token }
 }
